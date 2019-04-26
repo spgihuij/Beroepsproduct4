@@ -1,4 +1,4 @@
-package com.example.beroepsproduct4.Views;
+package com.example.beroepsproduct4;
 
 import android.content.Intent;
 import android.os.Bundle;

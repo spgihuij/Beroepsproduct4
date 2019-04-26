@@ -11,4 +11,8 @@
     <string name="wachtwoord">Wachtwoord:</string>
     <string name="hintinlognaam">Inlognaam</string>
     <string name="hintwachtwoord">Wachtwoord</string>
+    <string name="knopregistreren">Registreren</string>
+    <string name="wiltuinloggen">Wilt u inloggen klik dan hier</string>
+    <string name="emailadres">Emailadres:</string>
+    <string name="hintemailadres">Emailadres</string>
 </resources>
