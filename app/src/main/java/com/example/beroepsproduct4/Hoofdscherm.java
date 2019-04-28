@@ -13,12 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.beroepsproduct4.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Hoofdscherm extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     //drawer
+
+    //Servi
+    private FirebaseAuth firebaseAuth;
+    private TextView textViewGebruikeremail, textViewGebruikeremailNAV;
+    private Button btnUitlog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,21 @@ public class Hoofdscherm extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//Servi
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null) {
+            finish();
+            startActivity(new Intent(this, Inlogscherm.class));
+        }
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        textViewGebruikeremail = (TextView) findViewById(R.id.textViewGebruikeremail);
+        textViewGebruikeremail.setText("Welkom " + user.getEmail());
+        btnUitlog = (Button) findViewById(R.id.btnUitlog);
+        btnUitlog.setOnClickListener(this);
+
+
+
 
     }
 
@@ -73,6 +98,7 @@ public class Hoofdscherm extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -93,5 +119,14 @@ public class Hoofdscherm extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == btnUitlog) {
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this, Inlogscherm.class));
+        }
     }
 }

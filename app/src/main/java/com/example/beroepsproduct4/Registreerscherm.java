@@ -30,17 +30,20 @@ public class Registreerscherm extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registreerscherm);
 
-
         Registreerknop = (Button) findViewById(R.id.button);
         editTextEmail = (EditText) findViewById(R.id.editText1);
         editTextWachtwoord = (EditText) findViewById(R.id.editText2);
         textViewInloggen = (TextView) findViewById(R.id.textView3);
         progressDialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
-
         Registreerknop.setOnClickListener(this);
         textViewInloggen.setOnClickListener(this);
 
+        if(firebaseAuth.getCurrentUser() !=null){
+            // Hoofdscherm starten (want user is al ingelogd)
+            finish();
+            startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));
+        }
     }
 
     private void registerUser() {
@@ -66,6 +69,9 @@ public class Registreerscherm extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));
+
                             progressDialog.dismiss();
                             Toast.makeText(Registreerscherm.this, "Succesvol geregistreerd", Toast.LENGTH_LONG).show();
 
@@ -86,6 +92,7 @@ public class Registreerscherm extends AppCompatActivity
 
             if (view == textViewInloggen) {
                 // Opent inlogscherm
+                startActivity(new Intent(this, Inlogscherm.class));
             }
         }
     }
