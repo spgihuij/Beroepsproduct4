@@ -2,6 +2,7 @@ package com.example.beroepsproduct4;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -28,7 +29,7 @@ public class Hoofdscherm extends AppCompatActivity
     private FirebaseAuth firebaseAuth;
     private TextView textViewGebruikeremail, textViewGebruikeremailNAV;
     private Button btnUitlog;
-
+    private DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,32 +95,23 @@ public class Hoofdscherm extends AppCompatActivity
 
         return super.onOptionsItemSelected(item);
     }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
 
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+            // voor menu items die geselecteerd blijven als je er op klikt
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            case R.id.nav_camera:
+                getSupportFragmentManager().beginTransaction().replace(R.id.contentmain, new EvenementAanmaken()).commit();
+                break;
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     @Override
     public void onClick(View view) {

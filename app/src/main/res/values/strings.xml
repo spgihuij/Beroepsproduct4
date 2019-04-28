@@ -20,4 +20,11 @@
     <string name="wilturegistreren">Wilt u registreren klik dan hier</string>
     <string name="titelregistreren">Registreren</string>
     <string name="knopuitlog">Uitloggen</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="vulhierinevenement">Vul hier een evenementnaam in</string>
+    <string name="vulhierinlocatie">Vul hier de locatie van het evenement in</string>
+    <string name="vulhierinbeschrijving">Vul hier de beschrijving in</string>
+    <string name="knopopslaan">Opslaan</string>
 </resources>
