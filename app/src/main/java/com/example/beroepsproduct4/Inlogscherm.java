@@ -32,7 +32,7 @@ private FirebaseAuth firebaseAuth;
 editTextEmail = (EditText) findViewById(R.id.editText1);
 editTextWachtwoord = (EditText) findViewById(R.id.editText2);
 btnInlog = (Button) findViewById(R.id.button);
-textViewRegistreren = (TextView) findViewById(R.id.textView4);
+textViewRegistreren = (TextView) findViewById(R.id.textView5);
 firebaseAuth = FirebaseAuth.getInstance();
 progressDialog = new ProgressDialog(this);
 
