@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".EvenementAanmaken">
+    tools:context=".EvenementAanmaken"
+    android:background="@color/white">
+
 
     <EditText
         android:id="@+id/editTextEvenementnaam"
