@@ -25,7 +25,7 @@ public class Hoofdscherm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     //drawer
 
-    //Servi
+    //Servi Werkend
     private FirebaseAuth firebaseAuth;
     private TextView textViewGebruikeremail, textViewGebruikeremailNAV;
     private Button btnUitlog;
