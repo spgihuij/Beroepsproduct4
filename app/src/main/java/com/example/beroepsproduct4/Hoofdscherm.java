@@ -102,7 +102,11 @@ public class Hoofdscherm extends AppCompatActivity
             // voor menu items die geselecteerd blijven als je er op klikt
 
             case R.id.nav_camera:
-                getSupportFragmentManager().beginTransaction().replace(R.id.contentmain, new EvenementAanmaken()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.Layout, new EvenementAanmaken()).commit();
+                break;
+
+            case R.id.nav_gallery:
+                getSupportFragmentManager().beginTransaction().replace(R.id.contentmain, new EvenementLijst()).commit();
                 break;
 
         }

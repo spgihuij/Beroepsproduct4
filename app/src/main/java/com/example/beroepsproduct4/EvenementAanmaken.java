@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class EvenementAanmaken extends Fragment implements View.OnClickListener {
 
-private DatabaseReference databaseReference;
+private DatabaseReference databaseReference, databaseEvenementen;
 private EditText editTextEvenementnaam, editTextLocatie, editTextBeschrijving;
 private Button btnOpslaan;
     private FirebaseAuth firebaseAuth;
@@ -39,7 +39,7 @@ private Button btnOpslaan;
         editTextBeschrijving = (EditText) view.findViewById(R.id.editTextBeschrijving);
         btnOpslaan =(Button) view.findViewById(R.id.btnOpslaan);
         firebaseAuth = FirebaseAuth.getInstance();
-
+        databaseEvenementen = FirebaseDatabase.getInstance().getReference("Evenementen");
         btnOpslaan.setOnClickListener(this);
 
         return view; //test2
@@ -50,12 +50,12 @@ private Button btnOpslaan;
     String evenementnaam = editTextEvenementnaam.getText().toString().trim();
         String evenementlocatie = editTextLocatie.getText().toString().trim();
         String evenementbeschrijving = editTextBeschrijving.getText().toString().trim();
-
-        Evenement evenement = new Evenement(evenementnaam, evenementlocatie, evenementbeschrijving);
+        String id = databaseEvenementen.push().getKey();
+        Evenement evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
-        databaseReference.child(user.getUid()).setValue(evenement);
+        databaseEvenementen.child(id).setValue(evenement);
 
         Toast.makeText(getActivity(), "Evenement Toegevoegd", Toast.LENGTH_LONG).show();
 
