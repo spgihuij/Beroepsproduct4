@@ -54,11 +54,12 @@ public class Hoofdscherm extends AppCompatActivity
             startActivity(new Intent(this, Inlogscherm.class));
         }
         FirebaseUser user = firebaseAuth.getCurrentUser();
+        /**
         textViewGebruikeremail = (TextView) findViewById(R.id.textViewGebruikeremail);
         textViewGebruikeremail.setText("Welkom " + user.getEmail());
         btnUitlog = (Button) findViewById(R.id.btnUitlog);
         btnUitlog.setOnClickListener(this);
-
+*/
 
 
 
@@ -102,11 +103,11 @@ public class Hoofdscherm extends AppCompatActivity
             // voor menu items die geselecteerd blijven als je er op klikt
 
             case R.id.nav_camera:
-                getSupportFragmentManager().beginTransaction().replace(R.id.Layout, new EvenementAanmaken()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EvenementAanmaken()).commit();
                 break;
 
             case R.id.nav_gallery:
-                getSupportFragmentManager().beginTransaction().replace(R.id.contentmain, new EvenementLijst()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EvenementLijst()).commit();
                 break;
 
         }

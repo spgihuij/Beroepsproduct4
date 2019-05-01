@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class EvenementLijst extends Fragment implements View.OnClickListener {
 
-    FirebaseDatabase firebaseDatabase;
+   /** FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private ListView listViewEvenementen;
     private ArrayList<String> mEvenementNaam = new ArrayList<>();
@@ -42,17 +42,30 @@ public class EvenementLijst extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved) {
         View view = inflater.inflate(R.layout.fragment_evenement_lijst, container, false);
-   firebaseDatabase = FirebaseDatabase.getInstance();
-   databaseReference = firebaseDatabase.getReference("Evenementen");
-   listViewEvenementen = (ListView) view.findViewById(R.id.listViewEvenement);
-    final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, mEvenementNaam);
-    listViewEvenementen.setAdapter(arrayAdapter);
-    databaseReference.addChildEventListener(new ChildEventListener() {
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Evenementen");
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, mEvenementNaam);
+        listViewEvenementen = (ListView) view.findViewById(R.id.listViewEvenement);
+        listViewEvenementen.setAdapter(arrayAdapter);
+        databaseReference.addChildEventListener(new EvenementnaamChildEventListener());
+mEvenementNaam = new ArrayList<>();
+        return view;
+    }
+
+
+
+
+
+    class EvenementnaamChildEventListener implements ChildEventListener{
+
+
         @Override
         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-        String value = dataSnapshot.getValue(String.class);
-        mEvenementNaam.add(value);
-        arrayAdapter.notifyDataSetChanged();
+        Evenement evenementnaam = dataSnapshot.getValue(Evenement.class);
+            evenementnaam.setEvenementid(dataSnapshot.getKey());
+            mEvenementNaam.add(0, evenementnaam);
+            arrayAdapter.notifyDataSetChanged();
         }
 
         @Override
@@ -74,17 +87,21 @@ public class EvenementLijst extends Fragment implements View.OnClickListener {
         public void onCancelled(@NonNull DatabaseError databaseError) {
 
         }
-    });
-
-        return view;
     }
 
 
+
+
+
+
+
+*/
 
     @Override
     public void onClick(View view) {
 
 
         }
+
 
 }
