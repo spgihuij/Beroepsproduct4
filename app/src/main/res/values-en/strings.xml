@@ -2,4 +2,22 @@
 <resources>
     <string name="app_name">Beroepsproduct4</string>
     <string name="helloworldtest">Testvertalen</string>
+    <string name="emailadres">Email:</string>
+    <string name="hintemailadres">Email</string>
+    <string name="hintinlognaam">Login name</string>
+    <string name="hintwachtwoord">Password</string>
+    <string name="ikgaakkoordAVG">I agree with the fact that other people can see my data.</string>
+    <string name="inlognaam">Login name</string>
+    <string name="inlogtitel">Login</string>
+    <string name="knopinloggen">Login</string>
+    <string name="knopopslaan">Save</string>
+    <string name="knopregistreren">Register</string>
+    <string name="knopuitlog">Logout</string>
+    <string name="titelregistreren">Register</string>
+    <string name="vulhierinbeschrijving">Enter description here</string>
+    <string name="vulhierinevenement">Enter event name here</string>
+    <string name="vulhierinlocatie">Enter event location here</string>
+    <string name="wachtwoord">Password:</string>
+    <string name="wiltuinloggen">Do you want to login? Click here.</string>
+    <string name="wilturegistreren">Do you want to register? Click here.</string>
 </resources>

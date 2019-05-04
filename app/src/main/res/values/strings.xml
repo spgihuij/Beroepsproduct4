@@ -12,12 +12,12 @@
     <string name="hintinlognaam">Inlognaam</string>
     <string name="hintwachtwoord">Wachtwoord</string>
     <string name="knopregistreren">Registreren</string>
-    <string name="wiltuinloggen">Wilt u inloggen klik dan hier</string>
+    <string name="wiltuinloggen">Wilt u inloggen? Klik dan hier.</string>
     <string name="emailadres">Emailadres:</string>
     <string name="hintemailadres">Emailadres</string>
     <string name="knopinloggen">Inloggen</string>
     <string name="inlogtitel">Inloggen</string>
-    <string name="wilturegistreren">Wilt u registreren klik dan hier</string>
+    <string name="wilturegistreren">Wilt u registreren? klik dan hier.</string>
     <string name="titelregistreren">Registreren</string>
     <string name="knopuitlog">Uitloggen</string>
 
