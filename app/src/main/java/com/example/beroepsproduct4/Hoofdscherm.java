@@ -28,7 +28,7 @@ public class Hoofdscherm extends AppCompatActivity
     //Servi Werkend
     private FirebaseAuth firebaseAuth;
     private TextView textViewGebruikeremail, textViewGebruikeremailNAV;
-    private Button btnUitlog;
+    private Button btnUitlog2;
     private DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +57,10 @@ public class Hoofdscherm extends AppCompatActivity
         /**
         textViewGebruikeremail = (TextView) findViewById(R.id.textViewGebruikeremail);
         textViewGebruikeremail.setText("Welkom " + user.getEmail());
-        btnUitlog = (Button) findViewById(R.id.btnUitlog);
-        btnUitlog.setOnClickListener(this);
-*/
+         */
+        btnUitlog2 = (Button) findViewById(R.id.btnUitlog2);
+        btnUitlog2.setOnClickListener(this);
+
 
 
 
@@ -106,9 +107,9 @@ public class Hoofdscherm extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EvenementAanmaken()).commit();
                 break;
 
-            case R.id.nav_gallery:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EvenementLijst()).commit();
-                break;
+          //  case R.id.nav_gallery:
+            //    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EvenementLijst()).commit();
+              //  break;
 
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -120,7 +121,7 @@ public class Hoofdscherm extends AppCompatActivity
 
     @Override
     public void onClick(View view) {
-        if (view == btnUitlog) {
+        if (view == btnUitlog2) {
             firebaseAuth.signOut();
             finish();
             startActivity(new Intent(this, Inlogscherm.class));

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class Inlogscherm extends AppCompatActivity implements View.OnClickListen
     private TextView textViewRegistreren;
 private ProgressDialog progressDialog;
 private FirebaseAuth firebaseAuth;
+private CheckBox checkBox1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ editTextEmail = (EditText) findViewById(R.id.editText1);
 editTextWachtwoord = (EditText) findViewById(R.id.editText2);
 btnInlog = (Button) findViewById(R.id.button);
 textViewRegistreren = (TextView) findViewById(R.id.textView3);
+checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
+
 firebaseAuth = FirebaseAuth.getInstance();
 progressDialog = new ProgressDialog(this);
 
@@ -53,6 +57,10 @@ textViewRegistreren.setOnClickListener(this);
             if (TextUtils.isEmpty(emailadres)) {
                 // email is leeg
                 Toast.makeText(this, "Vul alstublieft een emailadres in", Toast.LENGTH_LONG).show();
+                return;
+            }
+            if (checkBox1.isChecked()==false) {
+                Toast.makeText(this, "Als u wilt inloggen moet u het vierkantje aanvinken.", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -96,5 +104,6 @@ firebaseAuth.signInWithEmailAndPassword(emailadres, wachtwoord)
             finish();
             startActivity(new Intent(this, Registreerscherm.class));
         }
+
     }
 }
