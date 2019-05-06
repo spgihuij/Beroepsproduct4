@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "604187836700",
+    "firebase_url": "https://beroepsproductblok4ict1a.firebaseio.com",
+    "project_id": "beroepsproductblok4ict1a",
+    "storage_bucket": "beroepsproductblok4ict1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604187836700:android:3e227deb04c79fc0",
+        "android_client_info": {
+          "package_name": "com.example.beroepsproduct4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "604187836700-53m2ve29r6laj5na1e9aap5t94d5e83s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.beroepsproduct4",
+            "certificate_hash": "8c33cfcc5afc33e5d3cae03cf72ca1c9fc36c3f2"
+          }
+        },
+        {
+          "client_id": "604187836700-jimtsdg4spd7h64mbo6p64lvh89cms3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkrfZRcAB6oEiNseQ37_jOEdRblSXDjBo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "604187836700-jimtsdg4spd7h64mbo6p64lvh89cms3i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
