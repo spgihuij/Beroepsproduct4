@@ -1,12 +1,8 @@
 package com.example.beroepsproduct4;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -52,11 +47,8 @@ private Button btnOpslaan;
         String evenementbeschrijving = editTextBeschrijving.getText().toString().trim();
         String id = databaseEvenementen.push().getKey();
         Evenement evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving);
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
-
         databaseEvenementen.child(id).setValue(evenement);
-
         Toast.makeText(getActivity(), "Evenement Toegevoegd", Toast.LENGTH_LONG).show();
 
     }
