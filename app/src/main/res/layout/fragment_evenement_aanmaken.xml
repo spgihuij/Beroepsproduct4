@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:context=".EvenementAanmaken"
+    android:background="@color/white">
+
+
+    <EditText
+        android:id="@+id/editTextEvenementnaam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/vulhierinevenement"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextLocatie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/vulhierinlocatie"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextBeschrijving"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:ems="10"
+        android:gravity="left"
+        android:hint="@string/vulhierinbeschrijving"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnOpslaan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/knopopslaan" />
+</LinearLayout>

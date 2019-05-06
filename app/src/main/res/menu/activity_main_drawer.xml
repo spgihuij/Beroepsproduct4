@@ -5,33 +5,42 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/info_over_mij"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:title="Info over mij" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/info_over_anderen"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Info over anderen" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/evenementen"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Evenementen" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/sociaal_netwerk"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Sociaal netwerk" />
+        <item
+            android:id="@+id/mijn_agenda"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Mijn agenda" />
+
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Ontwikkelaar">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/evenement_toevoegen"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Evenement toevoegen" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/sociaal_netwerk_toevoegen"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Sociaal netwerk toevoegen" />
+            <item
+                android:id="@+id/geen_ontwikkelaar"
+
+                android:title="U bent geen ontwikkelaar" />
         </menu>
     </item>
 
