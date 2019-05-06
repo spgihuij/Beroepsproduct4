@@ -166,7 +166,7 @@ public class Hoofdscherm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth firebaseAuth;
-
+//test
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
 
     private static final String TAG = "MyActivity";
