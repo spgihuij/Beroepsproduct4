@@ -7,4 +7,25 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="helloworldtest">Hello World!</string>
+    <string name="inlognaam">Inlognaam:</string>
+    <string name="wachtwoord">Wachtwoord:</string>
+    <string name="hintinlognaam">Inlognaam</string>
+    <string name="hintwachtwoord">Wachtwoord</string>
+    <string name="knopregistreren">Registreren</string>
+    <string name="wiltuinloggen">Wilt u inloggen? Klik dan hier.</string>
+    <string name="emailadres">Emailadres:</string>
+    <string name="hintemailadres">Emailadres</string>
+    <string name="knopinloggen">Inloggen</string>
+    <string name="inlogtitel">Inloggen</string>
+    <string name="wilturegistreren">Wilt u registreren? klik dan hier.</string>
+    <string name="titelregistreren">Registreren</string>
+    <string name="knopuitlog">Uitloggen</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="vulhierinevenement">Vul hier een evenementnaam in</string>
+    <string name="vulhierinlocatie">Vul hier de locatie van het evenement in</string>
+    <string name="vulhierinbeschrijving">Vul hier de beschrijving in</string>
+    <string name="knopopslaan">Opslaan</string>
+    <string name="ikgaakkoordAVG">Ik ga akkoord met het feit dat andere gebruikers mijn gegevens kunnen inzien.</string>
 </resources>
