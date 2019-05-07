@@ -27,6 +27,8 @@
     <string name="toastinlogsuccesvol">Inloggen Succesvol.</string>
     <string name="toastgeenemail">Vul alstublieft een emailadres in.</string>
     <string name="toastgeenwachtwoord">Vul alstublieft een wachtwoord in.</string>
+    <string name="toastgeennaam">Vul alstublieft een naam in.</string>
+
     <string name="toastgeencheckbox">Je moet het vierkantje hieronder aanvinken voordat je kan inloggen.</string>
     <string name="toastbezigmetinloggen">Bezig met inloggen... </string>
 
@@ -37,4 +39,8 @@
     <string name="vulhierinbeschrijving">Vul hier de beschrijving in</string>
     <string name="knopopslaan">Opslaan</string>
     <string name="ikgaakkoordAVG">Ik ga akkoord met het feit dat andere gebruikers mijn gegevens kunnen inzien.</string>
+    <string name="naam">Volledige naam:</string>
+    <string name="hintnaam">Naam</string>
+    <string name="slamijnnaamop">Sla mijn naam en email op zodat deze later in de app gebruikt kunnen worden.</string>
+    <string name="profielfoto">Profielfoto:</string>
 </resources>

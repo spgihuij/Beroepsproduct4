@@ -46,9 +46,9 @@ private Button btnOpslaan;
         String evenementlocatie = editTextLocatie.getText().toString().trim();
         String evenementbeschrijving = editTextBeschrijving.getText().toString().trim();
         String id = databaseEvenementen.push().getKey();
-        Evenement evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving);
+        //Evenement evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving);
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        databaseEvenementen.child(id).setValue(evenement);
+      //  databaseEvenementen.child(id).setValue(evenement);
         Toast.makeText(getActivity(), "Evenement Toegevoegd", Toast.LENGTH_LONG).show();
 
     }

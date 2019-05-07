@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +31,7 @@ private CheckBox checkBox1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inlogscherm);
 editTextEmail = (EditText) findViewById(R.id.editText1);
-editTextWachtwoord = (EditText) findViewById(R.id.editText2);
+editTextWachtwoord = (EditText) findViewById(R.id.editTextNaam);
 btnInlog = (Button) findViewById(R.id.button);
 textViewRegistreren = (TextView) findViewById(R.id.textView3);
 checkBox1 = (CheckBox) findViewById(R.id.checkBox1);

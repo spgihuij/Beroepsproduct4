@@ -1,15 +1,16 @@
 package com.example.beroepsproduct4;
 
 public class Evenement {
+    public String evenementid;
     public String evenementnaam;
-   public String evenementlocatie;
+    public String evenementlocatie;
     public String evenementbeschrijving;
-   public String evenementid;
+    public String evenementdatum;
 
     public Evenement() {
     }
 
-    public Evenement(String evenementid, String evenementnaam, String evenementlocatie, String evenementbeschrijving) {
+    public Evenement(String evenementid, String evenementnaam, String evenementlocatie, String evenementbeschrijving, String evenementdatum) {
 
         this.evenementnaam = evenementnaam;
         this.evenementlocatie = evenementlocatie;
