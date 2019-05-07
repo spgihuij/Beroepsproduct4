@@ -1,4 +1,4 @@
 package com.example.beroepsproduct4;
 
-public class Navigation_activity {
+public class Scherm_info_over_anderen {
 }
