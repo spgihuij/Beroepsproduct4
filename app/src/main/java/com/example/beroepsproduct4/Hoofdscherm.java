@@ -237,18 +237,14 @@ public class Hoofdscherm extends AppCompatActivity
             if (user.getUid().equals(x))
             {
                 Menu nav_Menu = navigationView.getMenu();
-                nav_Menu.findItem(R.id.evenement_toevoegen).setVisible(true);
-                nav_Menu.findItem(R.id.sociaal_netwerk_toevoegen).setVisible(true);
-                nav_Menu.findItem(R.id.geen_ontwikkelaar).setVisible(false);
+                nav_Menu.findItem(R.id.groep_ontwikkelaar).setVisible(true);
             }
 
             else
             {
                 Menu nav_Menu = navigationView.getMenu();
-                nav_Menu.findItem(R.id.evenement_toevoegen).setVisible(false);
-                nav_Menu.findItem(R.id.sociaal_netwerk_toevoegen).setVisible(false);
-                nav_Menu.findItem(R.id.geen_ontwikkelaar).setVisible(true);
-                nav_Menu.findItem(R.id.geen_ontwikkelaar).setEnabled(false);
+                nav_Menu.findItem(R.id.groep_ontwikkelaar).setVisible(false);
+
             }
         }
     }
