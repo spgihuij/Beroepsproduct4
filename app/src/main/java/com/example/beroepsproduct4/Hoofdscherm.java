@@ -140,6 +140,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -191,7 +192,7 @@ public class Hoofdscherm extends AppCompatActivity
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
-        //createUser();
+
 
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -208,25 +209,6 @@ public class Hoofdscherm extends AppCompatActivity
 
     }
 
-    /* public void createUser()
-     {
- test
-         firebaseAuth.createUserWithEmailAndPassword("thomasvanderlubbe2@hotmail.com", "123456")
-                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                     @Override
-                     public void onComplete(@NonNull Task<AuthResult> task) {
-                         if (task.isSuccessful()) {
-                             FirebaseUser user = firebaseAuth.getCurrentUser();
-                             ontwikkelaars.add(user.getUid());
-                         } else {
-                             // If sign in fails, display a message to the user.
-                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                             Toast.makeText(Hoofdscherm.this, "Authentication failed.",
-                                     Toast.LENGTH_SHORT).show();
-                         }
-                     }
-                 });
-     }*/
 
 
     public void checkUser(NavigationView navigationView)
@@ -285,10 +267,15 @@ public class Hoofdscherm extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.info_over_mij) {
             // Handle the camera action
         } else if (id == R.id.info_over_anderen) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.drawer_layout,
+                            new AnderenZoeken())
+                    .commit();
 
         } else if (id == R.id.evenementen) {
 

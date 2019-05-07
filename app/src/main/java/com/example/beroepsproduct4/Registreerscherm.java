@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -35,6 +36,7 @@ public class Registreerscherm extends AppCompatActivity
         editTextWachtwoord = (EditText) findViewById(R.id.editText2);
         textViewInloggen = (TextView) findViewById(R.id.textView3);
         progressDialog = new ProgressDialog(this);
+        FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
         Registreerknop.setOnClickListener(this);
         textViewInloggen.setOnClickListener(this);
