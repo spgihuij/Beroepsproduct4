@@ -83,6 +83,7 @@ public class Registreerscherm extends AppCompatActivity
                 });
     }
 
+
         @Override
         public void onClick (View view){
             if (view == Registreerknop) {
