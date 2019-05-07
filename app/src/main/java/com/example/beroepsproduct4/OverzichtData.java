@@ -1,5 +1,5 @@
 package com.example.beroepsproduct4;
-
+//info
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
