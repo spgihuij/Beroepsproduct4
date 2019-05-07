@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Registreerscherm extends AppCompatActivity
     implements View.OnClickListener {
 
-    private Button Registreerknop;
+    private Button Registreerknop, btnNaarInlog;
     private EditText editTextEmail, editTextWachtwoord;
     private TextView textViewInloggen;
     private ProgressDialog progressDialog;
@@ -31,13 +31,15 @@ public class Registreerscherm extends AppCompatActivity
         setContentView(R.layout.activity_registreerscherm);
 
         Registreerknop = (Button) findViewById(R.id.button);
+        btnNaarInlog = (Button) findViewById(R.id.button3);
+
         editTextEmail = (EditText) findViewById(R.id.editText1);
         editTextWachtwoord = (EditText) findViewById(R.id.editText2);
         textViewInloggen = (TextView) findViewById(R.id.textView3);
         progressDialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
         Registreerknop.setOnClickListener(this);
-        textViewInloggen.setOnClickListener(this);
+        btnNaarInlog.setOnClickListener(this);
 
         if(firebaseAuth.getCurrentUser() !=null){
             // Hoofdscherm starten (want user is al ingelogd)
@@ -49,21 +51,26 @@ public class Registreerscherm extends AppCompatActivity
     private void registerUser() {
         final String emailadres = editTextEmail.getText().toString().trim();
         final String wachtwoord = editTextWachtwoord.getText().toString().trim();
+        String toastgeenemail = getString(R.string.toastgeenemail);
+        String toastgeenwachtwoord = getString(R.string.toastgeenwachtwoord);
+        String toastbezigmetregistreren = getString(R.string.toastbezigmetregistreren);
 
         if (TextUtils.isEmpty(emailadres)) {
             // email is leeg
-            Toast.makeText(this, "Vul alstublieft een emailadres in", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, toastgeenemail, Toast.LENGTH_LONG).show();
             return;
         }
 
         if (TextUtils.isEmpty(wachtwoord)) {
             // wachtwoord is leeg
-            Toast.makeText(this, "Vul alstublieft een wachtwoord in", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, toastgeenwachtwoord, Toast.LENGTH_LONG).show();
             return;
         }
         //Als alles klopt laat ik een progressbar zien
-        progressDialog.setMessage("Bezig met registreren...");
+        progressDialog.setMessage(toastbezigmetregistreren);
         progressDialog.show();
+
+
         firebaseAuth.createUserWithEmailAndPassword(emailadres, wachtwoord)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -73,10 +80,13 @@ public class Registreerscherm extends AppCompatActivity
                                 startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));
 
                             progressDialog.dismiss();
-                            Toast.makeText(Registreerscherm.this, "Succesvol geregistreerd", Toast.LENGTH_LONG).show();
+                            String toastregistrerensuccesvol = getString(R.string.toastregistrerensuccesvol);
+
+                            Toast.makeText(Registreerscherm.this, toastregistrerensuccesvol, Toast.LENGTH_LONG).show();
 
                         } else {
-                            Toast.makeText(Registreerscherm.this, "Registreren mislukt probeer het opnieuw", Toast.LENGTH_LONG).show();
+                            String toastregistrerenmislukt = getString(R.string.toastregistrerenmislukt);
+                            Toast.makeText(Registreerscherm.this, toastregistrerenmislukt, Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -91,7 +101,7 @@ public class Registreerscherm extends AppCompatActivity
 
             }
 
-            if (view == textViewInloggen) {
+            if (view == btnNaarInlog) {
                 // Opent inlogscherm
                 startActivity(new Intent(this, Inlogscherm.class));
             }

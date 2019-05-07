@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Inlogscherm extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail, editTextWachtwoord;
-    private Button btnInlog;
+    private Button btnInlog, btnNaarRegistreren;
     private TextView textViewRegistreren;
 private ProgressDialog progressDialog;
 private FirebaseAuth firebaseAuth;
@@ -36,9 +36,14 @@ editTextWachtwoord = (EditText) findViewById(R.id.editText2);
 btnInlog = (Button) findViewById(R.id.button);
 textViewRegistreren = (TextView) findViewById(R.id.textView3);
 checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
-
+btnNaarRegistreren = (Button) findViewById(R.id.button2);
 firebaseAuth = FirebaseAuth.getInstance();
 progressDialog = new ProgressDialog(this);
+
+
+
+
+
 
 if(firebaseAuth.getCurrentUser() !=null){
     // Hoofdscherm starten (want user is al ingelogd)
@@ -47,30 +52,35 @@ if(firebaseAuth.getCurrentUser() !=null){
 }
 
 btnInlog.setOnClickListener(this);
-textViewRegistreren.setOnClickListener(this);
+btnNaarRegistreren.setOnClickListener(this);
         }
 
         private void userLogin(){
             final String emailadres = editTextEmail.getText().toString().trim();
             final String wachtwoord = editTextWachtwoord.getText().toString().trim();
+//Strings
+            String toastgeenemail = getString(R.string.toastgeenemail);
+            String toastgeenwachtwoord = getString(R.string.toastgeenwachtwoord);
+            String toastgeencheckbox = getString(R.string.toastgeencheckbox);
+            String toastbezigmetinloggen = getString(R.string.toastbezigmetinloggen);
 
             if (TextUtils.isEmpty(emailadres)) {
                 // email is leeg
-                Toast.makeText(this, "Vul alstublieft een emailadres in", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, toastgeenemail , Toast.LENGTH_LONG).show();
                 return;
             }
             if (checkBox1.isChecked()==false) {
-                Toast.makeText(this, "Als u wilt inloggen moet u het vierkantje aanvinken.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, toastgeencheckbox, Toast.LENGTH_LONG).show();
                 return;
             }
 
             if (TextUtils.isEmpty(wachtwoord)) {
                 // wachtwoord is leeg
-                Toast.makeText(this, "Vul alstublieft een wachtwoord in", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, toastgeenwachtwoord, Toast.LENGTH_LONG).show();
                 return;
             }
             //Als alles klopt laat ik een progressbar zien
-            progressDialog.setMessage("Bezig met inloggen...");
+            progressDialog.setMessage(toastbezigmetinloggen);
             progressDialog.show();
 
 firebaseAuth.signInWithEmailAndPassword(emailadres, wachtwoord)
@@ -78,15 +88,17 @@ firebaseAuth.signInWithEmailAndPassword(emailadres, wachtwoord)
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressDialog.dismiss();
+                String toastinlogsuccesvol = getString(R.string.toastinlogsuccesvol);
 
                 if(task.isSuccessful()){
                     // Start hoofdscherm activity
                     finish();
                     startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));
-                    Toast.makeText(Inlogscherm.this, "Inloggen succesvol!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Inlogscherm.this, toastinlogsuccesvol, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    Toast.makeText(Inlogscherm.this, "Inloggen mislukt probeer het opnieuw", Toast.LENGTH_LONG).show();
+                    String toastinlogmislukt = getString(R.string.toastinlogmislukt);
+                    Toast.makeText(Inlogscherm.this, toastinlogmislukt, Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -100,7 +112,7 @@ firebaseAuth.signInWithEmailAndPassword(emailadres, wachtwoord)
             userLogin();
         }
 
-        if(view == textViewRegistreren) {
+        if(view == btnNaarRegistreren) {
             finish();
             startActivity(new Intent(this, Registreerscherm.class));
         }
