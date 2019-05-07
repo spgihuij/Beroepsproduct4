@@ -2,22 +2,23 @@ package com.example.beroepsproduct4;
 
 public class UserInformation {
 
-    private String VoorNaam;
+    public String Naam;
+    public String Woonplaats;
 
-    public String getVoorNaam() {
-        return VoorNaam;
+    public String getNaam() {
+        return Naam;
     }
 
-    public void setVoorNaam(String voorNaam) {
-        VoorNaam = voorNaam;
+    public void setNaam(String naam) {
+        Naam = naam;
     }
 
-    public String getAchterNaam() {
-        return AchterNaam;
+    public String getWoonplaats() {
+        return Woonplaats;
     }
 
-    public void setAchterNaam(String achterNaam) {
-        AchterNaam = achterNaam;
+    public void setWoonplaats(String woonplaats) {
+        Woonplaats = woonplaats;
     }
 
     public String getEmailAdres() {
@@ -28,6 +29,5 @@ public class UserInformation {
         EmailAdres = emailAdres;
     }
 
-    private String AchterNaam;
-    private String EmailAdres;
+    public String EmailAdres;
 }

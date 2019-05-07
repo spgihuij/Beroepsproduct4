@@ -1,5 +1,5 @@
 package com.example.beroepsproduct4;
-//info
+
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -87,18 +87,18 @@ public class OverzichtData extends AppCompatActivity {
     private void showData(DataSnapshot dataSnapshot) {
         for(DataSnapshot ds : dataSnapshot.getChildren()){
             UserInformation uInfo = new UserInformation();
-            uInfo.setVoorNaam(ds.child(userID).getValue(UserInformation.class).getVoorNaam()); //set the name
-            uInfo.setAchterNaam(ds.child(userID).getValue(UserInformation.class).getAchterNaam()); //set the email
+            uInfo.setNaam(ds.child(userID).getValue(UserInformation.class).getNaam()); //set the name
+            uInfo.setWoonplaats(ds.child(userID).getValue(UserInformation.class).getWoonplaats()); //set the email
             uInfo.setEmailAdres(ds.child(userID).getValue(UserInformation.class).getEmailAdres()); //set the phone_num
 
             //display all the information
-            Log.d(TAG, "showData: naam: " + uInfo.getVoorNaam());
-            Log.d(TAG, "showData: voornaam: " + uInfo.getAchterNaam());
+            Log.d(TAG, "showData: naam: " + uInfo.getNaam());
+            Log.d(TAG, "showData: voornaam: " + uInfo.getWoonplaats());
             Log.d(TAG, "showData: emailadres: " + uInfo.getEmailAdres());
 
             ArrayList<String> array  = new ArrayList<>();
-            array.add(uInfo.getVoorNaam());
-            array.add(uInfo.getAchterNaam());
+            array.add(uInfo.getNaam());
+            array.add(uInfo.getWoonplaats());
             array.add(uInfo.getEmailAdres());
             ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,array);
             mListView.setAdapter(adapter);
