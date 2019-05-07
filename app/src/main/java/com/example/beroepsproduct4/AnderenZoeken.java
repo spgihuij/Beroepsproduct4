@@ -7,10 +7,12 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,8 +63,16 @@ public class AnderenZoeken extends Fragment {
         private void showData(DataSnapshot dataSnapshot) {
             for(DataSnapshot ds : dataSnapshot.getChildren())
             {
+                Persoon persoon = new Persoon();
+                persoon.setNaam(ds.getValue(Persoon.class).getNaam());
+                persoon.setEmail(ds.getValue(Persoon.class).getEmail());
+                persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
-            }
+                persoonsnamen.add(persoon.getNaam());
+                RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), persoonsnamen);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            }
         }
 
 
