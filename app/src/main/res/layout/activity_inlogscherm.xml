@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Inlogscherm"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".Inlogscherm">
 
     <TextView
         android:id="@+id/textView1"
@@ -71,8 +71,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/knopinloggen"
         android:background="@drawable/custom_button"
+        android:text="@string/knopinloggen"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/editTextNaam"
         app:layout_constraintHorizontal_bias="0.542"

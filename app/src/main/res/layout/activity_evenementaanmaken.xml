@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".EvenementAanmaken"
-    android:background="@color/white">
+    tools:context=".EvenementAanmaken">
 
 
     <TextView

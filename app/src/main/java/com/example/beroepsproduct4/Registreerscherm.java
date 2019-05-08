@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,17 +32,17 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 public class Registreerscherm extends AppCompatActivity
-    implements View.OnClickListener {
+        implements View.OnClickListener {
 
 
-    private int Gallery_intent =2;
+    private int Gallery_intent = 2;
     private ImageButton imageButton;
     private Button Registreerknop, btnNaarInlog;
     private EditText editTextEmail, editTextWachtwoord, editTextNaam;
     private TextView textViewInloggen;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference  databasePersoonmetmail;
+    private DatabaseReference databasePersoonmetmail;
     private CheckBox checkBox;
     private StorageReference storage;
     private StorageReference imagepath;
@@ -68,7 +69,7 @@ public class Registreerscherm extends AppCompatActivity
         storage = FirebaseStorage.getInstance().getReference();
 
 
-        if(firebaseAuth.getCurrentUser() !=null){
+        if (firebaseAuth.getCurrentUser() != null) {
             // Hoofdscherm starten (want user is al ingelogd)
             finish();
             startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));
@@ -76,22 +77,18 @@ public class Registreerscherm extends AppCompatActivity
     }
 
 
+    private void naamenemailOpslaan() {
 
+        final String emailadres = editTextEmail.getText().toString().trim();
+        final String naam = editTextNaam.getText().toString().trim();
+        final String profielfoto = imagepath.toString().trim();
+        firebaseAuth = FirebaseAuth.getInstance();
+        databasePersoonmetmail = FirebaseDatabase.getInstance().getReference("Persoon Met Mail");
+        persoon = new Persoon(naam, emailadres, profielfoto);
+        databasePersoonmetmail.child(naam).setValue(persoon);
+        Toast.makeText(Registreerscherm.this, "U heeft toestemming gegeven.", Toast.LENGTH_SHORT);
 
- private void naamenemailOpslaan(){
-
-                final String emailadres = editTextEmail.getText().toString().trim();
-                final String naam = editTextNaam.getText().toString().trim();
-                final String profielfoto = imagepath.toString().trim();
-                firebaseAuth = FirebaseAuth.getInstance();
-                databasePersoonmetmail = FirebaseDatabase.getInstance().getReference("Persoon Met Mail");
-                persoon = new Persoon(naam, emailadres, profielfoto);
-                databasePersoonmetmail.child(naam).setValue(persoon);
-                Toast.makeText(Registreerscherm.this, "U heeft toestemming gegeven.", Toast.LENGTH_SHORT);
-
- }
-
-
+    }
 
 
     private void registerUser() {
@@ -121,7 +118,7 @@ public class Registreerscherm extends AppCompatActivity
             Toast.makeText(this, toastgeennaam, Toast.LENGTH_LONG).show();
             return;
         }
-        if (checkBox.isChecked()==false) {
+        if (checkBox.isChecked() == false) {
             Toast.makeText(this, toastgeencheckbox, Toast.LENGTH_LONG).show();
             return;
         }
@@ -135,8 +132,8 @@ public class Registreerscherm extends AppCompatActivity
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));
 
                             progressDialog.dismiss();
                             String toastregistrerensuccesvol = getString(R.string.toastregistrerensuccesvol);
@@ -154,21 +151,21 @@ public class Registreerscherm extends AppCompatActivity
     }
 
 
-        @Override
-        public void onClick (View view){
-            if (view == Registreerknop) {
-                registerUser();
-            }
-
-            if (view == checkBox){
-                naamenemailOpslaan();
-            }
-            if (view == btnNaarInlog) {
-                // Opent inlogscherm
-                startActivity(new Intent(this, Inlogscherm.class));
-            }
-
+    @Override
+    public void onClick(View view) {
+        if (view == Registreerknop) {
+            registerUser();
         }
+
+        if (view == checkBox) {
+            naamenemailOpslaan();
+        }
+        if (view == btnNaarInlog) {
+            // Opent inlogscherm
+            startActivity(new Intent(this, Inlogscherm.class));
+        }
+
+    }
 
     public void btnProfielfoto(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -180,7 +177,7 @@ public class Registreerscherm extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == Gallery_intent && resultCode == RESULT_OK){
+        if (requestCode == Gallery_intent && resultCode == RESULT_OK) {
             Uri uri = data.getData();
             imageButton.setImageURI(uri);
             imagepath = storage.child("PersoonInlog").child(uri.getLastPathSegment());

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,16 +25,16 @@ import com.google.firebase.storage.UploadTask;
 
 public class EvenementAanmaken extends AppCompatActivity implements View.OnClickListener {
 
-private DatabaseReference databaseReference, databaseEvenementen;
-private EditText editTextEvenementnaam, editTextLocatie, editTextBeschrijving, editTextDatum;
-private Button btnOpslaan;
-private FirebaseAuth firebaseAuth;
-private ImageButton ibEvenementFoto;
-private StorageReference storage;
-private StorageReference imagepath;
-private int Gallery_intent =2;
-Evenement evenement;
-String imageLocation;
+    private DatabaseReference databaseReference, databaseEvenementen;
+    private EditText editTextEvenementnaam, editTextLocatie, editTextBeschrijving, editTextDatum;
+    private Button btnOpslaan;
+    private FirebaseAuth firebaseAuth;
+    private ImageButton ibEvenementFoto;
+    private StorageReference storage;
+    private StorageReference imagepath;
+    private int Gallery_intent = 2;
+    Evenement evenement;
+    String imageLocation;
 
     @Nullable
     @Override
@@ -45,42 +46,38 @@ String imageLocation;
         editTextEvenementnaam = (EditText) findViewById(R.id.editTextEvenementnaam);
         editTextLocatie = (EditText) findViewById(R.id.editTextLocatie);
         editTextBeschrijving = (EditText) findViewById(R.id.editTextBeschrijving);
-        editTextDatum = (EditText) findViewById(R.id.editTextDatum) ;
+        editTextDatum = (EditText) findViewById(R.id.editTextDatum);
         ibEvenementFoto = (ImageButton) findViewById(R.id.ibAfbeeldingEvenement);
-        btnOpslaan =(Button) findViewById(R.id.btnOpslaan);
+        btnOpslaan = (Button) findViewById(R.id.btnOpslaan);
         firebaseAuth = FirebaseAuth.getInstance();
         databaseEvenementen = FirebaseDatabase.getInstance().getReference("Evenementen");
         btnOpslaan.setOnClickListener(this);
         storage = FirebaseStorage.getInstance().getReference();
 
 
-
     }
 
     // data opslaan
-    private void opslaanEvenement(){
+    private void opslaanEvenement() {
 
-    String evenementnaam = editTextEvenementnaam.getText().toString().trim();
+        String evenementnaam = editTextEvenementnaam.getText().toString().trim();
         String evenementlocatie = editTextLocatie.getText().toString().trim();
         String evenementbeschrijving = editTextBeschrijving.getText().toString().trim();
         String evenementdatum = editTextDatum.getText().toString().trim();
         String evenementfoto = imagepath.toString().trim();
         String id = databaseEvenementen.push().getKey();
-        evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving,evenementdatum, evenementfoto);
+        evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving, evenementdatum, evenementfoto);
         databaseEvenementen.child(id).setValue(evenement);
         Toast.makeText(this, "Evenement Toegevoegd", Toast.LENGTH_LONG).show();
 
     }
 
 
-
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == Gallery_intent && resultCode == RESULT_OK){
+        if (requestCode == Gallery_intent && resultCode == RESULT_OK) {
             Uri uri2 = data.getData();
             ibEvenementFoto.setImageURI(uri2);
             imagepath = storage.child("EvenementFoto").child(uri2.getLastPathSegment());
@@ -102,14 +99,16 @@ String imageLocation;
 
 
     }
+
     @Override
     public void onClick(View view) {
-if(view == btnOpslaan){
-    opslaanEvenement();
-}
+        if (view == btnOpslaan) {
+            opslaanEvenement();
+        }
 
 
     }
+
     public void btnEvenementFoto(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
