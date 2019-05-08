@@ -292,6 +292,8 @@ public class Hoofdscherm extends AppCompatActivity
 
         if (id == R.id.info_over_mij) {
             // Handle the camera action
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Invoerendatapersoon()).commit();
+
         } else if (id == R.id.info_over_anderen) {
 
         } else if (id == R.id.evenementen) {

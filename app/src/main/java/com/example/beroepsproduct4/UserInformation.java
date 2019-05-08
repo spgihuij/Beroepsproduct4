@@ -2,32 +2,52 @@ package com.example.beroepsproduct4;
 
 public class UserInformation {
 
-    public String Naam;
-    public String Woonplaats;
+    public String naam;
+    public String woonplaats;
+    public String emailadrespersoon;
+    public String userID;
 
-    public String getNaam() {
-        return Naam;
+    public UserInformation(String naam, String woonplaats, String emailadrespersoon, String userID) {
+        this.naam = naam;
+        this.woonplaats = woonplaats;
+        this.emailadrespersoon = emailadrespersoon;
+        this.userID = userID;
     }
 
-    public void setNaam(String naam) {
-        Naam = naam;
+    public String getNaam() {
+        return naam;
+    }
+
+    public UserInformation setNaam(String naam) {
+        this.naam = naam;
+        return this;
     }
 
     public String getWoonplaats() {
-        return Woonplaats;
+        return woonplaats;
     }
 
-    public void setWoonplaats(String woonplaats) {
-        Woonplaats = woonplaats;
+    public UserInformation setWoonplaats(String woonplaats) {
+        this.woonplaats = woonplaats;
+        return this;
     }
 
-    public String getEmailAdres() {
-        return EmailAdres;
+    public String getEmailadrespersoon() {
+        return emailadrespersoon;
     }
 
-    public void setEmailAdres(String emailAdres) {
-        EmailAdres = emailAdres;
+    public UserInformation setEmailadrespersoon(String emailadrespersoon) {
+        this.emailadrespersoon = emailadrespersoon;
+        return this;
     }
 
-    public String EmailAdres;
+    public String getUserID() {
+        return userID;
+    }
+
+    public UserInformation setUserID(String userID) {
+        this.userID = userID;
+        return this;
+    }
 }
+
