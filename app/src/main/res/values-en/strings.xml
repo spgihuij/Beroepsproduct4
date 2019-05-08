@@ -29,4 +29,12 @@
     <string name="toastinlogsuccesvol">Login succesfull.</string>
     <string name="toastregistrerenmislukt">Register failed, please try again.</string>
     <string name="toastregistrerensuccesvol">Register succesfull.</string>
+    <string name="hintevenementdatum">Date</string>
+    <string name="hintnaam">Name</string>
+    <string name="naam">Full name:</string>
+    <string name="profielfoto">Profile picture:</string>
+    <string name="slamijnnaamop">Save my name and email so they can be used throughout the app.</string>
+    <string name="titelafbevenement">Press on the plus icon to assign an image to the event.</string>
+    <string name="titelevenementaanmaken">Create Event</string>
+    <string name="toastgeennaam">Please fill in a name.</string>
 </resources>
