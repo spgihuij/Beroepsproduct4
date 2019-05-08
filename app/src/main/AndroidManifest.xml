@@ -13,6 +13,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Inlogscherm" />
         <activity android:name=".OverzichtData"></activity>
+        <activity android:name=".EvenementAanmaken"></activity>
+
         <activity android:name=".Registreerscherm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
