@@ -39,18 +39,18 @@ public class Invoerendatapersoon extends Fragment implements View.OnClickListene
         return view;
     }
 
-    private void opslaanPersoon(){
+    public void opslaanPersoon(){
 
         String Naam = editText31.getText().toString().trim();
         String Emailadrespersoon = editText32.getText().toString().trim();
         String Woonplaats = editText33.getText().toString().trim();
         String UserID = databasePersonen.push().getKey();
-        UserInformation2 userInformation= new UserInformation2(Naam, Emailadrespersoon, Woonplaats, UserID);
-        userInformation.setEmailadrespersoon(Emailadrespersoon);
-        userInformation.setWoonplaats(Woonplaats);
-        userInformation.setUserID(UserID);
+        UserInformation2 userInformation2= new UserInformation2(Naam, Emailadrespersoon, Woonplaats, UserID);
+        userInformation2.setEmailadrespersoon(Emailadrespersoon);
+        userInformation2.setWoonplaats(Woonplaats);
+        userInformation2.setUserID(UserID);
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        databasePersonen.child(UserID).setValue(userInformation);
+        databasePersonen.child(UserID).setValue(userInformation2);
         Toast.makeText(getActivity(), "Persoondata Aangepast", Toast.LENGTH_LONG).show();
 
     }
