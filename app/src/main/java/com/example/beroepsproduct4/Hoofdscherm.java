@@ -295,7 +295,7 @@ public class Hoofdscherm extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Invoerendatapersoon()).commit();
 
         } else if (id == R.id.info_over_anderen) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new OverzichtData()).commit();
         } else if (id == R.id.evenementen) {
 
         } else if (id == R.id.sociaal_netwerk) {

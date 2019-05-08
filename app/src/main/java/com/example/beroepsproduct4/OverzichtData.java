@@ -1,7 +1,6 @@
 package com.example.beroepsproduct4;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,7 +28,7 @@ public class OverzichtData extends Fragment {
     private FirebaseAuth FirebaseAuth;
     private FirebaseAuth.AuthStateListener AuthListener;
     private DatabaseReference myRef;
-    private String userID;
+    private String userEmail;
 
     private ListView mListView;
 
@@ -45,9 +44,9 @@ public class OverzichtData extends Fragment {
         //NOTE: Unless you are signed in, this will not be useable.
         FirebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = FirebaseDatabase.getReference();
+        myRef = FirebaseDatabase.getReference().child("personen");
         FirebaseUser user = FirebaseAuth.getCurrentUser();
-        userID = user.getEmail();
+        userEmail = user.getEmail();
 
 
         AuthListener = new FirebaseAuth.AuthStateListener() {
@@ -88,22 +87,24 @@ public class OverzichtData extends Fragment {
 
     private void showData(DataSnapshot dataSnapshot) {
         for(DataSnapshot ds : dataSnapshot.getChildren()){
-            UserInformation uInfo = new UserInformation("","","","");
-            uInfo.setEmailadrespersoon(ds.child(userID).getValue(UserInformation.class).getEmailadrespersoon());
-            uInfo.setNaam(ds.child(userID).getValue(UserInformation.class).getNaam());
-            uInfo.setWoonplaats(ds.child(userID).getValue(UserInformation.class).getWoonplaats());
+            UserInformation uInfo = new UserInformation();
+            uInfo.setEmailadrespersoon(ds.getValue(UserInformation.class).getEmailadrespersoon());
+            uInfo.setNaam(ds.getValue(UserInformation.class).getNaam());
+            uInfo.setWoonplaats(ds.getValue(UserInformation.class).getWoonplaats());
+        if (uInfo.getEmailadrespersoon().equals(userEmail))
+            {
+                //display all the information
+                Log.d(TAG, "showData: naam: " + uInfo.getNaam());
+                Log.d(TAG, "showData: woonplaats: " + uInfo.getWoonplaats());
+                Log.d(TAG, "showData: emailadres: " + uInfo.getEmailadrespersoon());
+                ArrayList<String> array  = new ArrayList<>();
+                array.add(uInfo.getNaam());
+                array.add(uInfo.getWoonplaats());
+                array.add(uInfo.getEmailadrespersoon());
+                ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,array);
+                mListView.setAdapter(adapter);
+            }
 
-            //display all the information
-            Log.d(TAG, "showData: naam: " + uInfo.getNaam());
-            Log.d(TAG, "showData: woonplaats: " + uInfo.getWoonplaats());
-            Log.d(TAG, "showData: emailadres: " + uInfo.getEmailadrespersoon());
-
-            ArrayList<String> array  = new ArrayList<>();
-            array.add(uInfo.getNaam());
-            array.add(uInfo.getWoonplaats());
-            array.add(uInfo.getEmailadrespersoon());
-            ArrayAdapter adapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,array);
-            mListView.setAdapter(adapter);
         }
     }
 

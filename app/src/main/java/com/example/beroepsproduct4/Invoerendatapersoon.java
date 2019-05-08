@@ -45,7 +45,10 @@ public class Invoerendatapersoon extends Fragment implements View.OnClickListene
         String Emailadrespersoon = editText32.getText().toString().trim();
         String Woonplaats = editText33.getText().toString().trim();
         String UserID = databasePersonen.push().getKey();
-        UserInformation userInformation= new UserInformation(Naam, Emailadrespersoon, Woonplaats, UserID);
+        UserInformation2 userInformation= new UserInformation2(Naam, Emailadrespersoon, Woonplaats, UserID);
+        userInformation.setEmailadrespersoon(Emailadrespersoon);
+        userInformation.setWoonplaats(Woonplaats);
+        userInformation.setUserID(UserID);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databasePersonen.child(UserID).setValue(userInformation);
         Toast.makeText(getActivity(), "Persoondata Aangepast", Toast.LENGTH_LONG).show();
