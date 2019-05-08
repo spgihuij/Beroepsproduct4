@@ -2,6 +2,7 @@ package com.example.beroepsproduct4;
 
 public class Persoon {
 
+
     public String persoonnaam;
     public String persoonemail;
     public String persoonprofielfoto;
@@ -97,5 +98,6 @@ public class Persoon {
     public void setPersoonwebsite(String persoonwebsite) {
         this.persoonwebsite = persoonwebsite;
     }
+
 
 }

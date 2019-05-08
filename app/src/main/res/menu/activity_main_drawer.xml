@@ -27,7 +27,9 @@
 
     </group>
 
-    <item android:title="Ontwikkelaar">
+    <item
+        android:id="@+id/groep_ontwikkelaar"
+        android:title="Ontwikkelaar">
         <menu>
             <item
                 android:id="@+id/evenement_toevoegen"
@@ -37,10 +39,7 @@
                 android:id="@+id/sociaal_netwerk_toevoegen"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="Sociaal netwerk toevoegen" />
-            <item
-                android:id="@+id/geen_ontwikkelaar"
 
-                android:title="U bent geen ontwikkelaar" />
         </menu>
     </item>
 

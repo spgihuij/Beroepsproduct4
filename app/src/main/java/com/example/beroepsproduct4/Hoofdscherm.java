@@ -73,7 +73,7 @@ public class Hoofdscherm extends AppCompatActivity
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
-        //createUser();
+
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -105,20 +105,25 @@ public class Hoofdscherm extends AppCompatActivity
     }
 
 
-    public void checkUser(NavigationView navigationView) {
-        for (String x : ontwikkelaars) {
+
+    public void checkUser(NavigationView navigationView)
+    {
+        for(String x : ontwikkelaars)
+        {
+
             FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
             if (user.getUid().equals(x)) {
                 Menu nav_Menu = navigationView.getMenu();
-                nav_Menu.findItem(R.id.evenement_toevoegen).setVisible(true);
-                nav_Menu.findItem(R.id.sociaal_netwerk_toevoegen).setVisible(true);
-                nav_Menu.findItem(R.id.geen_ontwikkelaar).setVisible(false);
-            } else {
+
+                nav_Menu.findItem(R.id.groep_ontwikkelaar).setVisible(true);
+            }
+
+            else
+            {
+
                 Menu nav_Menu = navigationView.getMenu();
-                nav_Menu.findItem(R.id.evenement_toevoegen).setVisible(false);
-                nav_Menu.findItem(R.id.sociaal_netwerk_toevoegen).setVisible(false);
-                nav_Menu.findItem(R.id.geen_ontwikkelaar).setVisible(true);
-                nav_Menu.findItem(R.id.geen_ontwikkelaar).setEnabled(false);
+                nav_Menu.findItem(R.id.groep_ontwikkelaar).setVisible(false);
+
             }
         }
     }
@@ -163,10 +168,15 @@ public class Hoofdscherm extends AppCompatActivity
 
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
         if (id == R.id.info_over_mij) {
             // Handle the camera action
         } else if (id == R.id.info_over_anderen) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.drawer_layout,
+                            new AnderenZoeken())
+                    .commit();
 
         } else if (id == R.id.evenementen) {
             Intent intent = new Intent(Hoofdscherm.this, EvenementAanmaken.class);

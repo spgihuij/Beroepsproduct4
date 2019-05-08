@@ -11,6 +11,7 @@
     tools:context=".Hoofdscherm">
 
 
+
     <TextView
         android:id="@+id/begroetingszinnen_hoofdscherm"
         android:layout_width="wrap_content"
