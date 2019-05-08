@@ -22,7 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-
+//servi
 public class EvenementAanmaken extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseReference databaseReference, databaseEvenementen;
