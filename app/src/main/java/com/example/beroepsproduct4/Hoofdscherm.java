@@ -140,6 +140,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -170,7 +171,6 @@ public class Hoofdscherm extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -178,6 +178,7 @@ public class Hoofdscherm extends AppCompatActivity
         toggle.syncState();
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
 
         ontwikkelaars.add("PhDjDY2gtGSoGrrUNwCrPy2TCpm1");
@@ -284,6 +285,8 @@ public class Hoofdscherm extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -292,6 +295,8 @@ public class Hoofdscherm extends AppCompatActivity
         } else if (id == R.id.info_over_anderen) {
 
         } else if (id == R.id.evenementen) {
+            Intent intent = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
+            startActivity(intent);
 
         } else if (id == R.id.sociaal_netwerk) {
 

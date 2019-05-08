@@ -43,4 +43,7 @@
     <string name="hintnaam">Naam</string>
     <string name="slamijnnaamop">Sla mijn naam en email op zodat deze later in de app gebruikt kunnen worden.</string>
     <string name="profielfoto">Profielfoto:</string>
+    <string name="titelevenementaanmaken">Evenement Aanmaken</string>
+    <string name="hintevenementdatum">Vul hier de datum in</string>
+    <string name="titelafbevenement">Druk op de plus om een afbeelding aan het evenement te koppelen</string>
 </resources>

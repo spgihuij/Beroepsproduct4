@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,12 +10,45 @@
     android:background="@color/white">
 
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_header"
+        android:gravity="center"
+        android:text="@string/titelevenementaanmaken"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:fontFamily="sans-serif-thin" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/titelafbevenement" />
+
+    <ImageButton
+        android:id="@+id/ibAfbeeldingEvenement"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:onClick="btnEvenementFoto"
+        android:src="@android:drawable/ic_input_add" />
+
     <EditText
         android:id="@+id/editTextEvenementnaam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/vulhierinevenement"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextDatum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hintevenementdatum"
         android:inputType="textPersonName" />
 
     <EditText
@@ -28,7 +62,7 @@
     <EditText
         android:id="@+id/editTextBeschrijving"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="100dp"
         android:ems="10"
         android:gravity="left"
         android:hint="@string/vulhierinbeschrijving"
