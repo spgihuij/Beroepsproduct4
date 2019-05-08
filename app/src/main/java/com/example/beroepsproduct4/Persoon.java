@@ -2,26 +2,35 @@ package com.example.beroepsproduct4;
 
 public class Persoon {
 
-    private String persoonemail;
-    private String persoonnaam;
-    private String persoonfoto;
-    private String persoonwoonplaats;
-    private String persoongeboortedatum;
-    private String persoonsport;
-    private String persoonhuisdier;
-    private String persoontvprogramma;
-    private String persoonwebsite;
+    public String persoonnaam;
+    public String persoonemail;
+    public String persoonprofielfoto;
+    public String persoonwoonplaats;
+    public String persoongeboortedatum;
+    public String persoonsport;
+    public String persoonhuisdier;
+    public String persoontvprogramma;
+    public String persoonwebsite;
 
-    public Persoon(String persoonemail, String persoonnaam, String persoonfoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
-        this.persoonemail = persoonemail;
+    public Persoon(String persoonnaam, String persoonemail, String persoonprofielfoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
         this.persoonnaam = persoonnaam;
-        this.persoonfoto = persoonfoto;
+        this.persoonemail = persoonemail;
+        this.persoonprofielfoto = persoonprofielfoto;
         this.persoonwoonplaats = persoonwoonplaats;
         this.persoongeboortedatum = persoongeboortedatum;
         this.persoonsport = persoonsport;
         this.persoonhuisdier = persoonhuisdier;
         this.persoontvprogramma = persoontvprogramma;
         this.persoonwebsite = persoonwebsite;
+    }
+
+
+    public String getPersoonnaam() {
+        return persoonnaam;
+    }
+
+    public void setPersoonnaam(String persoonnaam) {
+        this.persoonnaam = persoonnaam;
     }
 
     public String getPersoonemail() {
@@ -32,20 +41,13 @@ public class Persoon {
         this.persoonemail = persoonemail;
     }
 
-    public String getPersoonnaam() {
-        return persoonnaam;
+    public String getPersoonprofielfoto() {
+        return persoonprofielfoto;
     }
 
-    public void setPersoonnaam(String persoonnaam) {
-        this.persoonnaam = persoonnaam;
-    }
+    public void setPersoonprofielfoto(String persoonprofielfoto) {
+        this.persoonprofielfoto = persoonprofielfoto;
 
-    public String getPersoonfoto() {
-        return persoonfoto;
-    }
-
-    public void setPersoonfoto(String persoonfoto) {
-        this.persoonfoto = persoonfoto;
     }
 
     public String getPersoonwoonplaats() {
@@ -95,6 +97,5 @@ public class Persoon {
     public void setPersoonwebsite(String persoonwebsite) {
         this.persoonwebsite = persoonwebsite;
     }
+
 }
-
-

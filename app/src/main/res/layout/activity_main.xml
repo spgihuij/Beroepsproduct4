@@ -6,25 +6,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:visibility="visible"
+    tools:openDrawer="start"
+    tools:visibility="visible">
 
     <LinearLayout
         android:id="@+id/Layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:visibility="visible">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
 
 
             <TextView
@@ -70,6 +74,7 @@
                 tools:layout_conversion_absoluteHeight="48dp"
                 tools:layout_conversion_absoluteWidth="129dp" />
 
+
             <Button
                 android:id="@+id/btnzinnengenerate2"
                 android:layout_width="wrap_content"
@@ -113,7 +118,8 @@
         android:layout_gravity="start"
         android:visibility="visible"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer"
+        tools:visibility="visible" />
 
 
 </android.support.v4.widget.DrawerLayout>
