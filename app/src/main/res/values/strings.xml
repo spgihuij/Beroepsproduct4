@@ -22,7 +22,7 @@
     <string name="knopuitlog">Uitloggen</string>
     <string name="toastinlogmislukt">Inloggen mislukt probeer het opnieuw. </string>
     <string name="toastregistrerenmislukt">Registreren mislukt probeer het opnieuw. </string>
-    <string name="toastregistrerensuccesvol">Registreren Succesvol.</string>
+    <string name="toastregistrerensuccesvol">Registreren Succesvol. Klik op de knop inloggen om in te loggen.</string>
     <string name="toastbezigmetregistreren">Bezig met registreren...</string>
     <string name="toastinlogsuccesvol">Inloggen Succesvol.</string>
     <string name="toastgeenemail">Vul alstublieft een emailadres in.</string>

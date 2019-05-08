@@ -78,9 +78,16 @@ public class Registreerscherm extends AppCompatActivity
         final String emailadres = editTextEmail.getText().toString().trim();
         final String naam = editTextNaam.getText().toString().trim();
         final String profielfoto = imagepath.toString().trim();
+        String woonplaats = "";
+        String geboortedatum = "";
+        String sport = "";
+        String huisdier = "";
+        String tvprogramma = "";
+        String website = "";
+
         firebaseAuth = FirebaseAuth.getInstance();
-        databasePersoonmetmail = FirebaseDatabase.getInstance().getReference("Persoon Met Mail");
-        persoon = new Persoon(naam, emailadres, profielfoto);
+        databasePersoonmetmail = FirebaseDatabase.getInstance().getReference("TestPersoon");
+        persoon = new Persoon(naam, emailadres, profielfoto, woonplaats, geboortedatum, sport, huisdier, tvprogramma, website);
         databasePersoonmetmail.child(naam).setValue(persoon);
         Toast.makeText(Registreerscherm.this, "U heeft toestemming gegeven.", Toast.LENGTH_SHORT);
 
