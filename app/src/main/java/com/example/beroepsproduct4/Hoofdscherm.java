@@ -125,8 +125,11 @@ package com.example.beroepsproduct4;
 
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -139,24 +142,33 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 
 public class Hoofdscherm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseAuth;
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
-    private TextView mName;
-    private String name;
+    private TextView mEmail;
+    FirebaseUser user;
+    View creerzinnen;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,19 +182,17 @@ public class Hoofdscherm extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        creerrandomzinnen(creerzinnen);
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mName = navigationView.getHeaderView(0).findViewById(R.id.nav_name);
-        getCurrentinfo();
-
+        //ontwikkelaars code
         ontwikkelaars.add("PhDjDY2gtGSoGrrUNwCrPy2TCpm1");
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
         //createUser();
-
         FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -193,22 +203,26 @@ public class Hoofdscherm extends AppCompatActivity
             }
         };
         firebaseAuth.addAuthStateListener(authStateListener);
+    }
 
+
+        public void creerrandomzinnen(View view){
         // random zinnen
-        final TextView textone=(TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
-        Button generate= (Button)findViewById(R.id.btnzinnengenerate);
-        final String [] voelgoedzinnen={"voel je je goed", "hoe voel je je vandaag", "helemaal top vandaag"};
+        final TextView gebroetingszinnen = (TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
+        Button generate = (Button) findViewById(R.id.btnzinnengenerate);
+        final String[] voelgoedzinnen = {"voel je je goed", "hoe voel je je vandaag", "helemaal top vandaag"};
 
-        int rando= (int)((Math.random()*3));
+        int rando = (int) ((Math.random() * 3));
 
-        generate.setOnClickListener(new View.OnClickListener(){
+        generate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                int rando= (int)(Math.random()*3);
-                textone.setText(voelgoedzinnen[rando]);
+            public void onClick(View v) {
+                int rando = (int) (Math.random() * 3);
+                gebroetingszinnen.setText(voelgoedzinnen[rando]);
             }
         });
     }
+
 
     public void checkUser(NavigationView navigationView) {
         for (String x : ontwikkelaars) {
@@ -228,22 +242,6 @@ public class Hoofdscherm extends AppCompatActivity
         }
     }
 
-    private void getCurrentinfo() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
-                // Id of the provider (ex: google.com)
-                String providerId = profile.getProviderId();
-
-                // UID specific to the provider
-                String uid = profile.getUid();
-
-                // Name, email address, and profile photo Url
-                name = profile.getDisplayName();
-                mName.setText(name);
-            }
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -284,6 +282,7 @@ public class Hoofdscherm extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -296,6 +295,8 @@ public class Hoofdscherm extends AppCompatActivity
         } else if (id == R.id.sociaal_netwerk) {
 
         } else if (id == R.id.mijn_agenda) {
+            Intent intent = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
+            startActivity(intent);
 
         } else if (id == R.id.evenement_toevoegen) {
 
