@@ -1,6 +1,7 @@
 package com.example.beroepsproduct4;
 
 public class Persoon {
+
     public String persoonnaam;
     public String persoonemail;
     public String persoonprofielfoto;
@@ -22,6 +23,7 @@ public class Persoon {
         this.persoontvprogramma = persoontvprogramma;
         this.persoonwebsite = persoonwebsite;
     }
+
 
     public String getPersoonnaam() {
         return persoonnaam;
@@ -45,6 +47,7 @@ public class Persoon {
 
     public void setPersoonprofielfoto(String persoonprofielfoto) {
         this.persoonprofielfoto = persoonprofielfoto;
+
     }
 
     public String getPersoonwoonplaats() {
@@ -94,4 +97,5 @@ public class Persoon {
     public void setPersoonwebsite(String persoonwebsite) {
         this.persoonwebsite = persoonwebsite;
     }
+
 }
