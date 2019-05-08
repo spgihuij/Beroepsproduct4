@@ -13,6 +13,9 @@ public class Persoon {
     public String persoontvprogramma;
     public String persoonwebsite;
 
+    public Persoon(){
+
+    }
     public Persoon(String persoonnaam, String persoonemail, String persoonprofielfoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
         this.persoonnaam = persoonnaam;
         this.persoonemail = persoonemail;

@@ -19,29 +19,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Random;
 
 
 public class Hoofdscherm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseAuth firebaseAuth;
-
+    FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
 
@@ -87,7 +76,7 @@ public class Hoofdscherm extends AppCompatActivity
     }
 
 
-        public void creerrandomzinnen(View view){
+    public void creerrandomzinnen(View view) {
         // random zinnen
         final TextView gebroetingszinnen = (TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
         Button generate = (Button) findViewById(R.id.btnzinnengenerate);
@@ -105,21 +94,15 @@ public class Hoofdscherm extends AppCompatActivity
     }
 
 
-
-    public void checkUser(NavigationView navigationView)
-    {
-        for(String x : ontwikkelaars)
-        {
+    public void checkUser(NavigationView navigationView) {
+        for (String x : ontwikkelaars) {
 
             FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
             if (user.getUid().equals(x)) {
                 Menu nav_Menu = navigationView.getMenu();
 
                 nav_Menu.findItem(R.id.groep_ontwikkelaar).setVisible(true);
-            }
-
-            else
-            {
+            } else {
 
                 Menu nav_Menu = navigationView.getMenu();
                 nav_Menu.findItem(R.id.groep_ontwikkelaar).setVisible(false);
@@ -164,40 +147,43 @@ public class Hoofdscherm extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (id == R.id.info_over_mij) {
-            // Handle the camera action
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Invoerendatapersoon()).commit();
+        switch (item.getItemId()) {
 
-        } else if (id == R.id.info_over_anderen) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.drawer_layout,
-                            new AnderenZoeken())
-                    .commit();
+            case R.id.info_over_mij:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Invoerendatapersoon()).commit();
+                break;
 
-        } else if (id == R.id.evenementen) {
-            Intent intent = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
-            startActivity(intent);
+            case R.id.info_over_anderen:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.drawer_layout,
+                                new AnderenZoeken())
+                        .commit();
+                break;
 
-        } else if (id == R.id.sociaal_netwerk) {
-
-        } else if (id == R.id.mijn_agenda) {
-            Intent intent = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
-            startActivity(intent);
-
-        } else if (id == R.id.evenement_toevoegen) {
-
-        } else if (id == R.id.sociaal_netwerk_toevoegen) {
+            case R.id.evenementen:
+                Intent intent = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
+                startActivity(intent);
+                break;
+            case R.id.sociaal_netwerk:
+                //sociaalnetwerk
+                break;
+            case R.id.mijn_agenda:
+                Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
+                startActivity(intent2);
+                break;
+            case R.id.evenement_toevoegen:
+                // evenement toevoegen
+                break;
+            case R.id.sociaal_netwerk_toevoegen:
+                //sociaal netwerk teovoegen
+                break;
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        return true;
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
-}

@@ -76,12 +76,12 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
             for(DataSnapshot ds : dataSnapshot.getChildren())
             {
                 Persoon persoon = new Persoon();
-                persoon.setNaam(ds.getValue(Persoon.class).getNaam());
+                persoon.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
                 
-                if(persoon.getNaam()!= null) {
+                if(persoon.getPersoonnaam()!= null) {
 
-                    persoonsnamen.add(persoon.getNaam());
-                    Log.d(TAG, persoon.getNaam());
+                    persoonsnamen.add(persoon.getPersoonnaam());
+                    Log.d(TAG, persoon.getPersoonnaam());
                 }
                // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
                // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
