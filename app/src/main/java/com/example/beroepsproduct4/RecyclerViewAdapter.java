@@ -8,20 +8,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable {
 
     private static final String TAG = "RecyclerViewAdapter";
 
     private ArrayList<String>  persoonsnamen = new ArrayList<>();
+    private ArrayList<String> persoonsnamenfull;
     private Context context;
 
     public RecyclerViewAdapter(Context context, ArrayList<String> persoonsnamen) {
         this.persoonsnamen = persoonsnamen;
+        persoonsnamenfull = new ArrayList<>(persoonsnamen);
         this.context = context;
     }
 
@@ -52,6 +57,47 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return persoonsnamen.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return lijstfilter;
+    }
+
+    public Filter lijstfilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<String> filteredlijst = new ArrayList<>();
+
+            if(constraint == null || constraint.length() == 0)
+            {
+                filteredlijst.addAll(persoonsnamenfull);
+            }
+
+            else
+            {
+                String filterpattern = constraint.toString().toLowerCase().trim();
+
+                for(String string : persoonsnamenfull)
+                {
+                    if (string.toLowerCase().contains(filterpattern))
+                    {
+                        filteredlijst.add(string);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredlijst;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            persoonsnamen.clear();
+            persoonsnamen.addAll((List)results.values);
+            notifyDataSetChanged();
+
+        }
+    };
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
