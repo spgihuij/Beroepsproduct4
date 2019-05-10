@@ -20,4 +20,21 @@
     <string name="wachtwoord">Password:</string>
     <string name="wiltuinloggen">Do you want to login? Click here.</string>
     <string name="wilturegistreren">Do you want to register? Click here.</string>
+    <string name="toastbezigmetinloggen">Logging in...</string>
+    <string name="toastbezigmetregistreren">Registering...</string>
+    <string name="toastgeencheckbox">You have to check the checkbox below before you login.</string>
+    <string name="toastgeenemail">Please fill in an email.</string>
+    <string name="toastgeenwachtwoord">Please fill in a password.</string>
+    <string name="toastinlogmislukt">Login failed, please try again.</string>
+    <string name="toastinlogsuccesvol">Login succesfull.</string>
+    <string name="toastregistrerenmislukt">Register failed, please try again.</string>
+    <string name="toastregistrerensuccesvol">Register succesfull.</string>
+    <string name="hintevenementdatum">Date</string>
+    <string name="hintnaam">Name</string>
+    <string name="naam">Full name:</string>
+    <string name="profielfoto">Profile picture:</string>
+    <string name="slamijnnaamop">Save my name and email so they can be used throughout the app.</string>
+    <string name="titelafbevenement">Press on the plus icon to assign an image to the event.</string>
+    <string name="titelevenementaanmaken">Create Event</string>
+    <string name="toastgeennaam">Please fill in a name.</string>
 </resources>

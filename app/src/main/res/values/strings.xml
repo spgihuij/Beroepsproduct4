@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Beroepsproduct4</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
     <string name="helloworldtest">Hello World!</string>
     <string name="inlognaam">Inlognaam:</string>
     <string name="wachtwoord">Wachtwoord:</string>
@@ -20,13 +20,28 @@
     <string name="wilturegistreren">Wilt u registreren? klik dan hier.</string>
     <string name="titelregistreren">Registreren</string>
     <string name="knopuitlog">Uitloggen</string>
-
-
+    <string name="toastinlogmislukt">Inloggen mislukt probeer het opnieuw. </string>
+    <string name="toastregistrerenmislukt">Registreren mislukt probeer het opnieuw. </string>
+    <string name="toastregistrerensuccesvol">Registreren Succesvol. Klik op de knop inloggen om in te loggen.</string>
+    <string name="toastbezigmetregistreren">Bezig met registreren...</string>
+    <string name="toastinlogsuccesvol">Inloggen Succesvol.</string>
+    <string name="toastgeenemail">Vul alstublieft een emailadres in.</string>
+    <string name="toastgeenwachtwoord">Vul alstublieft een wachtwoord in.</string>
+    <string name="toastgeennaam">Vul alstublieft een naam in.</string>
+    <string name="toastgeencheckbox">Je moet het vierkantje hieronder aanvinken voordat je kan inloggen.</string>
+    <string name="toastbezigmetinloggen">Bezig met inloggen... </string>
     <string name="vulhierinevenement">Vul hier een evenementnaam in</string>
     <string name="vulhierinlocatie">Vul hier de locatie van het evenement in</string>
     <string name="vulhierinbeschrijving">Vul hier de beschrijving in</string>
     <string name="knopopslaan">Opslaan</string>
     <string name="ikgaakkoordAVG">Ik ga akkoord met het feit dat andere gebruikers mijn gegevens kunnen inzien.</string>
-
     <string name="zoekpersoon">Klik op de persoon die jij zoekt</string>
+    <string name="naam">Volledige naam:</string>
+    <string name="hintnaam">Naam</string>
+    <string name="slamijnnaamop">Sla mijn naam en email op zodat deze later in de app gebruikt kunnen worden.</string>
+    <string name="profielfoto">Profielfoto:</string>
+    <string name="titelevenementaanmaken">Evenement Aanmaken</string>
+    <string name="hintevenementdatum">Vul hier de datum in</string>
+    <string name="titelafbevenement">Druk op de plus om een afbeelding aan het evenement te koppelen</string>
+
 </resources>
