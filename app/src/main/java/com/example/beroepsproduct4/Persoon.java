@@ -6,7 +6,11 @@ public class Persoon {
     private String naam;
     private String woonplaats;
 
-    public Persoon() {
+
+
+    public Persoon()
+    {
+
     }
 
     public String getEmail() {
