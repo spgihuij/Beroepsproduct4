@@ -3,113 +3,121 @@ package com.example.beroepsproduct4;
 public class Persoon {
 
 
-    public String persoonNaam;
-    public String persoonEmail;
-    public String persoonProfielFoto;
-    public String persoonWoonplaats;
-    public String persoonGeboortedatum;
-    public String persoonSport;
-    public String persoonHuisdier;
-    public String persoonTvProgramma;
-    public String persoonWebsite;
-    public String persoonHobby;
+    public String persoonnaam;
+    public String persoonemail;
+    public String persoonprofielFoto;
+    public String persoonwoonplaats;
+    public String persoongeboortedatum;
+    public String persoonsport;
+    public String persoonhuisdier;
+    public String persoontvprogramma;
+    public String persoonwebsite;
+    public String persoonhobby;
+    public String persoonsociaalnetwerk;
 
-    public Persoon(){
+    public Persoon() {
 
     }
-    public Persoon(String persoonnaam, String persoonemail, String persoonprofielfoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite, String persoonhobby) {
-        this.persoonNaam = persoonnaam;
-        this.persoonEmail = persoonemail;
-        this.persoonProfielFoto = persoonprofielfoto;
-        this.persoonWoonplaats = persoonwoonplaats;
-        this.persoonGeboortedatum = persoongeboortedatum;
-        this.persoonSport = persoonsport;
-        this.persoonHuisdier = persoonhuisdier;
-        this.persoonTvProgramma = persoontvprogramma;
-        this.persoonWebsite = persoonwebsite;
-        this.persoonHobby = persoonhobby;
-    }
 
-    public String getPersoonHobby() {
-        return persoonHobby;
-    }
-
-    public void setPersoonHobby(String persoonHobby) {
-        this.persoonHobby = persoonHobby;
+    public Persoon(String persoonnaam, String persoonemail, String persoonprofielFoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
+        this.persoonnaam = persoonnaam;
+        this.persoonemail = persoonemail;
+        this.persoonprofielFoto = persoonprofielFoto;
+        this.persoonwoonplaats = persoonwoonplaats;
+        this.persoongeboortedatum = persoongeboortedatum;
+        this.persoonsport = persoonsport;
+        this.persoonhuisdier = persoonhuisdier;
+        this.persoontvprogramma = persoontvprogramma;
+        this.persoonwebsite = persoonwebsite;
     }
 
     public String getPersoonnaam() {
-        return persoonNaam;
+        return persoonnaam;
     }
 
     public void setPersoonnaam(String persoonnaam) {
-        this.persoonNaam = persoonnaam;
+        this.persoonnaam = persoonnaam;
     }
 
     public String getPersoonemail() {
-        return persoonEmail;
+        return persoonemail;
     }
 
     public void setPersoonemail(String persoonemail) {
-        this.persoonEmail = persoonemail;
+        this.persoonemail = persoonemail;
     }
 
-    public String getPersoonprofielfoto() {
-        return persoonProfielFoto;
+    public String getPersoonprofielFoto() {
+        return persoonprofielFoto;
     }
 
-    public void setPersoonprofielfoto(String persoonprofielfoto) {
-        this.persoonProfielFoto = persoonprofielfoto;
-
+    public void setPersoonprofielFoto(String persoonprofielFoto) {
+        this.persoonprofielFoto = persoonprofielFoto;
     }
 
     public String getPersoonwoonplaats() {
-        return persoonWoonplaats;
+        return persoonwoonplaats;
     }
 
     public void setPersoonwoonplaats(String persoonwoonplaats) {
-        this.persoonWoonplaats = persoonwoonplaats;
+        this.persoonwoonplaats = persoonwoonplaats;
     }
 
     public String getPersoongeboortedatum() {
-        return persoonGeboortedatum;
+        return persoongeboortedatum;
     }
 
     public void setPersoongeboortedatum(String persoongeboortedatum) {
-        this.persoonGeboortedatum = persoongeboortedatum;
+        this.persoongeboortedatum = persoongeboortedatum;
     }
 
     public String getPersoonsport() {
-        return persoonSport;
+        return persoonsport;
     }
 
     public void setPersoonsport(String persoonsport) {
-        this.persoonSport = persoonsport;
+        this.persoonsport = persoonsport;
     }
 
     public String getPersoonhuisdier() {
-        return persoonHuisdier;
+        return persoonhuisdier;
     }
 
     public void setPersoonhuisdier(String persoonhuisdier) {
-        this.persoonHuisdier = persoonhuisdier;
+        this.persoonhuisdier = persoonhuisdier;
     }
 
     public String getPersoontvprogramma() {
-        return persoonTvProgramma;
+        return persoontvprogramma;
     }
 
     public void setPersoontvprogramma(String persoontvprogramma) {
-        this.persoonTvProgramma = persoontvprogramma;
+        this.persoontvprogramma = persoontvprogramma;
     }
 
     public String getPersoonwebsite() {
-        return persoonWebsite;
+        return persoonwebsite;
     }
 
     public void setPersoonwebsite(String persoonwebsite) {
-        this.persoonWebsite = persoonwebsite;
+        this.persoonwebsite = persoonwebsite;
     }
 
+    public String getPersoonhobby() {
+        return persoonhobby;
+    }
 
+    public void setPersoonhobby(String persoonhobby) {
+        this.persoonhobby = persoonhobby;
+    }
+
+    public String getPersoonsociaalnetwerk() {
+        return persoonsociaalnetwerk;
+    }
+
+    public void setPersoonsociaalnetwerk(String persoonsociaalnetwerk) {
+        this.persoonsociaalnetwerk = persoonsociaalnetwerk;
+    }
 }
+
+
