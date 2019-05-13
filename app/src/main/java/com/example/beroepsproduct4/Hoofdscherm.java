@@ -3,14 +3,14 @@ package com.example.beroepsproduct4;
 
 import android.content.Intent;
 
-import android.os.Build;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
+
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
+
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -205,7 +205,7 @@ public class Hoofdscherm extends AppCompatActivity
         navUserEmail.setText(currentuser.getEmail());
 
         // ik gebruik Glide om een foto te laden
-        Glide.with(this).load(currentuser.getPhotoUrl()).into(navUserPhoto);
+        //Glide.with(this).load(currentuser.getPhotoUrl()).into(navUserPhoto);
     }
 
 }
