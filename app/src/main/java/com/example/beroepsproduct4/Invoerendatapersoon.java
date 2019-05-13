@@ -50,7 +50,7 @@ public class Invoerendatapersoon extends Fragment implements View.OnClickListene
         userInformation2.setWoonplaats(Woonplaats);
         userInformation2.setUserID(UserID);
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        databasePersonen.child(UserID).setValue(userInformation2);
+        databasePersonen.child(Naam).setValue(userInformation2);
         Toast.makeText(getActivity(), "Persoondata Aangepast", Toast.LENGTH_LONG).show();
 
     }
