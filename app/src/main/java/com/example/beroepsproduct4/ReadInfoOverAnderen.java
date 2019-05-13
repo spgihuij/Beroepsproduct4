@@ -69,7 +69,6 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
     }
 
 
-
 private void getIntentData(){
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null)
