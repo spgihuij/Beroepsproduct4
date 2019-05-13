@@ -44,7 +44,7 @@ public class OverzichtData extends Fragment {
         //NOTE: Unless you are signed in, this will not be useable.
         FirebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = FirebaseDatabase.getReference().child("personen");
+        myRef = FirebaseDatabase.getReference().child("Personen");
         FirebaseUser user = FirebaseAuth.getCurrentUser();
         userEmail = user.getEmail();
 
