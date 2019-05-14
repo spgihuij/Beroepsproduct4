@@ -94,7 +94,6 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
                             }
 
         }
-    
 
 
 
