@@ -1,9 +1,6 @@
 package com.example.beroepsproduct4;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,10 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.concurrent.RecursiveAction;
 
 import static android.support.constraint.Constraints.TAG;
 
@@ -45,7 +37,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved) {
-        View view = inflater.inflate(R.layout.anderenzoekenlayout, container, false);
+        View view = inflater.inflate(R.layout.anderenzoeken_layout, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         searchView = (SearchView) view.findViewById(R.id.search_view) ;

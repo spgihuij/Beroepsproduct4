@@ -15,7 +15,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,24 +28,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private ArrayList<Persoon> persoonsListFull = new ArrayList<>();
     private ArrayList<Evenement> evenementList = new ArrayList<>();
     private ArrayList<Evenement> evenementListFull = new ArrayList<>();
-
     private Context context;
 
     public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList) {
         if(persoonList != null) {
             this.persoonList = persoonList;
-            for(Persoon p : persoonList)
-            {
-                persoonsListFull.add(p);
-            }
+
+                persoonsListFull.addAll(persoonList);
+
             this.context = context;
         }
         if(evenementList!= null){
             this.evenementList = evenementList;
-            for(Evenement e : evenementList)
-            {
-                evenementListFull.add(e);
-            }
+            evenementListFull.addAll(evenementList);
             this.context = context;
 
         }
@@ -60,12 +54,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         View view;
         if(i == type_personen)
         {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
             return new personenViewHolder(view);
         }
         else
         {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
             return  new evenementenViewHolder(view);
         }
     }
