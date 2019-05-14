@@ -97,7 +97,6 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
 
 
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         return false;
