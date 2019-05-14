@@ -26,8 +26,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static int type_evenementen = 2;
 
     private ArrayList<Persoon> persoonList = new ArrayList<>();
-    private ArrayList<String> stringlistfull = new ArrayList<>();
+    private ArrayList<Persoon> persoonsListFull = new ArrayList<>();
     private ArrayList<Evenement> evenementList = new ArrayList<>();
+    private ArrayList<Evenement> evenementListFull = new ArrayList<>();
+
     private Context context;
 
     public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList) {
@@ -35,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             this.persoonList = persoonList;
             for(Persoon p : persoonList)
             {
-                stringlistfull.add(p.getPersoonnaam());
+                persoonsListFull.add(p);
             }
             this.context = context;
         }
@@ -43,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             this.evenementList = evenementList;
             for(Evenement e : evenementList)
             {
-                stringlistfull.add(e.getEvenementnaam());
+                evenementListFull.add(e);
             }
             this.context = context;
 
@@ -132,34 +134,57 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public Filter lijstfilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<String> filteredlijst = new ArrayList<>();
+            List<Persoon> filteredlijstPersoon = new ArrayList<>();
+            List<Evenement> filteredlijstEvenement = new ArrayList<>();
+            if (persoonList != null) {
 
-            if(constraint == null || constraint.length() == 0)
-            {
-                filteredlijst.addAll(stringlistfull);
+                if (constraint == null || constraint.length() == 0) {
+                    filteredlijstPersoon.addAll(persoonsListFull);
+                } else {
+                    String filterpattern = constraint.toString().toLowerCase().trim();
+
+                    for (Persoon persoon : persoonsListFull) {
+                        if (persoon.getPersoonnaam().toLowerCase().contains(filterpattern)) {
+                            filteredlijstPersoon.add(persoon);
+                        }
+                    }
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredlijstPersoon;
+                return results;
             }
 
             else
             {
-                String filterpattern = constraint.toString().toLowerCase().trim();
+                if (constraint == null || constraint.length() == 0) {
+                    filteredlijstEvenement.addAll(evenementListFull);
+                } else {
+                    String filterpattern = constraint.toString().toLowerCase().trim();
 
-                for(String string : stringlistfull)
-                {
-                    if (string.toLowerCase().contains(filterpattern))
-                    {
-                        filteredlijst.add(string);
+                    for (Evenement evenement : evenementListFull) {
+                        if (evenement.getEvenementnaam().toLowerCase().contains(filterpattern)) {
+                            filteredlijstEvenement.add(evenement);
+                        }
                     }
                 }
+                FilterResults results = new FilterResults();
+                results.values = filteredlijstEvenement;
+                return results;
             }
-            FilterResults results = new FilterResults();
-            results.values = filteredlijst;
-            return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            persoonList.clear();
-            persoonList.addAll((List)results.values);
+            if (persoonList != null ) {
+                persoonList.clear();
+                persoonList.addAll((List) results.values);
+            }
+
+            else
+            {
+                evenementList.clear();
+                evenementList.addAll((List) results.values);
+            }
             notifyDataSetChanged();
 
         }
