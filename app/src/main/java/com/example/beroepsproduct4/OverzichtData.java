@@ -44,7 +44,7 @@ public class OverzichtData extends Fragment {
         //NOTE: Unless you are signed in, this will not be useable.
         FirebaseAuth = FirebaseAuth.getInstance();
         FirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = FirebaseDatabase.getReference().child("personen");
+        myRef = FirebaseDatabase.getReference().child("Personen");
         FirebaseUser user = FirebaseAuth.getCurrentUser();
         userEmail = user.getEmail();
 
@@ -94,9 +94,9 @@ public class OverzichtData extends Fragment {
         if (uInfo.getEmailadrespersoon().equals(userEmail))
             {
                 //display all the information
-                Log.d(TAG, "showData: naam: " + uInfo.getNaam());
-                Log.d(TAG, "showData: woonplaats: " + uInfo.getWoonplaats());
-                Log.d(TAG, "showData: emailadres: " + uInfo.getEmailadrespersoon());
+                Log.d(TAG, "showData: persoonnaam: " + uInfo.getNaam());
+                Log.d(TAG, "showData: persoonwoonplaats: " + uInfo.getWoonplaats());
+                Log.d(TAG, "showData: persoonemail: " + uInfo.getEmailadrespersoon());
                 ArrayList<String> array  = new ArrayList<>();
                 array.add(uInfo.getNaam());
                 array.add(uInfo.getWoonplaats());

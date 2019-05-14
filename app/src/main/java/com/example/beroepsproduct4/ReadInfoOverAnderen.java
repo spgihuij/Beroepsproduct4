@@ -37,6 +37,7 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         showData();
 
 
+
     }
 
     private void showData() {
@@ -59,10 +60,12 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
                 tvprogramma.setText(tvp);
                 website.setText(web);
 
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
 
             }
         });
@@ -75,3 +78,4 @@ private void getIntentData(){
         persoonsNaam=bundle.getString("persoonsnaam");
         }
         }
+
