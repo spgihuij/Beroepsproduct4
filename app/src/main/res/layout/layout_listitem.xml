@@ -23,4 +23,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="328dp"
+        android:layout_marginBottom="339dp"
+        android:background="@color/colorPrimaryDark"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/persoonsnaam"
+        app:layout_constraintEnd_toStartOf="@+id/persoonsnaam"
+        app:layout_constraintTop_toTopOf="@+id/persoonsnaam"
+        app:srcCompat="@android:drawable/btn_dialog" />
 </android.support.constraint.ConstraintLayout>

@@ -33,7 +33,7 @@ import static android.support.constraint.Constraints.TAG;
 
 public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextListener {
 
-    private ArrayList<String> persoonsnamen = new ArrayList<>();
+    private ArrayList<Persoon> persoonsnamen = new ArrayList<>();
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -78,17 +78,18 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
             {
                 Persoon persoon = new Persoon();
                 persoon.setPersoonnaam( ds.getValue(Persoon.class).getPersoonnaam());
-                
-                if(persoon.getPersoonnaam()!= null) {
 
-                    persoonsnamen.add(persoon.getPersoonnaam());
+                
+                if(persoon != null) {
+
+                    persoonsnamen.add(persoon);
                     Log.d(TAG, persoon.getPersoonnaam());
                 }
                // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
                // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-                adapter = new RecyclerViewAdapter(getActivity(), persoonsnamen);
+                adapter = new RecyclerViewAdapter(getActivity(), persoonsnamen, null);
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             }

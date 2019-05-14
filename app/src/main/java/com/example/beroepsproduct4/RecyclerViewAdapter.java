@@ -12,63 +12,116 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.common.internal.service.Common;
-
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Filterable {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
     private static final String TAG = "RecyclerViewAdapter";
+    private static int type_personen = 1;
+    private static int type_evenementen = 2;
 
-    private ArrayList<String>  persoonsnamen = new ArrayList<>();
-    private ArrayList<String> persoonsnamenfull;
+    private ArrayList<Persoon> persoonList = new ArrayList<>();
+    private ArrayList<String> stringlistfull = new ArrayList<>();
+    private ArrayList<Evenement> evenementList = new ArrayList<>();
     private Context context;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> persoonsnamen) {
-        this.persoonsnamen = persoonsnamen;
-        persoonsnamenfull = new ArrayList<>(persoonsnamen);
-        this.context = context;
+    public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList) {
+        if(persoonList != null) {
+            this.persoonList = persoonList;
+            for(Persoon p : persoonList)
+            {
+                stringlistfull.add(p.getPersoonnaam());
+            }
+            this.context = context;
+        }
+        if(evenementList!= null){
+            this.evenementList = evenementList;
+            for(Evenement e : evenementList)
+            {
+                stringlistfull.add(e.getEvenementnaam());
+            }
+            this.context = context;
+
+        }
     }
+
+
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem,viewGroup,false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view;
+        if(i == type_personen)
+        {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem,viewGroup,false);
+            return new personenViewHolder(view);
+        }
+        else
+        {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem,viewGroup,false);
+            return  new evenementenViewHolder(view);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        viewHolder.persoonsNaam.setText(persoonsnamen.get(i));
+        if (getItemViewType(i) == type_personen) {
+            ((personenViewHolder) viewHolder).setPersonenInfo(persoonList.get(i));
 
-        viewHolder.recyclerLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent s = new Intent(v.getContext(),ReadInfoOverAnderen.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("persoonsnaam", persoonsnamen.get(i));
-                s.putExtras(bundle);
-                v.getContext().startActivity(s);
+            ((personenViewHolder)viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent s = new Intent(v.getContext(), ReadInfoOverAnderen.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("persoonsnaam", persoonList.get(i).getPersoonnaam());
+                    s.putExtras(bundle);
+                    v.getContext().startActivity(s);
+                }
+            });
+
+
+        }
+        else {
+
+            ((evenementenViewHolder) viewHolder).setEvenementInfo(evenementList.get(i));
+
+            ((evenementenViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //intent voor evenement info na click.
+                }
+            });
+        }
 
 
 
 
+    }
 
-            }
-        });
+    @Override
+    public int getItemViewType(int i)
+    {
+        if (persoonList!= null)
+        {
+                 return type_personen;
+
+        }
+        else
+
+                return  type_evenementen;
 
     }
 
     @Override
     public int getItemCount() {
-        return persoonsnamen.size();
+        return persoonList.size();
     }
 
     @Override
@@ -83,14 +136,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             if(constraint == null || constraint.length() == 0)
             {
-                filteredlijst.addAll(persoonsnamenfull);
+                filteredlijst.addAll(stringlistfull);
             }
 
             else
             {
                 String filterpattern = constraint.toString().toLowerCase().trim();
 
-                for(String string : persoonsnamenfull)
+                for(String string : stringlistfull)
                 {
                     if (string.toLowerCase().contains(filterpattern))
                     {
@@ -105,23 +158,53 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            persoonsnamen.clear();
-            persoonsnamen.addAll((List)results.values);
+            persoonList.clear();
+            persoonList.addAll((List)results.values);
             notifyDataSetChanged();
 
         }
     };
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+     class personenViewHolder extends RecyclerView.ViewHolder{
 
         TextView persoonsNaam;
         ConstraintLayout recyclerLayout;
 
-        public ViewHolder(View itemView){
+        public personenViewHolder(View itemView){
             super(itemView);
             persoonsNaam = itemView.findViewById(R.id.persoonsnaam);
             recyclerLayout = itemView.findViewById(R.id.recycler_Layout);
         }
 
+         public void setPersonenInfo(Persoon persoon)
+         {
+             persoonsNaam.setText(persoon.getPersoonnaam());
+         }
+
     }
+
+    class evenementenViewHolder extends RecyclerView.ViewHolder{
+         TextView evenementNaam;
+         TextView evenementLocatie;
+         ImageView evenementFoto;
+         ConstraintLayout recyclerLayout;
+
+        public evenementenViewHolder(View itemView){
+            super(itemView);
+
+        }
+
+        public void setEvenementInfo(Evenement evenement)
+        {
+            evenementNaam.setText(evenement.getEvenementnaam());
+            evenementLocatie.setText(evenement.getEvenementlocatie());
+            //foto nog toevoegen
+        }
+
+
+    }
+
+
+
+
 }
