@@ -53,7 +53,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("personen");
+        databaseReference = firebaseDatabase.getReference().child("Personen");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,27 +71,27 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
         return view;
     }
 
-        private void showData(DataSnapshot dataSnapshot) {
+    private void showData(DataSnapshot dataSnapshot) {
         persoonsnamen.clear();
-            for(DataSnapshot ds : dataSnapshot.getChildren())
-            {
-                Persoon persoon = new Persoon();
-                persoon.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
-                
-                if(persoon.getPersoonnaam()!= null) {
+        for(DataSnapshot ds : dataSnapshot.getChildren())
+        {
+            Persoon persoon = new Persoon();
+            persoon.setPersoonnaam( ds.getValue(Persoon.class).getPersoonnaam());
 
-                    persoonsnamen.add(persoon.getPersoonnaam());
-                    Log.d(TAG, persoon.getPersoonnaam());
-                }
-               // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
-               // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
+            if(persoon.getPersoonnaam()!= null) {
+
+                persoonsnamen.add(persoon.getPersoonnaam());
+                Log.d(TAG, persoon.getPersoonnaam());
+            }
+            // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
+            // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-                adapter = new RecyclerViewAdapter(getActivity(), persoonsnamen);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            }
+            adapter = new RecyclerViewAdapter(getActivity(), persoonsnamen);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
+    }
 
 
 
@@ -102,7 +102,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onQueryTextChange(String newText) {
-    adapter.getFilter().filter(newText);
+        adapter.getFilter().filter(newText);
         return false;
     }
 }

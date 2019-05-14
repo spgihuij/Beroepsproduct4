@@ -1,26 +1,42 @@
 package com.example.beroepsproduct4;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
-public class Invoerendatapersoon extends Fragment implements View.OnClickListener {
+public class Invoerendatapersoon extends Fragment  {
 
     private DatabaseReference databaseReference, databasePersonen;
     private EditText editText31, editText32, editText33, editText34, editText35, editText36, editText37, editText38;
     private Button btnOpslaan10,btnoplsaandata1,btnoplsaandata2,btnoplsaandata3,btnoplsaandata4,btnoplsaandata5,btnoplsaandata6,btnoplsaandata7,btnoplsaandata8;
     private FirebaseAuth firebaseAuth;
+    private static final String TAG = "ViewDatabase";
+    private FirebaseDatabase FirebaseDatabase;
+    private FirebaseAuth.AuthStateListener AuthListener;
+    private DatabaseReference myRef;
+    private String userEmail;
+
+    private ListView mListView;
 
     @Nullable
     @Override
@@ -47,17 +63,102 @@ public class Invoerendatapersoon extends Fragment implements View.OnClickListene
         btnOpslaan10 =(Button) view.findViewById(R.id.btnOpslaan10);
         firebaseAuth = FirebaseAuth.getInstance();
         databasePersonen = FirebaseDatabase.getInstance().getReference("Personen");
-        btnOpslaan10.setOnClickListener(this);
-        btnoplsaandata1.setOnClickListener(this);
-        btnoplsaandata2.setOnClickListener(this);
-        btnoplsaandata3.setOnClickListener(this);
-        btnoplsaandata4.setOnClickListener(this);
-        btnoplsaandata5.setOnClickListener(this);
-        btnoplsaandata6.setOnClickListener(this);
-        btnoplsaandata7.setOnClickListener(this);
-        btnoplsaandata8.setOnClickListener(this);
+        mListView = (ListView) view.findViewById(R.id.listviewData);
+        FirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = FirebaseDatabase.getReference().child("Personen");
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        userEmail = user.getEmail();
 
+        btnOpslaan10.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+        btnoplsaandata1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+        btnoplsaandata2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+        btnoplsaandata3.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+        btnoplsaandata4.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+        btnoplsaandata5.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+        btnoplsaandata6.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+        btnoplsaandata7.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+
+        btnoplsaandata8.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public  void onClick(View v)
+            { opslaanPersoon(); }});
+
+
+        AuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getEmail());
+                    toastMessage("Successfully signed in with: " + user.getEmail());
+                } else {
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                    toastMessage("Successfully signed out.");
+                }
+            }
+        };
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         return view;
+    }
+    private void showData(DataSnapshot dataSnapshot) {
+        for(DataSnapshot ds : dataSnapshot.getChildren()){
+            Persoon uInfo = new Persoon();
+            uInfo.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
+            uInfo.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
+            uInfo.setPersoonwoonplaats(ds.getValue(Persoon.class).getPersoonwoonplaats());
+           if (uInfo.getPersoonemail().equals(userEmail));
+            {
+                String nam = ds.child("persoonnaam").getValue().toString();
+                String gd = ds.child("persoongeboortedatum").getValue().toString();
+                String hd = ds.child("persoonhuisdier").getValue().toString();
+                String sp = ds.child("persoonsport").getValue().toString();
+                String tvp = ds.child("persoontvprogramma").getValue().toString();
+                String wp = ds.child("persoonwoonplaats").getValue().toString();
+                String web = ds.child("persoonwebsite").getValue().toString();
+                editText31.setText(nam);
+                editText32.setText(gd);
+                editText33.setText(wp);
+                editText34.setText(sp);
+                editText35.setText(hd);
+                editText36.setText(tvp);
+                editText37.setText(web);
+            }
+        }
     }
 
     public void opslaanPersoon(){
@@ -71,68 +172,43 @@ public class Invoerendatapersoon extends Fragment implements View.OnClickListene
         String PersoonTvProgramma= editText37.getText().toString().trim();
         String PersoonWebsite = editText38.getText().toString().trim();
         String PersoonProfielFoto = ("-");
-
-        Persoon Persoon= new Persoon(PersoonNaam,PersoonEmail , PersoonWoonplaats, PersoonGeboorteDatum,
-                PersoonHuisdier, PersoonSport, PersoonTvProgramma, PersoonWebsite, PersoonProfielFoto);
-        Persoon.setPersoonnaam(PersoonNaam);
-        Persoon.setPersoonemail(PersoonEmail);
-        Persoon.setPersoonwoonplaats(PersoonWoonplaats);
-        Persoon.setPersoongeboortedatum(PersoonGeboorteDatum);
-        Persoon.setPersoonhuisdier(PersoonHuisdier);
-        Persoon.setPersoonsport(PersoonSport);
-        Persoon.setPersoontvprogramma(PersoonTvProgramma);
-        Persoon.setPersoonwebsite(PersoonWebsite);
+        if (PersoonNaam.trim().length() > 0) {
+            Persoon Persoon = new Persoon(PersoonNaam, PersoonEmail, PersoonWoonplaats, PersoonGeboorteDatum,
+                    PersoonHuisdier, PersoonSport, PersoonTvProgramma, PersoonWebsite, PersoonProfielFoto);
+            Persoon.setPersoonnaam(PersoonNaam);
+            Persoon.setPersoonemail(PersoonEmail);
+            Persoon.setPersoonwoonplaats(PersoonWoonplaats);
+            Persoon.setPersoongeboortedatum(PersoonGeboorteDatum);
+            Persoon.setPersoonhuisdier(PersoonHuisdier);
+            Persoon.setPersoonsport(PersoonSport);
+            Persoon.setPersoontvprogramma(PersoonTvProgramma);
+            Persoon.setPersoonwebsite(PersoonWebsite);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databasePersonen.child(PersoonNaam).setValue(Persoon);
         Toast.makeText(getActivity(), "Persoondata Aangepast", Toast.LENGTH_LONG).show();
-
+    } else {
+            Toast.makeText(getActivity(), "Vul alstublieft de je naam en email in", Toast.LENGTH_SHORT).show();}
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebaseAuth.addAuthStateListener(AuthListener);
     }
 
     @Override
-    public void onClick(View view) {
-        if(view == btnOpslaan10){
-            opslaanPersoon();
+    public void onStop() {
+        super.onStop();
+        if (AuthListener != null) {
+            firebaseAuth.removeAuthStateListener(AuthListener);
         }
     }
-    public void onClick1(View view) {
-        if(view == btnoplsaandata1){
-            opslaanPersoon();
-        }
-    }
-    public void onClick2(View view) {
-        if(view == btnoplsaandata2){
-            opslaanPersoon();
-        }
-    }
-    public void onClick3(View view) {
-        if(view == btnoplsaandata3){
-            opslaanPersoon();
-        }
-    }
-    public void onClick4(View view) {
-        if(view == btnoplsaandata4){
-            opslaanPersoon();
-        }
-    }
-    public void onClick5(View view) {
-        if(view == btnoplsaandata5){
-            opslaanPersoon();
-        }
-    }
-    public void onClick6(View view) {
-        if(view == btnoplsaandata6){
-            opslaanPersoon();
-        }
-    }
-    public void onClick7(View view) {
-        if(view == btnoplsaandata7){
-            opslaanPersoon();
-        }
-    }
-    public void onClick8(View view) {
-        if(view == btnoplsaandata8){
-            opslaanPersoon();
-        }
+
+    private void toastMessage(String message){
+        Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+
     }
 }
+
+
+
