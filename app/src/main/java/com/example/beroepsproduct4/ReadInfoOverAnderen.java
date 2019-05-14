@@ -1,5 +1,6 @@
 package com.example.beroepsproduct4;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +17,15 @@ import com.google.firebase.database.ValueEventListener;
 public class ReadInfoOverAnderen extends AppCompatActivity {
     TextView naam, geboortedatum, woonplaats, sport, huisdier, tvprogramma, website;
     Button btn;
+    String persoonsNaam;
     DatabaseReference reference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_info_over_anderen);
+        getIntentData();
 
         naam = (TextView) findViewById(R.id.ia_iv_naam);
         geboortedatum = (TextView) findViewById(R.id.ia_iv_Geboortedatum);
@@ -30,40 +34,44 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         huisdier = (TextView) findViewById(R.id.ia_iv_huisdier);
         tvprogramma = (TextView) findViewById(R.id.ia_iv_tvprogramma);
         website = (TextView) findViewById(R.id.ia_iv_website);
+        showData();
 
-        btn = (Button) findViewById(R.id.buttonInfoOveranderen);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reference = FirebaseDatabase.getInstance().getReference().child("info over anderen").child("rens");
-                reference.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String nam = dataSnapshot.child("naam").getValue().toString();
-                        String gd = dataSnapshot.child("geboortedatum").getValue().toString();
-                        String hd = dataSnapshot.child("huisdier").getValue().toString();
-                        String sp = dataSnapshot.child("sport").getValue().toString();
-                        String tvp = dataSnapshot.child("tv programma").getValue().toString();
-                        String wp = dataSnapshot.child("woonplaats").getValue().toString();
-                        String web = dataSnapshot.child("website").getValue().toString();
-                        naam.setText(nam);
-                        geboortedatum.setText(gd);
-                        woonplaats.setText(wp);
-                        sport.setText(sp);
-                        huisdier.setText(hd);
-                        tvprogramma.setText(tvp);
-                        website.setText(web);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-
-        });
 
     }
-}
+
+    private void showData() {
+        reference = FirebaseDatabase.getInstance().getReference().child("Personen").child(persoonsNaam);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String nam = dataSnapshot.child("persoonnaam").getValue().toString();
+                String gd = dataSnapshot.child("persoongeboortedatum").getValue().toString();
+                String hd = dataSnapshot.child("persoonhuisdier").getValue().toString();
+                String sp = dataSnapshot.child("persoonsport").getValue().toString();
+                String tvp = dataSnapshot.child("persoontvprogramma").getValue().toString();
+                String wp = dataSnapshot.child("persoonwoonplaats").getValue().toString();
+                String web = dataSnapshot.child("persoonwebsite").getValue().toString();
+                naam.setText(nam);
+                geboortedatum.setText(gd);
+                woonplaats.setText(wp);
+                sport.setText(sp);
+                huisdier.setText(hd);
+                tvprogramma.setText(tvp);
+                website.setText(web);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+private void getIntentData(){
+        Bundle bundle=getIntent().getExtras();
+        if(bundle!=null)
+        persoonsNaam=bundle.getString("persoonsnaam");
+        }
+        }

@@ -53,7 +53,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("personen");
+        databaseReference = firebaseDatabase.getReference().child("Personen");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,7 +76,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
             for(DataSnapshot ds : dataSnapshot.getChildren())
             {
                 Persoon persoon = new Persoon();
-                persoon.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
+                persoon.setPersoonnaam( ds.getValue(Persoon.class).getPersoonnaam());
                 
                 if(persoon.getPersoonnaam()!= null) {
 

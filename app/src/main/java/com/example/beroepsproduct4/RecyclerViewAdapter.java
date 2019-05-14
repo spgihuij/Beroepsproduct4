@@ -1,6 +1,8 @@
 package com.example.beroepsproduct4;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.common.internal.service.Common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
 
         viewHolder.persoonsNaam.setText(persoonsnamen.get(i));
@@ -47,7 +51,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.recyclerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //intent open informatie over de persoon
+                Intent s = new Intent(v.getContext(),ReadInfoOverAnderen.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("persoonsnaam", persoonsnamen.get(i));
+                s.putExtras(bundle);
+                v.getContext().startActivity(s);
+
+
+
+
+
             }
         });
 

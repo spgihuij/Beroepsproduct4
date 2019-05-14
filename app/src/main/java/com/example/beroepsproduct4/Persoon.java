@@ -5,21 +5,24 @@ public class Persoon {
 
     public String persoonnaam;
     public String persoonemail;
-    public String persoonprofielfoto;
+    public String persoonprofielFoto;
     public String persoonwoonplaats;
     public String persoongeboortedatum;
     public String persoonsport;
     public String persoonhuisdier;
     public String persoontvprogramma;
     public String persoonwebsite;
+    public String persoonhobby;
+    public String persoonsociaalnetwerk;
 
-    public Persoon(){
+    public Persoon() {
 
     }
-    public Persoon(String persoonnaam, String persoonemail, String persoonprofielfoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
+
+    public Persoon(String persoonnaam, String persoonemail, String persoonprofielFoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
         this.persoonnaam = persoonnaam;
         this.persoonemail = persoonemail;
-        this.persoonprofielfoto = persoonprofielfoto;
+        this.persoonprofielFoto = persoonprofielFoto;
         this.persoonwoonplaats = persoonwoonplaats;
         this.persoongeboortedatum = persoongeboortedatum;
         this.persoonsport = persoonsport;
@@ -27,7 +30,6 @@ public class Persoon {
         this.persoontvprogramma = persoontvprogramma;
         this.persoonwebsite = persoonwebsite;
     }
-
 
     public String getPersoonnaam() {
         return persoonnaam;
@@ -45,13 +47,12 @@ public class Persoon {
         this.persoonemail = persoonemail;
     }
 
-    public String getPersoonprofielfoto() {
-        return persoonprofielfoto;
+    public String getPersoonprofielFoto() {
+        return persoonprofielFoto;
     }
 
-    public void setPersoonprofielfoto(String persoonprofielfoto) {
-        this.persoonprofielfoto = persoonprofielfoto;
-
+    public void setPersoonprofielFoto(String persoonprofielFoto) {
+        this.persoonprofielFoto = persoonprofielFoto;
     }
 
     public String getPersoonwoonplaats() {
@@ -102,5 +103,21 @@ public class Persoon {
         this.persoonwebsite = persoonwebsite;
     }
 
+    public String getPersoonhobby() {
+        return persoonhobby;
+    }
 
+    public void setPersoonhobby(String persoonhobby) {
+        this.persoonhobby = persoonhobby;
+    }
+
+    public String getPersoonsociaalnetwerk() {
+        return persoonsociaalnetwerk;
+    }
+
+    public void setPersoonsociaalnetwerk(String persoonsociaalnetwerk) {
+        this.persoonsociaalnetwerk = persoonsociaalnetwerk;
+    }
 }
+
+
