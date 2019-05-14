@@ -37,6 +37,7 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         showData();
 
 
+
     }
 
     private void showData() {
@@ -58,20 +59,23 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
                 huisdier.setText(hd);
                 tvprogramma.setText(tvp);
                 website.setText(web);
+
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
 
             }
         });
     }
 
 
-
-    private void getIntentData(){
+private void getIntentData(){
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null)
-            persoonsNaam=bundle.getString("persoonsnaam");
-    }
-}
+        persoonsNaam=bundle.getString("persoonsnaam");
+        }
+        }
+

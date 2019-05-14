@@ -73,23 +73,26 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
     private void showData(DataSnapshot dataSnapshot) {
         persoonsnamen.clear();
-        for(DataSnapshot ds : dataSnapshot.getChildren())
-        {
-            Persoon persoon = new Persoon();
-            persoon.setPersoonnaam( ds.getValue(Persoon.class).getPersoonnaam());
 
-            if(persoon.getPersoonnaam()!= null) {
+            for(DataSnapshot ds : dataSnapshot.getChildren())
+            {
+                Persoon persoon = new Persoon();
+                persoon.setPersoonnaam( ds.getValue(Persoon.class).getPersoonnaam());
+                
+                if(persoon.getPersoonnaam()!= null) {
 
-                persoonsnamen.add(persoon.getPersoonnaam());
-                Log.d(TAG, persoon.getPersoonnaam());
-            }
-            // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
-            // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
+                    persoonsnamen.add(persoon.getPersoonnaam());
+                    Log.d(TAG, persoon.getPersoonnaam());
+                }
+               // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
+               // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-            adapter = new RecyclerViewAdapter(getActivity(), persoonsnamen);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                adapter = new RecyclerViewAdapter(getActivity(), persoonsnamen);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            }
+
         }
     }
 

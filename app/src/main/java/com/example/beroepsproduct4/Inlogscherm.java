@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
 //servi
 public class Inlogscherm extends AppCompatActivity implements View.OnClickListener {
     private EditText editTextEmail, editTextWachtwoord;
@@ -25,6 +26,7 @@ public class Inlogscherm extends AppCompatActivity implements View.OnClickListen
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private CheckBox checkBox1;
+    private Intent Hoofdscherm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,11 @@ public class Inlogscherm extends AppCompatActivity implements View.OnClickListen
         btnNaarRegistreren = (Button) findViewById(R.id.button2);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
+        Hoofdscherm = new Intent(this, com.example.beroepsproduct4.Hoofdscherm.class);
 
+        Intent registerActivity = new Intent(getApplicationContext(), Registreerscherm.class);
+        startActivity(registerActivity);
+        finish();
 
         if (firebaseAuth.getCurrentUser() != null) {
             // Hoofdscherm starten (want user is al ingelogd)

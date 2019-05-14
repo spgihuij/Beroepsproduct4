@@ -30,7 +30,6 @@
             android:layout_height="match_parent">
 
 
-
             <TextView
                 android:id="@+id/begroetingszinnen_hoofdscherm"
                 android:layout_width="wrap_content"
@@ -62,36 +61,26 @@
                 tools:layout_conversion_absoluteHeight="19dp"
                 tools:layout_conversion_absoluteWidth="59dp" />
 
-            <Button
-                android:id="@+id/btnzinnengenerate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="156dp"
-                android:text="zin genereren"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/begroetingszinnen_hoofdscherm"
-                tools:layout_conversion_absoluteHeight="48dp"
-                tools:layout_conversion_absoluteWidth="129dp" />
-
 
             <ImageView
                 android:id="@+id/imageViewHoofdschermEmoticon"
-                android:layout_width="92dp"
-                android:layout_height="80dp"
+                android:layout_width="169dp"
+                android:layout_height="121dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnzinnengenerate"
+                app:layout_constraintTop_toBottomOf="@+id/begroetingszinnen_hoofdscherm"
+                app:layout_constraintVertical_bias="0.147"
+                app:srcCompat="@drawable/duim_omhoog_emoticon"
                 tools:layout_conversion_absoluteHeight="161dp"
-                tools:layout_conversion_absoluteWidth="192dp"
-                tools:srcCompat="@drawable/duim_omhoog_emoticon" />
+                tools:layout_conversion_absoluteWidth="192dp" />
 
         </android.support.constraint.ConstraintLayout>-
 
