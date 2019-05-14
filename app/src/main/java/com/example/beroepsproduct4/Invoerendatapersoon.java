@@ -141,9 +141,16 @@ public class Invoerendatapersoon extends Fragment  {
             uInfo.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
             uInfo.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
             uInfo.setPersoonwoonplaats(ds.getValue(Persoon.class).getPersoonwoonplaats());
-           if (uInfo.getPersoonemail().equals(userEmail));
+            uInfo.setPersoongeboortedatum(ds.getValue(Persoon.class).getPersoongeboortedatum());
+            uInfo.setPersoonhuisdier(ds.getValue(Persoon.class).getPersoonhuisdier());
+            uInfo.setPersoonsport(ds.getValue(Persoon.class).getPersoonsport());
+            uInfo.setPersoontvprogramma(ds.getValue(Persoon.class).getPersoontvprogramma());
+            uInfo.setPersoonwebsite(ds.getValue(Persoon.class).getPersoonwebsite());
+            if(uInfo.getPersoonemail().equals(userEmail))
             {
+
                 String nam = ds.child("persoonnaam").getValue().toString();
+                String email = ds.child("persoonemail").getValue().toString();
                 String gd = ds.child("persoongeboortedatum").getValue().toString();
                 String hd = ds.child("persoonhuisdier").getValue().toString();
                 String sp = ds.child("persoonsport").getValue().toString();
@@ -151,13 +158,19 @@ public class Invoerendatapersoon extends Fragment  {
                 String wp = ds.child("persoonwoonplaats").getValue().toString();
                 String web = ds.child("persoonwebsite").getValue().toString();
                 editText31.setText(nam);
-                editText32.setText(gd);
+                editText32.setText(email);
                 editText33.setText(wp);
-                editText34.setText(sp);
+                editText34.setText(gd);
                 editText35.setText(hd);
-                editText36.setText(tvp);
-                editText37.setText(web);
+                editText36.setText(sp);
+                editText37.setText(tvp);
+                editText38.setText(web);
+            }else
+            {
+
             }
+
+
         }
     }
 
