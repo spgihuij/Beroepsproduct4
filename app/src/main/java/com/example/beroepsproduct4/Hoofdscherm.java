@@ -163,6 +163,7 @@ public class Hoofdscherm extends AppCompatActivity
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Invoerendatapersoon()).commit();
                 break;
 
+
             case R.id.info_over_anderen:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AnderenZoeken()).commit();
                 break;

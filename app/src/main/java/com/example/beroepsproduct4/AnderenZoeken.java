@@ -71,8 +71,9 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
         return view;
     }
 
-        private void showData(DataSnapshot dataSnapshot) {
+    private void showData(DataSnapshot dataSnapshot) {
         persoonsnamen.clear();
+
             for(DataSnapshot ds : dataSnapshot.getChildren())
             {
                 Persoon persoon = new Persoon();
@@ -91,7 +92,9 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                             }
+
         }
+
 
 
 
@@ -102,7 +105,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onQueryTextChange(String newText) {
-    adapter.getFilter().filter(newText);
+        adapter.getFilter().filter(newText);
         return false;
     }
 }
