@@ -169,8 +169,8 @@ public class Hoofdscherm extends AppCompatActivity
                 break;
 
             case R.id.evenementen:
-                Intent intent = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EvenementZoeken()).commit();
+
                 break;
             case R.id.sociaal_netwerk:
                 //sociaalnetwerk
@@ -180,8 +180,10 @@ public class Hoofdscherm extends AppCompatActivity
                 startActivity(intent2);
                 break;
             case R.id.evenement_toevoegen:
-                // evenement toevoegen
+                Intent intent3 = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
+                startActivity(intent3);
                 break;
+
             case R.id.sociaal_netwerk_toevoegen:
                 //sociaal netwerk teovoegen
                 break;
