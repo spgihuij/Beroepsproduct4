@@ -154,11 +154,7 @@ public class Registreerscherm extends AppCompatActivity
                 });
 
     }
-private void updateUI(){
-        Intent homeAcitvity= new Intent(getApplicationContext(),Hoofdscherm.class);
-        startActivity(homeAcitvity);
-        finish();
-}
+
 
     @Override
     public void onClick(View view) {
