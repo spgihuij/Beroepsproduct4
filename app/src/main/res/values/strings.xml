@@ -43,5 +43,19 @@
     <string name="titelevenementaanmaken">Evenement Aanmaken</string>
     <string name="hintevenementdatum">Vul hier de datum in</string>
     <string name="titelafbevenement">Druk op de plus om een afbeelding aan het evenement te koppelen</string>
+    <string name="toastevenementtoegevoegd">Evenement Toegevoegd</string>
+    <string name="toastfotoopgeslagen">Foto opgeslagen</string>
+    <string name="toastfotonietopgeslagen">Foto niet opgeslagen probeer opnieuw</string>
+    <string name="zin1">Wat is het weer een leuke dag vandaag!</string>
+    <string name="zin2">Ik hoop dat je blij bent!</string>
+    <string name="zin3">Wat een mooie dag!</string>
+    <string name="zin4">Super leuk je weer te zien!</string>
+    <string name="zin5">Heb je weer zin om de app te gebruiken?</string>
+    <string name="toastpersoondataaangepast">Persoondata Aangepast</string>
+    <string name="toastvulnaamenmailin">Vul alstublieft een naam en emailadres in.</string>
+    <string name="streepjesommenuteopenen">Druk op de drie streepjes boven de pijl om het menu te openen.</string>
+    <string name="goedemorgen">Goedemorgen,</string>
+    <string name="goedemiddag">Goedemiddag,</string>
+    <string name="goedeavond">Goedeavond,</string>
 
 </resources>

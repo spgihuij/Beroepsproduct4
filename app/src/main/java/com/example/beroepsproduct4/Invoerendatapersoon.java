@@ -199,9 +199,11 @@ public class Invoerendatapersoon extends Fragment  {
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
         databasePersonen.child(PersoonNaam).setValue(Persoon);
-        Toast.makeText(getActivity(), "Persoondata Aangepast", Toast.LENGTH_LONG).show();
+        String dataaangepast = getString(R.string.toastpersoondataaangepast);
+        Toast.makeText(getActivity(), dataaangepast, Toast.LENGTH_LONG).show();
     } else {
-            Toast.makeText(getActivity(), "Vul alstublieft de je naam en email in", Toast.LENGTH_SHORT).show();}
+            String toastvulnaamenemailin = getString(R.string.toastvulnaamenmailin);
+            Toast.makeText(getActivity(), toastvulnaamenemailin, Toast.LENGTH_SHORT).show();}
     }
     @Override
     public void onStart() {

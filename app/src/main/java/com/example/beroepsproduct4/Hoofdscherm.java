@@ -28,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class Hoofdscherm extends AppCompatActivity
@@ -39,7 +41,9 @@ public class Hoofdscherm extends AppCompatActivity
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
     View creerzinnen;
-
+    View creertimestamp;
+    View creerimage;
+    ImageView ivHoofdscherm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +68,9 @@ public class Hoofdscherm extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //beginnen van het maken van welkomszinnen
+        creertimestampzinnen(creertimestamp);
         creerrandomzinnen(creerzinnen);
-
+        creerrandomimage(creerimage);
         //gegevens in navigation drawer plaatsen
         updateNavHeader();
 
@@ -89,12 +94,55 @@ public class Hoofdscherm extends AppCompatActivity
 
     }
 
+public void creerrandomimage(View view){
+    ivHoofdscherm = (ImageView) findViewById(R.id.ivHoofdscherm);
+  int image1 = R.drawable.hoofdschermimage1;
+  int image2 = R.drawable.hoofdschermimage2;
+  int image3 = R.drawable.hoofdschermimage3;
+  int image4 = R.drawable.hoofdschermimage4;
+  int image5 = R.drawable.hoofdschermimage5;
+
+    final int[] leukeplaatjes = {image1, image2, image3, image4, image5};
+    int randomimage = (int) (Math.random() * 5);
+    ivHoofdscherm.setImageResource(leukeplaatjes[randomimage]);
+}
+
+
+
+public void creertimestampzinnen(View view){
+    Calendar currTime = Calendar.getInstance();
+    int hour = currTime.get(Calendar.HOUR_OF_DAY);
+    final TextView timestampzin = (TextView) findViewById(R.id.tvTijdbegroet);
+    if (hour >= 0 && hour < 12) {
+        String goedemorgen = getString(R.string.goedemorgen);
+    timestampzin.setText(goedemorgen);
+    }
+    else if (hour >= 12 && hour < 18) {
+        String goedemiddag = getString(R.string.goedemiddag);
+        timestampzin.setText(goedemiddag);
+    }
+    else if (hour >=18 && hour <23){
+        String goedeavond = getString(R.string.goedeavond);
+        timestampzin.setText(goedeavond);
+    }
+
+
+}
+
+
+
     public void creerrandomzinnen(View view) {
         // random zinnen
-        final TextView gebroetingszinnen = (TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
-        final String[] voelgoedzinnen = {"voel je je goed", "hoe voel je je vandaag", "helemaal top vandaag"};
-        int rando = (int) (Math.random() * 3);
-        gebroetingszinnen.setText(voelgoedzinnen[rando]);
+        String zin1 = getString(R.string.zin1);
+        String zin2 = getString(R.string.zin2);
+        String zin3 = getString(R.string.zin3);
+        String zin4 = getString(R.string.zin4);
+        String zin5 = getString(R.string.zin5);
+
+        final TextView begroetingszin = (TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
+        final String[] voelgoedzinnen = {zin1, zin2, zin3, zin4, zin5};
+        int rando = (int) (Math.random() * 5);
+        begroetingszin.setText(voelgoedzinnen[rando]);
     }
 
 

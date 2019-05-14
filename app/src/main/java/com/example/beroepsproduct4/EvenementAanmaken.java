@@ -59,7 +59,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
 
     // data opslaan
     private void opslaanEvenement() {
-
+        String toastevtoegevoegd = getString(R.string.toastevenementtoegevoegd);
         String evenementnaam = editTextEvenementnaam.getText().toString().trim();
         String evenementlocatie = editTextLocatie.getText().toString().trim();
         String evenementbeschrijving = editTextBeschrijving.getText().toString().trim();
@@ -68,7 +68,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         String id = databaseEvenementen.push().getKey();
         evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving, evenementdatum, evenementfoto);
         databaseEvenementen.child(id).setValue(evenement);
-        Toast.makeText(this, "Evenement Toegevoegd", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, toastevtoegevoegd, Toast.LENGTH_LONG).show();
 
     }
 
@@ -82,16 +82,19 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
             ibEvenementFoto.setImageURI(uri2);
             imagepath = storage.child("EvenementFoto").child(uri2.getLastPathSegment());
             imageLocation = uri2.getLastPathSegment();
+            final String tstfotoopgeslagen = getString(R.string.toastfotoopgeslagen);
+            final String tstfotonietopgeslagen = getString(R.string.toastfotonietopgeslagen);
+
             imagepath.putFile(uri2).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(EvenementAanmaken.this, "Foto opgeslagen", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EvenementAanmaken.this, tstfotoopgeslagen, Toast.LENGTH_LONG).show();
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(EvenementAanmaken.this, "Foto niet opgeslagen", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EvenementAanmaken.this, tstfotonietopgeslagen, Toast.LENGTH_LONG).show();
 
                 }
             });
