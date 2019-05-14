@@ -42,11 +42,7 @@ public class Inlogscherm extends AppCompatActivity implements View.OnClickListen
         progressDialog = new ProgressDialog(this);
         Hoofdscherm = new Intent(this, com.example.beroepsproduct4.Hoofdscherm.class);
 
-        Intent registerActivity = new Intent(getApplicationContext(), Registreerscherm.class);
-        startActivity(registerActivity);
-        finish();
-
-        if (firebaseAuth.getCurrentUser() != null) {
+             if (firebaseAuth.getCurrentUser() != null) {
             // Hoofdscherm starten (want user is al ingelogd)
             finish();
             startActivity(new Intent(getApplicationContext(), Hoofdscherm.class));

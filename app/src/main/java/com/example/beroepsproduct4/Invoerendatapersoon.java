@@ -63,7 +63,7 @@ public class Invoerendatapersoon extends Fragment  {
         btnOpslaan10 =(Button) view.findViewById(R.id.btnOpslaan10);
         firebaseAuth = FirebaseAuth.getInstance();
         databasePersonen = FirebaseDatabase.getInstance().getReference("Personen");
-        mListView = (ListView) view.findViewById(R.id.listviewData);
+
         FirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = FirebaseDatabase.getReference().child("Personen");
         FirebaseUser user = firebaseAuth.getCurrentUser();
