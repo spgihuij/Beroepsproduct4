@@ -22,7 +22,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-//import com.bumptech.glide.Glide;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -92,17 +92,14 @@ public class Hoofdscherm extends AppCompatActivity
     public void creerrandomzinnen(View view) {
         // random zinnen
         final TextView gebroetingszinnen = (TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
-        Button generate = (Button) findViewById(R.id.btnzinnengenerate);
         final String[] voelgoedzinnen = {"voel je je goed", "hoe voel je je vandaag", "helemaal top vandaag"};
-        int rando = (int) ((Math.random() * 3));
-        generate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int rando = (int) (Math.random() * 3);
-                gebroetingszinnen.setText(voelgoedzinnen[rando]);
-            }
-        });
+        int rando = (int) (Math.random() * 3);
+        gebroetingszinnen.setText(voelgoedzinnen[rando]);
     }
+
+
+
+
 
 
     public void checkUser(NavigationView navigationView) {
@@ -167,7 +164,7 @@ public class Hoofdscherm extends AppCompatActivity
                 break;
 
             case R.id.info_over_anderen:
-                fragmentManager.beginTransaction().replace(R.id.drawer_layout, new AnderenZoeken()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AnderenZoeken()).commit();
                 break;
 
             case R.id.evenementen:
