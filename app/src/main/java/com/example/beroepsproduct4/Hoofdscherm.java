@@ -71,7 +71,7 @@ public class Hoofdscherm extends AppCompatActivity
 
 
         //ontwikkelaars code
-        ontwikkelaars.add("PhDjDY2gtGSoGrrUNwCrPy2TCpm1");
+        ontwikkelaars.add("JY15gbQPkWYo0nlaHh8iKDqAZDJ3");
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
 

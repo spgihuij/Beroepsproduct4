@@ -24,9 +24,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static int type_personen = 1;
     private static int type_evenementen = 2;
 
-    private ArrayList<Persoon> persoonList = new ArrayList<>();
+    private ArrayList<Persoon> persoonList = null;
     private ArrayList<Persoon> persoonsListFull = new ArrayList<>();
-    private ArrayList<Evenement> evenementList = new ArrayList<>();
+    private ArrayList<Evenement> evenementList = null;
     private ArrayList<Evenement> evenementListFull = new ArrayList<>();
     private Context context;
 
@@ -59,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         else
         {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem,viewGroup,false);
             return  new evenementenViewHolder(view);
         }
     }
@@ -117,7 +117,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return persoonList.size();
+        if(persoonList!= null) {
+            return persoonList.size();
+        }
+        else
+        {
+            return evenementList.size();
+        }
     }
 
     @Override
@@ -192,7 +198,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public personenViewHolder(View itemView){
             super(itemView);
             persoonsNaam = itemView.findViewById(R.id.persoonsnaam);
-            recyclerLayout = itemView.findViewById(R.id.recycler_Layout);
+            recyclerLayout = itemView.findViewById(R.id.recycler_Layout_personen);
         }
 
          public void setPersonenInfo(Persoon persoon)
@@ -204,20 +210,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     class evenementenViewHolder extends RecyclerView.ViewHolder{
          TextView evenementNaam;
-         TextView evenementLocatie;
+         TextView evenementDatum;
          ImageView evenementFoto;
          ConstraintLayout recyclerLayout;
 
         public evenementenViewHolder(View itemView){
             super(itemView);
+            evenementNaam = itemView.findViewById(R.id.evenementNaam);
+            evenementFoto = itemView.findViewById(R.id.evenementImage);
+            evenementDatum = itemView.findViewById(R.id.evenementDatum);
+            recyclerLayout = itemView.findViewById(R.id.recycler_Layout_evenement);
 
         }
 
         public void setEvenementInfo(Evenement evenement)
         {
             evenementNaam.setText(evenement.getEvenementnaam());
-            evenementLocatie.setText(evenement.getEvenementlocatie());
-            //foto nog toevoegen
+            //evenementDatum.setText(evenement.getEvenementdatum());
+
         }
 
 
