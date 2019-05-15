@@ -94,40 +94,40 @@ public class Hoofdscherm extends AppCompatActivity
 
     }
 
-public void creerrandomimage(View view){
-    ivHoofdscherm = (ImageView) findViewById(R.id.ivHoofdscherm);
-  int image1 = R.drawable.hoofdschermimage1;
-  int image2 = R.drawable.hoofdschermimage2;
-  int image3 = R.drawable.hoofdschermimage3;
-  int image4 = R.drawable.hoofdschermimage4;
-  int image5 = R.drawable.hoofdschermimage5;
+    public void creerrandomimage(View view){
+        ivHoofdscherm = (ImageView) findViewById(R.id.ivHoofdscherm);
+        int image1 = R.drawable.hoofdschermimage1;
+        int image2 = R.drawable.hoofdschermimage2;
+        int image3 = R.drawable.hoofdschermimage3;
+        int image4 = R.drawable.hoofdschermimage4;
+        int image5 = R.drawable.hoofdschermimage5;
 
-    final int[] leukeplaatjes = {image1, image2, image3, image4, image5};
-    int randomimage = (int) (Math.random() * 5);
-    ivHoofdscherm.setImageResource(leukeplaatjes[randomimage]);
-}
-
-
-
-public void creertimestampzinnen(View view){
-    Calendar currTime = Calendar.getInstance();
-    int hour = currTime.get(Calendar.HOUR_OF_DAY);
-    final TextView timestampzin = (TextView) findViewById(R.id.tvTijdbegroet);
-    if (hour >= 0 && hour < 12) {
-        String goedemorgen = getString(R.string.goedemorgen);
-    timestampzin.setText(goedemorgen);
-    }
-    else if (hour >= 12 && hour < 18) {
-        String goedemiddag = getString(R.string.goedemiddag);
-        timestampzin.setText(goedemiddag);
-    }
-    else if (hour >=18 && hour <23){
-        String goedeavond = getString(R.string.goedeavond);
-        timestampzin.setText(goedeavond);
+        final int[] leukeplaatjes = {image1, image2, image3, image4, image5};
+        int randomimage = (int) (Math.random() * 5);
+        ivHoofdscherm.setImageResource(leukeplaatjes[randomimage]);
     }
 
 
-}
+
+    public void creertimestampzinnen(View view){
+        Calendar currTime = Calendar.getInstance();
+        int hour = currTime.get(Calendar.HOUR_OF_DAY);
+        final TextView timestampzin = (TextView) findViewById(R.id.tvTijdbegroet);
+        if (hour >= 0 && hour < 12) {
+            String goedemorgen = getString(R.string.goedemorgen);
+            timestampzin.setText(goedemorgen);
+        }
+        else if (hour >= 12 && hour < 18) {
+            String goedemiddag = getString(R.string.goedemiddag);
+            timestampzin.setText(goedemiddag);
+        }
+        else if (hour >=18 && hour <23){
+            String goedeavond = getString(R.string.goedeavond);
+            timestampzin.setText(goedeavond);
+        }
+
+
+    }
 
 
 

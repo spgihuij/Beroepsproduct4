@@ -38,6 +38,8 @@ dependencies {
     // Firebase Storage
     implementation 'com.google.firebase:firebase-storage:17.0.0'
     implementation 'com.google.firebase:firebase-database:17.0.0'
+    implementation 'com.firebaseui:firebase-ui-storage:4.3.1'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
 
 }
 
