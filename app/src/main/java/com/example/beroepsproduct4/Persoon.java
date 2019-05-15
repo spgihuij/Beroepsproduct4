@@ -5,7 +5,7 @@ public class Persoon {
 
     public String persoonnaam;
     public String persoonemail;
-    public String persoonprofielFoto;
+    public String persoonprofielfoto;
     public String persoonwoonplaats;
     public String persoongeboortedatum;
     public String persoonsport;
@@ -19,10 +19,10 @@ public class Persoon {
 
     }
 
-    public Persoon(String persoonnaam, String persoonemail, String persoonprofielFoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
+    public Persoon(String persoonnaam, String persoonemail, String persoonprofielfoto, String persoonwoonplaats, String persoongeboortedatum, String persoonsport, String persoonhuisdier, String persoontvprogramma, String persoonwebsite) {
         this.persoonnaam = persoonnaam;
         this.persoonemail = persoonemail;
-        this.persoonprofielFoto = persoonprofielFoto;
+        this.persoonprofielfoto = persoonprofielfoto;
         this.persoonwoonplaats = persoonwoonplaats;
         this.persoongeboortedatum = persoongeboortedatum;
         this.persoonsport = persoonsport;
@@ -47,12 +47,12 @@ public class Persoon {
         this.persoonemail = persoonemail;
     }
 
-    public String getPersoonprofielFoto() {
-        return persoonprofielFoto;
+    public String getPersoonprofielfoto() {
+        return persoonprofielfoto;
     }
 
-    public void setPersoonprofielFoto(String persoonprofielFoto) {
-        this.persoonprofielFoto = persoonprofielFoto;
+    public void setPersoonprofielfoto(String persoonprofielfoto) {
+        this.persoonprofielfoto = persoonprofielfoto;
     }
 
     public String getPersoonwoonplaats() {

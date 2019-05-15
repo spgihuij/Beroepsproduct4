@@ -29,6 +29,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal|center_vertical"
             android:text="TextView"
+            android:fontFamily="sans-serif-thin"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
@@ -62,8 +63,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
-
             android:gravity="center_horizontal|center_vertical"
+            android:fontFamily="sans-serif-thin"
             android:text="Datum"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/evenementImage"

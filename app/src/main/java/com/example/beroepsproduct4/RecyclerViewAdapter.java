@@ -2,6 +2,8 @@ package com.example.beroepsproduct4;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -14,6 +16,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +74,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         if (getItemViewType(i) == type_personen) {
             ((personenViewHolder) viewHolder).setPersonenInfo(persoonList.get(i));
+
+            String uri = persoonList.get(i).getPersoonprofielfoto();
+
+            Picasso.get()
+                    .load(uri)
+                    .into(((personenViewHolder) viewHolder).imageView);
 
             ((personenViewHolder)viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -194,16 +204,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         TextView persoonsNaam;
         ConstraintLayout recyclerLayout;
+        ImageView imageView;
 
         public personenViewHolder(View itemView){
             super(itemView);
             persoonsNaam = itemView.findViewById(R.id.persoonsnaam);
             recyclerLayout = itemView.findViewById(R.id.recycler_Layout_personen);
+            imageView = itemView.findViewById(R.id.imageViewPersoon);
         }
 
          public void setPersonenInfo(Persoon persoon)
          {
              persoonsNaam.setText(persoon.getPersoonnaam());
+
+
+
+
          }
 
     }

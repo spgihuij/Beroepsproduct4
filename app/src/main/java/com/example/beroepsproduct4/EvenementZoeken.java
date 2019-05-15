@@ -34,13 +34,12 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
     private RecyclerViewAdapter adapter;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved) {
         View view = inflater.inflate(R.layout.evenementen_layout, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        searchView = (SearchView) view.findViewById(R.id.search_view) ;
+        searchView = (SearchView) view.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(this);
 
 
@@ -66,28 +65,26 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
     private void showData(DataSnapshot dataSnapshot) {
         evenementen.clear();
 
-            for(DataSnapshot ds : dataSnapshot.getChildren())
-            {
-                Evenement evenement = new Evenement();
-                evenement.setEvenementnaam( ds.getValue(Evenement.class).getEvenementnaam());
-
-                
-                if(evenement != null) {
-
-                    evenementen.add(evenement);
-                    Log.d(TAG, evenement.getEvenementnaam());
-                }
-               // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
-               // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+            Evenement evenement = new Evenement();
+            evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
 
 
-                adapter = new RecyclerViewAdapter(getActivity(), null, evenementen);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            }
+            if (evenement != null) {
 
+                evenementen.add(evenement);
+                Log.d(TAG, evenement.getEvenementnaam());
+            }
+            // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
+            // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
+
+
+            adapter = new RecyclerViewAdapter(getActivity(), null, evenementen);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
 
+    }
 
 
     @Override
