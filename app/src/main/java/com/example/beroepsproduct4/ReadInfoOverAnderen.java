@@ -34,31 +34,15 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         huisdier = (TextView) findViewById(R.id.ia_iv_huisdier);
         tvprogramma = (TextView) findViewById(R.id.ia_iv_tvprogramma);
         website = (TextView) findViewById(R.id.ia_iv_website);
-        showData();
 
 
 
-    }
-
-    private void showData() {
         reference = FirebaseDatabase.getInstance().getReference().child("Personen").child(persoonsNaam);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String nam = dataSnapshot.child("persoonnaam").getValue().toString();
-                String gd = dataSnapshot.child("persoongeboortedatum").getValue().toString();
-                String hd = dataSnapshot.child("persoonhuisdier").getValue().toString();
-                String sp = dataSnapshot.child("persoonsport").getValue().toString();
-                String tvp = dataSnapshot.child("persoontvprogramma").getValue().toString();
-                String wp = dataSnapshot.child("persoonwoonplaats").getValue().toString();
-                String web = dataSnapshot.child("persoonwebsite").getValue().toString();
-                naam.setText(nam);
-                geboortedatum.setText(gd);
-                woonplaats.setText(wp);
-                sport.setText(sp);
-                huisdier.setText(hd);
-                tvprogramma.setText(tvp);
-                website.setText(web);
+                showData(dataSnapshot);
+
 
 
             }
@@ -71,8 +55,24 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         });
     }
 
-
-private void getIntentData(){
+    private void showData(DataSnapshot dataSnapshot)
+    {
+        String nam = dataSnapshot.child("persoonnaam").getValue().toString();
+        String gd = dataSnapshot.child("persoongeboortedatum").getValue().toString();
+        String hd = dataSnapshot.child("persoonhuisdier").getValue().toString();
+        String sp = dataSnapshot.child("persoonsport").getValue().toString();
+        String tvp = dataSnapshot.child("persoontvprogramma").getValue().toString();
+        String wp = dataSnapshot.child("persoonwoonplaats").getValue().toString();
+        String web = dataSnapshot.child("persoonwebsite").getValue().toString();
+        naam.setText(nam);
+        geboortedatum.setText(gd);
+        woonplaats.setText(wp);
+        sport.setText(sp);
+        huisdier.setText(hd);
+        tvprogramma.setText(tvp);
+        website.setText(web);
+    }
+    private void getIntentData(){
         Bundle bundle=getIntent().getExtras();
         if(bundle!=null)
         persoonsNaam=bundle.getString("persoonsnaam");

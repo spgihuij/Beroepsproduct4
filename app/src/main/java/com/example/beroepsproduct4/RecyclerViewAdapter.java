@@ -61,6 +61,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
             return new personenViewHolder(view);
         }
+
+
         else
         {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem,viewGroup,false);
@@ -101,7 +103,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((evenementenViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //intent voor evenement info na click.
+                    Intent s = new Intent(v.getContext(), InfoOverEvenementPlaceholder.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("evenementennaam", evenementList.get(i).getEvenementnaam());
+                    s.putExtras(bundle);
+                    v.getContext().startActivity(s);
                 }
             });
         }

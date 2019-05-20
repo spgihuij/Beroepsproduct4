@@ -67,7 +67,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         String evenementfoto = imagepath.toString().trim();
         String id = databaseEvenementen.push().getKey();
         evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving, evenementdatum, evenementfoto);
-        databaseEvenementen.child(id).setValue(evenement);
+        databaseEvenementen.child(evenementnaam).setValue(evenement);
         Toast.makeText(this, "Evenement Toegevoegd", Toast.LENGTH_LONG).show();
 
     }
