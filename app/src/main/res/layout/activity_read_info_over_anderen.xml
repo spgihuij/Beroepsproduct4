@@ -21,17 +21,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/titel"
+        app:layout_constraintStart_toStartOf="@+id/titel"
+        app:layout_constraintTop_toBottomOf="@+id/titel"
+        app:srcCompat="@android:color/background_dark" />
+
     <GridLayout
         android:id="@+id/RensGridInfoAnderen"
         android:layout_width="371dp"
         android:layout_height="286dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titel">
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <TextView
             android:id="@+id/ia_naam"

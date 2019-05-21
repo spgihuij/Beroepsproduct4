@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -186,21 +186,9 @@ public class Invoerendatapersoon extends Fragment{
                 editText36.setText(sp);
                 editText37.setText(tvp);
                 editText38.setText(web);
-//Servitest
-
-                Glide.with(this)
-                        .load(gsReference)
-                        .centerCrop()
-                        .into(ivProfielfoto);
-
-            }else
-            {
-
-            }
-
 
         }
-    }
+    }}
 
     public void opslaanPersoon(){
 
