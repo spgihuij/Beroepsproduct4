@@ -68,7 +68,9 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             Evenement evenement = new Evenement();
             evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
-
+            evenement.setEvenementfoto(ds.getValue(Evenement.class).getEvenementfoto());
+            evenement.setEvenementbeschrijving(ds.getValue(Evenement.class).getEvenementbeschrijving());
+            evenement.setEvenementdatum(ds.getValue(Evenement.class).getEvenementdatum());
 
             if (evenement != null) {
 

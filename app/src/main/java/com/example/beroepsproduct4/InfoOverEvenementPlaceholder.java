@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class InfoOverEvenementPlaceholder extends AppCompatActivity {
     TextView naam;
@@ -26,12 +28,13 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReferencePersonen;
     private DatabaseReference databaseReferenceGroepAanmaken;
+    ImageView imageView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_read_info_over_anderen);
+        setContentView(R.layout.read_info_evenementen);
         getIntentData();
 
         naam = (TextView) findViewById(R.id.ia_iv_naam);
@@ -39,6 +42,7 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         persoonsEmail = user.getEmail();
+        imageView = (ImageView) findViewById(R.id.imageView);
 
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -68,14 +72,22 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
 
     private void showData(DataSnapshot dataSnapshot) {
 
-        for(DataSnapshot ds : dataSnapshot.getChildren()) {
             String nam = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementnaam").getValue().toString();
-            naam.setText(nam);
+            String pf = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementfoto").getValue().toString();
 
+        naam.setText(nam);
+
+
+            Picasso.get()
+                    .load(pf)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fit()
+                    .centerCrop()
+                    .into(imageView);
         }
 
 
-    }
+
 
     private void getIntentData() {
         Bundle bundle = getIntent().getExtras();
@@ -94,11 +106,13 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
 
     private void userNaam(DataSnapshot dataSnapshot) {
 
-        for (DataSnapshot ds : dataSnapshot.child("Personen").getChildren()) {
-            Persoon persoon = new Persoon();
+        for (DataSnapshot ds : dataSnapshot.child("Evenementen").getChildren()) {
+            Evenement evenement = new Evenement();
             try {
-                persoon.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
-                persoon.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
+                evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
+
+
+
             }
             catch (Exception e)
             {
@@ -106,11 +120,7 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
             }
 
 
-            if (persoon.getPersoonemail().equals(persoonsEmail)) {
-                ingelogdePersoonNaam = persoon.getPersoonnaam();
-                break;
             }
         }
 
     }
-}

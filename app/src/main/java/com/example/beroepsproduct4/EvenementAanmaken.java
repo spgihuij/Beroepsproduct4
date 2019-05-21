@@ -73,7 +73,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         btnOpslaan.setOnClickListener(this);
 
 //test
-        mStorageRef = FirebaseStorage.getInstance().getReference("EvenementFoto");
+        mStorageRef = FirebaseStorage.getInstance().getReference().child("EvenementFoto/");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Evenementen");
         mButtonUpload = findViewById(R.id.button4);
         mProgressBar = findViewById(R.id.mProgressBar);
@@ -190,7 +190,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                                         String locatie= editTextLocatie.getText().toString().trim();
                                         String beschrijving=editTextBeschrijving.getText().toString().trim();
                                         String image= downloadUri.toString();
-                                        Evenement evenement = new Evenement(id, naam, locatie, datum, beschrijving, image);
+                                        Evenement evenement = new Evenement(id, naam, locatie, beschrijving, datum, image);
                                         mDatabaseRef.child(naam).setValue(evenement);
                                     } else {
                                         Toast.makeText(EvenementAanmaken.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

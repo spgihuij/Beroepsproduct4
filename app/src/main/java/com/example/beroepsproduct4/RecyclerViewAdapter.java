@@ -107,9 +107,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
         }
-        else {
-
+        else if (getItemViewType(i) == type_evenementen){
             ((evenementenViewHolder) viewHolder).setEvenementInfo(evenementList.get(i));
+
+            String uri = evenementList.get(i).getEvenementfoto();
+            Picasso.get()
+                    .load(uri)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fit()
+                    .centerCrop()
+                    .into(((evenementenViewHolder) viewHolder).evenementFoto);
+
 
             ((evenementenViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -233,7 +241,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void setPersonenInfo(Persoon persoon)
         {
             persoonsNaam.setText(persoon.getPersoonnaam());
-            //imageView.setImageResource();
+
 
 
 
@@ -244,6 +252,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     class evenementenViewHolder extends RecyclerView.ViewHolder{
         TextView evenementNaam;
         TextView evenementDatum;
+        TextView evenementBeschrijving;
         ImageView evenementFoto;
         ConstraintLayout recyclerLayout;
 
@@ -252,6 +261,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             evenementNaam = itemView.findViewById(R.id.evenementNaam);
             evenementFoto = itemView.findViewById(R.id.evenementImage);
             evenementDatum = itemView.findViewById(R.id.evenementDatum);
+            evenementBeschrijving  = itemView.findViewById(R.id.evenementBeschrijving);
             recyclerLayout = itemView.findViewById(R.id.recycler_Layout_evenement);
 
         }
@@ -259,7 +269,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         public void setEvenementInfo(Evenement evenement)
         {
             evenementNaam.setText(evenement.getEvenementnaam());
-            //evenementDatum.setText(evenement.getEvenementdatum());
+            evenementDatum.setText(evenement.getEvenementdatum());
+            evenementBeschrijving.setText(evenement.getEvenementbeschrijving());
+
 
         }
 
