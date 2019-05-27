@@ -57,5 +57,18 @@
     <string name="goedemorgen">Goedemorgen,</string>
     <string name="goedemiddag">Goedemiddag,</string>
     <string name="goedeavond">Goedeavond,</string>
+    <string name="goedenacht">Goedenacht</string>
+    <string name="woonplaats">Woonplaats</string>
+    <string name="geboortedatum">Geboortedatum</string>
+    <string name="sport">Sport</string>
+    <string name="huisdier">Huisdier</string>
+    <string name="tvprogramma">Tv-Programma</string>
+    <string name="website">Website</string>
+    <string name="hintwebsite">Favoriete Website</string>
+    <string name="hinttvprogramma">Favoriete Tv Programma</string>
+    <string name="hinthuisdier">Favoriete Huisdier</string>
+    <string name="hintsport">Favoriete Sport</string>
+    <string name="hintgeboortedatum">Vul hier je geboortedatum in</string>
+    <string name="hintwoonplaats">Vul hier je woonplaats in.</string>
 
 </resources>

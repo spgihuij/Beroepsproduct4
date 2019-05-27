@@ -80,7 +80,7 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
 
             Picasso.get()
                     .load(pf)
-                    .placeholder(R.mipmap.ic_launcher)
+                    .placeholder(R.color.colorPrimaryDark)
                     .fit()
                     .centerCrop()
                     .into(imageView);

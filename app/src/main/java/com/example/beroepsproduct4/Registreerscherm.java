@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
 //servi
 public class Registreerscherm extends AppCompatActivity
         implements View.OnClickListener {
@@ -130,6 +131,7 @@ public class Registreerscherm extends AppCompatActivity
             Toast.makeText(this, toastgeencheckbox, Toast.LENGTH_LONG).show();
             return;
         }
+
         //Als alles klopt laat ik een progressbar zien
         progressDialog.setMessage(toastbezigmetregistreren);
         progressDialog.show();
@@ -197,7 +199,7 @@ public class Registreerscherm extends AppCompatActivity
                     }
                     return imagepath.getDownloadUrl();
                 }
-            }) .addOnCompleteListener( new OnCompleteListener<Uri>() {
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {

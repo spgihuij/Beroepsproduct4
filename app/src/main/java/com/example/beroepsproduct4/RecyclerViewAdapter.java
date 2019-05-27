@@ -85,7 +85,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             Picasso.get()
                     .load(uri)
-                    .placeholder(R.mipmap.ic_launcher)
+                    .placeholder(R.color.colorPrimaryDark)
                     .fit()
                     .centerCrop()
                     .into(((personenViewHolder) viewHolder).imageView);
@@ -113,7 +113,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             String uri = evenementList.get(i).getEvenementfoto();
             Picasso.get()
                     .load(uri)
-                    .placeholder(R.mipmap.ic_launcher)
+                    .placeholder(R.color.colorPrimaryDark)
                     .fit()
                     .centerCrop()
                     .into(((evenementenViewHolder) viewHolder).evenementFoto);

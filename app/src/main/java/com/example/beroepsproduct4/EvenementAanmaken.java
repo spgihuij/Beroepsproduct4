@@ -67,7 +67,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         editTextBeschrijving = (EditText) findViewById(R.id.editTextBeschrijving);
         editTextDatum = (EditText) findViewById(R.id.editTextDatum);
         ibEvenementFoto = (ImageView) findViewById(R.id.ibAfbeeldingEvenement);
-        btnOpslaan = (Button) findViewById(R.id.btnOpslaan);
+        btnOpslaan = (Button) findViewById(R.id.button4);
         firebaseAuth = FirebaseAuth.getInstance();
         databaseEvenementen = FirebaseDatabase.getInstance().getReference("Evenementen");
         btnOpslaan.setOnClickListener(this);

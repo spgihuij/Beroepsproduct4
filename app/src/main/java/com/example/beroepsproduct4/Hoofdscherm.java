@@ -35,7 +35,7 @@ import java.util.Date;
 public class Hoofdscherm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth firebaseAuth,mAuth;
+    FirebaseAuth firebaseAuth, mAuth;
     FirebaseUser currentuser;
     FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
@@ -54,7 +54,7 @@ public class Hoofdscherm extends AppCompatActivity
 
 
         //navdrawer
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         currentuser = mAuth.getCurrentUser();
 
 
@@ -77,6 +77,7 @@ public class Hoofdscherm extends AppCompatActivity
 
         //ontwikkelaars code
         ontwikkelaars.add("mCoC80t1pXfjwvtaXD22xTOprzI2");
+        ontwikkelaars.add("nA6IucwbJkgtswYG7MfKwGXC67g1");
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -95,7 +96,7 @@ public class Hoofdscherm extends AppCompatActivity
 
     }
 
-    public void creerrandomimage(View view){
+    public void creerrandomimage(View view) {
         ivHoofdscherm = (ImageView) findViewById(R.id.ivHoofdscherm);
         int image1 = R.drawable.hoofdschermimage1;
         int image2 = R.drawable.hoofdschermimage2;
@@ -109,27 +110,26 @@ public class Hoofdscherm extends AppCompatActivity
     }
 
 
-
-    public void creertimestampzinnen(View view){
+    public void creertimestampzinnen(View view) {
         Calendar currTime = Calendar.getInstance();
         int hour = currTime.get(Calendar.HOUR_OF_DAY);
         final TextView timestampzin = (TextView) findViewById(R.id.tvTijdbegroet);
-        if (hour >= 0 && hour < 12) {
+        if (hour >= 6 && hour < 12) {
             String goedemorgen = getString(R.string.goedemorgen);
             timestampzin.setText(goedemorgen);
-        }
-        else if (hour >= 12 && hour < 18) {
+        } else if (hour >= 12 && hour < 18) {
             String goedemiddag = getString(R.string.goedemiddag);
             timestampzin.setText(goedemiddag);
-        }
-        else if (hour >=18 && hour <23){
+        } else if (hour >= 18 && hour < 23) {
             String goedeavond = getString(R.string.goedeavond);
             timestampzin.setText(goedeavond);
+        } else if (hour >= 0 && hour < 6) {
+            String goedenacht = getString(R.string.goedenacht);
+            timestampzin.setText(goedenacht);
         }
 
 
     }
-
 
 
     public void creerrandomzinnen(View view) {
@@ -145,10 +145,6 @@ public class Hoofdscherm extends AppCompatActivity
         int rando = (int) (Math.random() * 5);
         begroetingszin.setText(voelgoedzinnen[rando]);
     }
-
-
-
-
 
 
     public void checkUser(NavigationView navigationView) {
@@ -246,9 +242,9 @@ public class Hoofdscherm extends AppCompatActivity
     public void updateNavHeader() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUserName= headerView.findViewById(R.id.nav_profielnaam);
-        TextView navUserEmail= headerView.findViewById(R.id.nav_profielemail);
-        ImageView navUserPhoto= headerView.findViewById(R.id.nav_profielFoto);
+        TextView navUserName = headerView.findViewById(R.id.nav_profielnaam);
+        TextView navUserEmail = headerView.findViewById(R.id.nav_profielemail);
+        ImageView navUserPhoto = headerView.findViewById(R.id.nav_profielFoto);
 
         navUserName.setText(currentuser.getDisplayName());
         navUserEmail.setText(currentuser.getEmail());
