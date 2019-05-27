@@ -91,12 +91,12 @@ public class Hoofdscherm extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot) {
                 showData(dataSnapshot);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -113,7 +113,6 @@ public class Hoofdscherm extends AppCompatActivity
         creerrandomzinnen(creerzinnen);
         creerrandomimage(creerimage);
         //gegevens in navigation drawer plaatsen
-
 
 
         //ontwikkelaars code
@@ -188,7 +187,7 @@ public class Hoofdscherm extends AppCompatActivity
 
 
     public void checkUser(NavigationView navigationView) {
-        for (String x : ontwikkelaars ) {
+        for (String x : ontwikkelaars) {
 
             FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
             if (user.getUid().equals(x)) {
@@ -261,8 +260,8 @@ public class Hoofdscherm extends AppCompatActivity
                 //sociaalnetwerk
                 break;
             case R.id.mijn_agenda:
-                Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
-                startActivity(intent2);
+                // Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
+                // startActivity(intent2);
                 break;
             case R.id.evenement_toevoegen:
                 Intent intent3 = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
@@ -280,7 +279,8 @@ public class Hoofdscherm extends AppCompatActivity
     }
 
 
-    /**Servi test navheaderupdate hieronder
+    /**
+     * Servi test navheaderupdate hieronder
      *
      * @param dataSnapshot
      */
@@ -288,16 +288,15 @@ public class Hoofdscherm extends AppCompatActivity
     private void showData(DataSnapshot dataSnapshot) {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
             Persoon uInfo = new Persoon();
             uInfo.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
             uInfo.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
             uInfo.setPersoonprofielfoto(ds.getValue(Persoon.class).getPersoonprofielfoto());
-            if(uInfo.getPersoonemail().equals(userEmail))
-            {
-                TextView navUserName= headerView.findViewById(R.id.nav_profielnaam);
-                TextView navUserEmail= headerView.findViewById(R.id.nav_profielemail);
+            if (uInfo.getPersoonemail().equals(userEmail)) {
+                TextView navUserName = headerView.findViewById(R.id.nav_profielnaam);
+                TextView navUserEmail = headerView.findViewById(R.id.nav_profielemail);
                 ImageView navProfielFoto = headerView.findViewById(R.id.nav_profielFoto);
                 String nam = ds.child("persoonnaam").getValue().toString();
                 String email = ds.child("persoonemail").getValue().toString();
@@ -312,9 +311,7 @@ public class Hoofdscherm extends AppCompatActivity
                         .into(navProfielFoto);
 
 
-
-            }else
-            {
+            } else {
 
             }
 

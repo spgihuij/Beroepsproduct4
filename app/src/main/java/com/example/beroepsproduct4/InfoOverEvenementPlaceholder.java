@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class InfoOverEvenementPlaceholder extends AppCompatActivity {
-    TextView evNaam, evDatum,evLocatie,evBeschrijving;
+    TextView evNaam, evDatum, evLocatie, evBeschrijving;
     String evenementNaam;
     DatabaseReference reference;
     FirebaseDatabase firebaseDatabase;
@@ -59,7 +59,7 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
         String evnaam = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementnaam").getValue().toString();
         String evdatum = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementdatum").getValue().toString();
         String evlocatie = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementlocatie").getValue().toString();
-        String evbes =dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementbeschrijving").getValue().toString();
+        String evbes = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementbeschrijving").getValue().toString();
         String evfoto = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementfoto").getValue().toString();
 
         evNaam.setText(evnaam);

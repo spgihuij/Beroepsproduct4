@@ -138,7 +138,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                             Toast.makeText(EvenementAanmaken.this, "Upload successful", Toast.LENGTH_LONG).show();
 
 
-
                             mStorageRef.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                 @Override
                                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -146,7 +145,8 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                                         throw task.getException();
                                     }
                                     return mStorageRef.getDownloadUrl();
-                                }}).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
@@ -155,9 +155,9 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                                         String id = mDatabaseRef.push().getKey();
                                         String naam = editTextEvenementnaam.getText().toString().trim();
                                         String datum = editTextDatum.getText().toString().trim();
-                                        String locatie= editTextLocatie.getText().toString().trim();
-                                        String beschrijving=editTextBeschrijving.getText().toString().trim();
-                                        String image= downloadUri.toString();
+                                        String locatie = editTextLocatie.getText().toString().trim();
+                                        String beschrijving = editTextBeschrijving.getText().toString().trim();
+                                        String image = downloadUri.toString();
                                         Evenement evenement = new Evenement(id, naam, locatie, beschrijving, datum, image);
                                         mDatabaseRef.child(naam).setValue(evenement);
                                     } else {
@@ -184,4 +184,5 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
-    }}
+    }
+}

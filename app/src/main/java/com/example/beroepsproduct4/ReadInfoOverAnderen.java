@@ -44,7 +44,6 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
                 showData(dataSnapshot);
 
 
-
             }
 
             @Override
@@ -55,8 +54,7 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         });
     }
 
-    private void showData(DataSnapshot dataSnapshot)
-    {
+    private void showData(DataSnapshot dataSnapshot) {
         String nam = dataSnapshot.child("persoonnaam").getValue().toString();
         String gd = dataSnapshot.child("persoongeboortedatum").getValue().toString();
         String hd = dataSnapshot.child("persoonhuisdier").getValue().toString();
@@ -80,10 +78,11 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
                 .centerCrop()
                 .into(imageView);
     }
-    private void getIntentData(){
-        Bundle bundle=getIntent().getExtras();
-        if(bundle!=null)
-            persoonsNaam=bundle.getString("persoonsnaam");
+
+    private void getIntentData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+            persoonsNaam = bundle.getString("persoonsnaam");
     }
 }
 

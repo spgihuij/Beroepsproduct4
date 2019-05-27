@@ -14,6 +14,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,14 +33,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private Context context;
 
     public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList) {
-        if(persoonList != null) {
+        if (persoonList != null) {
             this.persoonList = persoonList;
 
             persoonsListFull.addAll(persoonList);
 
             this.context = context;
         }
-        if(evenementList!= null){
+        if (evenementList != null) {
             this.evenementList = evenementList;
             evenementListFull.addAll(evenementList);
             this.context = context;
@@ -48,22 +49,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
 
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
-        if(i == type_personen)
-        {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
+        if (i == type_personen) {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem, viewGroup, false);
             return new personenViewHolder(view);
-        }
-
-
-        else
-        {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem,viewGroup,false);
-            return  new evenementenViewHolder(view);
+        } else {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem, viewGroup, false);
+            return new evenementenViewHolder(view);
         }
     }
 
@@ -85,10 +80,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     .into(((personenViewHolder) viewHolder).imageView);
 
 
-
-
-
-            ((personenViewHolder)viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
+            ((personenViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent s = new Intent(v.getContext(), ReadInfoOverAnderen.class);
@@ -100,8 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             });
 
 
-        }
-        else if (getItemViewType(i) == type_evenementen){
+        } else if (getItemViewType(i) == type_evenementen) {
             ((evenementenViewHolder) viewHolder).setEvenementInfo(evenementList.get(i));
 
             String uri = evenementList.get(i).getEvenementfoto();
@@ -126,31 +117,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
 
-
-
     }
 
     @Override
-    public int getItemViewType(int i)
-    {
-        if (persoonList!= null)
-        {
+    public int getItemViewType(int i) {
+        if (persoonList != null) {
             return type_personen;
 
-        }
-        else
+        } else
 
-            return  type_evenementen;
+            return type_evenementen;
 
     }
 
     @Override
     public int getItemCount() {
-        if(persoonList!= null) {
+        if (persoonList != null) {
             return persoonList.size();
-        }
-        else
-        {
+        } else {
             return evenementList.size();
         }
     }
@@ -181,10 +165,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 FilterResults results = new FilterResults();
                 results.values = filteredlijstPersoon;
                 return results;
-            }
-
-            else
-            {
+            } else {
                 if (constraint == null || constraint.length() == 0) {
                     filteredlijstEvenement.addAll(evenementListFull);
                 } else {
@@ -204,13 +185,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            if (persoonList != null ) {
+            if (persoonList != null) {
                 persoonList.clear();
                 persoonList.addAll((List) results.values);
-            }
-
-            else
-            {
+            } else {
                 evenementList.clear();
                 evenementList.addAll((List) results.values);
             }
@@ -219,49 +197,45 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     };
 
-    class personenViewHolder extends RecyclerView.ViewHolder{
+    class personenViewHolder extends RecyclerView.ViewHolder {
 
         TextView persoonsNaam;
         ConstraintLayout recyclerLayout;
         ImageView imageView;
 
-        public personenViewHolder(View itemView){
+        public personenViewHolder(View itemView) {
             super(itemView);
             persoonsNaam = itemView.findViewById(R.id.persoonsnaam);
             recyclerLayout = itemView.findViewById(R.id.recycler_Layout_personen);
             imageView = itemView.findViewById(R.id.imageViewPersoon);
         }
 
-        public void setPersonenInfo(Persoon persoon)
-        {
+        public void setPersonenInfo(Persoon persoon) {
             persoonsNaam.setText(persoon.getPersoonnaam());
-
-
 
 
         }
 
     }
 
-    class evenementenViewHolder extends RecyclerView.ViewHolder{
+    class evenementenViewHolder extends RecyclerView.ViewHolder {
         TextView evenementNaam;
         TextView evenementDatum;
         TextView evenementBeschrijving;
         ImageView evenementFoto;
         ConstraintLayout recyclerLayout;
 
-        public evenementenViewHolder(View itemView){
+        public evenementenViewHolder(View itemView) {
             super(itemView);
             evenementNaam = itemView.findViewById(R.id.evenementNaam);
             evenementFoto = itemView.findViewById(R.id.evenementImage);
             evenementDatum = itemView.findViewById(R.id.evenementDatum);
-            evenementBeschrijving  = itemView.findViewById(R.id.evenementBeschrijving);
+            evenementBeschrijving = itemView.findViewById(R.id.evenementBeschrijving);
             recyclerLayout = itemView.findViewById(R.id.recycler_Layout_evenement);
 
         }
 
-        public void setEvenementInfo(Evenement evenement)
-        {
+        public void setEvenementInfo(Evenement evenement) {
             evenementNaam.setText(evenement.getEvenementnaam());
             evenementDatum.setText(evenement.getEvenementdatum());
             evenementBeschrijving.setText(evenement.getEvenementbeschrijving());
@@ -271,8 +245,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
 
     }
-
-
 
 
 }
