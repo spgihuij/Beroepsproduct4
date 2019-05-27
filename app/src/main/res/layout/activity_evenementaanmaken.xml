@@ -19,7 +19,7 @@
         android:gravity="center"
         android:text="@string/titelevenementaanmaken"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:fontFamily="sans-serif-thin" />
 
     <TextView
@@ -28,12 +28,19 @@
         android:layout_height="wrap_content"
         android:text="@string/titelafbevenement" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ibAfbeeldingEvenement"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:onClick="btnEvenementFoto"
+        android:scaleType="fitCenter"
         android:src="@android:drawable/ic_input_add" />
+
+    <ProgressBar
+        android:id="@+id/mProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/editTextEvenementnaam"
@@ -62,15 +69,16 @@
     <EditText
         android:id="@+id/editTextBeschrijving"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="left"
         android:hint="@string/vulhierinbeschrijving"
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/btnOpslaan"
+        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/knopopslaan" />
+
 </LinearLayout>

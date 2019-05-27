@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
 //servi
 public class Registreerscherm extends AppCompatActivity
         implements View.OnClickListener {
@@ -43,6 +46,7 @@ public class Registreerscherm extends AppCompatActivity
     private CheckBox checkBox;
     private StorageReference storage;
     private StorageReference imagepath;
+
     Persoon persoon;
     String imageLocation;
 
@@ -79,7 +83,7 @@ public class Registreerscherm extends AppCompatActivity
 
         final String emailadres = editTextEmail.getText().toString().trim();
         final String naam = editTextNaam.getText().toString().trim();
-        final String profielfoto = imagepath.toString().trim();
+        final String profielfoto = imageLocation;
         String woonplaats = "";
         String geboortedatum = "";
         String sport = "";
@@ -88,7 +92,7 @@ public class Registreerscherm extends AppCompatActivity
         String website = "";
 
         firebaseAuth = FirebaseAuth.getInstance();
-        databasePersoonmetmail = FirebaseDatabase.getInstance().getReference("TestPersoon");
+        databasePersoonmetmail = FirebaseDatabase.getInstance().getReference("Personen");
         persoon = new Persoon(naam, emailadres, profielfoto, woonplaats, geboortedatum, sport, huisdier, tvprogramma, website);
         databasePersoonmetmail.child(naam).setValue(persoon);
         Toast.makeText(Registreerscherm.this, "U heeft toestemming gegeven.", Toast.LENGTH_SHORT);
@@ -127,6 +131,7 @@ public class Registreerscherm extends AppCompatActivity
             Toast.makeText(this, toastgeencheckbox, Toast.LENGTH_LONG).show();
             return;
         }
+
         //Als alles klopt laat ik een progressbar zien
         progressDialog.setMessage(toastbezigmetregistreren);
         progressDialog.show();
@@ -186,20 +191,27 @@ public class Registreerscherm extends AppCompatActivity
             Uri uri = data.getData();
             imageButton.setImageURI(uri);
             imagepath = storage.child("PersoonInlog").child(uri.getLastPathSegment());
-            imageLocation = uri.getLastPathSegment();
-            imagepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            imagepath.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Toast.makeText(Registreerscherm.this, "Profielfoto geupload", Toast.LENGTH_SHORT).show();
-
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    return imagepath.getDownloadUrl();
                 }
-            }).addOnFailureListener(new OnFailureListener() {
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Registreerscherm.this, "Profielfoto niet geupload", Toast.LENGTH_SHORT).show();
-
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        imageLocation = downloadUri.toString();
+                        Toast.makeText(Registreerscherm.this, "Profielfoto geupload", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Registreerscherm.this, "Profielfoto niet geupload", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
+
         }
 
 
