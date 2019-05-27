@@ -26,24 +26,38 @@ import android.widget.TextView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 
-public class Hoofdscherm extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener {
+public class Hoofdscherm extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth firebaseAuth,mAuth;
-    FirebaseUser currentuser;
+
     FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
-
     View creerzinnen;
     View creertimestamp;
     View creerimage;
     ImageView ivHoofdscherm;
+    //servitest navheaderupdate
+    private String userEmail;
+    private FirebaseAuth.AuthStateListener AuthListener;
+    private DatabaseReference myRef;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
+    private FirebaseUser user = firebaseAuth.getCurrentUser();
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databasePersonen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +65,40 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //navdrawer
-        mAuth=FirebaseAuth.getInstance();
-        currentuser = mAuth.getCurrentUser();
+
+//Servitest
+        userEmail = user.getEmail();
+
+        databasePersonen = FirebaseDatabase.getInstance().getReference("Personen");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = firebaseDatabase.getReference().child("Personen");
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        AuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+
+                } else {
+
+                }
+            }
+        };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -68,12 +113,10 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
         creerrandomzinnen(creerzinnen);
         creerrandomimage(creerimage);
         //gegevens in navigation drawer plaatsen
-        updateNavHeader();
 
 
         //ontwikkelaars code
         ontwikkelaars.add("mCoC80t1pXfjwvtaXD22xTOprzI2");
-        ontwikkelaars.add("nA6IucwbJkgtswYG7MfKwGXC67g1");
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -92,7 +135,7 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
 
     }
 
-    public void creerrandomimage(View view){
+    public void creerrandomimage(View view) {
         ivHoofdscherm = (ImageView) findViewById(R.id.ivHoofdscherm);
         int image1 = R.drawable.hoofdschermimage1;
         int image2 = R.drawable.hoofdschermimage2;
@@ -106,27 +149,26 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
     }
 
 
-
-    public void creertimestampzinnen(View view){
+    public void creertimestampzinnen(View view) {
         Calendar currTime = Calendar.getInstance();
         int hour = currTime.get(Calendar.HOUR_OF_DAY);
         final TextView timestampzin = (TextView) findViewById(R.id.tvTijdbegroet);
-        if (hour >= 0 && hour < 12) {
+        if (hour >= 6 && hour < 12) {
             String goedemorgen = getString(R.string.goedemorgen);
             timestampzin.setText(goedemorgen);
-        }
-        else if (hour >= 12 && hour < 18) {
+        } else if (hour >= 12 && hour < 18) {
             String goedemiddag = getString(R.string.goedemiddag);
             timestampzin.setText(goedemiddag);
-        }
-        else if (hour >=18 && hour <23){
+        } else if (hour >= 18 && hour < 23) {
             String goedeavond = getString(R.string.goedeavond);
             timestampzin.setText(goedeavond);
+        } else if (hour >= 0 && hour < 6) {
+            String goedenacht = getString(R.string.goedenacht);
+            timestampzin.setText(goedenacht);
         }
 
 
     }
-
 
 
     public void creerrandomzinnen(View view) {
@@ -218,8 +260,8 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
                 //sociaalnetwerk
                 break;
             case R.id.mijn_agenda:
-                Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
-                startActivity(intent2);
+                // Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
+                // startActivity(intent2);
                 break;
             case R.id.evenement_toevoegen:
                 Intent intent3 = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
@@ -236,17 +278,49 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
 
     }
 
-    public void updateNavHeader() {
+
+    /**
+     * Servi test navheaderupdate hieronder
+     *
+     * @param dataSnapshot
+     */
+
+    private void showData(DataSnapshot dataSnapshot) {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUserName= headerView.findViewById(R.id.nav_profielnaam);
-        TextView navUserEmail= headerView.findViewById(R.id.nav_profielemail);
-        ImageView navUserPhoto= headerView.findViewById(R.id.nav_profielFoto);
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-        navUserName.setText(currentuser.getDisplayName());
-        navUserEmail.setText(currentuser.getEmail());
-        // ik gebruik Glide om een foto te laden
-        //Glide.with(this).load(currentuser.getPhotoUrl()).into(navUserPhoto);
+            Persoon uInfo = new Persoon();
+            uInfo.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
+            uInfo.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
+            uInfo.setPersoonprofielfoto(ds.getValue(Persoon.class).getPersoonprofielfoto());
+            if (uInfo.getPersoonemail().equals(userEmail)) {
+                TextView navUserName = headerView.findViewById(R.id.nav_profielnaam);
+                TextView navUserEmail = headerView.findViewById(R.id.nav_profielemail);
+                ImageView navProfielFoto = headerView.findViewById(R.id.nav_profielFoto);
+                String nam = ds.child("persoonnaam").getValue().toString();
+                String email = ds.child("persoonemail").getValue().toString();
+                String pf = ds.child("persoonprofielfoto").getValue().toString();
+                navUserName.setText(nam);
+                navUserEmail.setText(email);
+                Picasso.get()
+                        .load(pf)
+                        .placeholder(R.color.colorPrimaryDark)
+                        .fit()
+                        .centerCrop()
+                        .into(navProfielFoto);
+
+
+            } else {
+
+            }
+
+
+        }
     }
+    /**Servi test navheaderupdate eindigd hier
+     *
+     * @param dataSnapshot
+     */
 
 }

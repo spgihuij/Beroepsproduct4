@@ -13,9 +13,11 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,12 +33,11 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-//servi
 public class EvenementAanmaken extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseReference databaseReference, databaseEvenementen;
     private EditText editTextEvenementnaam, editTextLocatie, editTextBeschrijving, editTextDatum;
-    private Button btnOpslaan,mButtonUpload;;
+    private Button btnOpslaan;
     private FirebaseAuth firebaseAuth;
     private ImageView ibEvenementFoto;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -44,6 +45,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
+    private Button mButtonUpload;
     private ProgressBar mProgressBar;
 
     @Nullable
@@ -57,11 +59,11 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         editTextBeschrijving = (EditText) findViewById(R.id.editTextBeschrijving);
         editTextDatum = (EditText) findViewById(R.id.editTextDatum);
         ibEvenementFoto = (ImageView) findViewById(R.id.ibAfbeeldingEvenement);
-        btnOpslaan = (Button) findViewById(R.id.btnOpslaan);
+        btnOpslaan = (Button) findViewById(R.id.button4);
         firebaseAuth = FirebaseAuth.getInstance();
         databaseEvenementen = FirebaseDatabase.getInstance().getReference("Evenementen");
         btnOpslaan.setOnClickListener(this);
-//test
+
         mStorageRef = FirebaseStorage.getInstance().getReference().child("EvenementFoto/");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Evenementen");
         mButtonUpload = findViewById(R.id.button4);
@@ -76,14 +78,10 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                 }
             }
         });
+
     }
 
-     @Override
-    public void onClick(View view) {
-        /**  if (view == btnOpslaan) {
-         opslaanEvenement();
-         }*/
-    }
+
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -91,10 +89,16 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
+
     public void btnEvenementFoto(View view) {
         openFileChooser();
     }
-    //test
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -134,7 +138,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                             Toast.makeText(EvenementAanmaken.this, "Upload successful", Toast.LENGTH_LONG).show();
 
 
-
                             mStorageRef.putFile(mImageUri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                                 @Override
                                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -142,7 +145,8 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                                         throw task.getException();
                                     }
                                     return mStorageRef.getDownloadUrl();
-                                }}).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                }
+                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
@@ -151,9 +155,9 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                                         String id = mDatabaseRef.push().getKey();
                                         String naam = editTextEvenementnaam.getText().toString().trim();
                                         String datum = editTextDatum.getText().toString().trim();
-                                        String locatie= editTextLocatie.getText().toString().trim();
-                                        String beschrijving=editTextBeschrijving.getText().toString().trim();
-                                        String image= downloadUri.toString();
+                                        String locatie = editTextLocatie.getText().toString().trim();
+                                        String beschrijving = editTextBeschrijving.getText().toString().trim();
+                                        String image = downloadUri.toString();
                                         Evenement evenement = new Evenement(id, naam, locatie, beschrijving, datum, image);
                                         mDatabaseRef.child(naam).setValue(evenement);
                                     } else {
@@ -180,4 +184,5 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
-    }}
+    }
+}

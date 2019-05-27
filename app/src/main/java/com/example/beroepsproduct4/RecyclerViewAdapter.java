@@ -56,14 +56,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         View view;
         if(i == type_personen)
         {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listitem_personen,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
             return new personenViewHolder(view);
         }
 
 
         else
         {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listitem_evenementen,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem,viewGroup,false);
             return  new evenementenViewHolder(view);
         }
     }

@@ -62,5 +62,6 @@
     <string name="sn_beschrijving"> Beschrijving :</string>
     <string name="sn_lidworden">Lid worden</string>
     <string name="sn_nietlidworden">Verder zoeken</string>
+    <string name="goedenacht">Goedenacht</string>
 
 </resources>
