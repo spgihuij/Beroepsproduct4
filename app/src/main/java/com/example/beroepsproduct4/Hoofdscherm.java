@@ -26,6 +26,12 @@ import android.widget.TextView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,8 +41,7 @@ import java.util.Date;
 public class Hoofdscherm extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth firebaseAuth, mAuth;
-    FirebaseUser currentuser;
+
     FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
@@ -44,6 +49,15 @@ public class Hoofdscherm extends AppCompatActivity
     View creertimestamp;
     View creerimage;
     ImageView ivHoofdscherm;
+    //servitest navheaderupdate
+    private String userEmail;
+    private FirebaseAuth.AuthStateListener AuthListener;
+    private DatabaseReference myRef;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
+    private FirebaseUser user = firebaseAuth.getCurrentUser();
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databasePersonen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +66,37 @@ public class Hoofdscherm extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//Servitest
+        userEmail = user.getEmail();
 
-        //navdrawer
-        mAuth = FirebaseAuth.getInstance();
-        currentuser = mAuth.getCurrentUser();
+        databasePersonen = FirebaseDatabase.getInstance().getReference("Personen");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = firebaseDatabase.getReference().child("Personen");
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        AuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+
+                } else {
+
+                }
+            }
+        };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,12 +113,11 @@ public class Hoofdscherm extends AppCompatActivity
         creerrandomzinnen(creerzinnen);
         creerrandomimage(creerimage);
         //gegevens in navigation drawer plaatsen
-        updateNavHeader();
+
 
 
         //ontwikkelaars code
         ontwikkelaars.add("mCoC80t1pXfjwvtaXD22xTOprzI2");
-        ontwikkelaars.add("nA6IucwbJkgtswYG7MfKwGXC67g1");
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -148,7 +188,7 @@ public class Hoofdscherm extends AppCompatActivity
 
 
     public void checkUser(NavigationView navigationView) {
-        for (String x : ontwikkelaars) {
+        for (String x : ontwikkelaars ) {
 
             FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
             if (user.getUid().equals(x)) {
@@ -239,18 +279,53 @@ public class Hoofdscherm extends AppCompatActivity
 
     }
 
-    public void updateNavHeader() {
+
+    /**Servi test navheaderupdate hieronder
+     *
+     * @param dataSnapshot
+     */
+
+    private void showData(DataSnapshot dataSnapshot) {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUserName = headerView.findViewById(R.id.nav_profielnaam);
-        TextView navUserEmail = headerView.findViewById(R.id.nav_profielemail);
-        ImageView navUserPhoto = headerView.findViewById(R.id.nav_profielFoto);
+        for(DataSnapshot ds : dataSnapshot.getChildren()){
 
-        navUserName.setText(currentuser.getDisplayName());
-        navUserEmail.setText(currentuser.getEmail());
+            Persoon uInfo = new Persoon();
+            uInfo.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
+            uInfo.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
+            uInfo.setPersoonprofielfoto(ds.getValue(Persoon.class).getPersoonprofielfoto());
+            if(uInfo.getPersoonemail().equals(userEmail))
+            {
+                TextView navUserName= headerView.findViewById(R.id.nav_profielnaam);
+                TextView navUserEmail= headerView.findViewById(R.id.nav_profielemail);
+                ImageView navProfielFoto = headerView.findViewById(R.id.nav_profielFoto);
+                String nam = ds.child("persoonnaam").getValue().toString();
+                String email = ds.child("persoonemail").getValue().toString();
+                String pf = ds.child("persoonprofielfoto").getValue().toString();
+                navUserName.setText(nam);
+                navUserEmail.setText(email);
+                Picasso.get()
+                        .load(pf)
+                        .placeholder(R.color.colorPrimaryDark)
+                        .fit()
+                        .centerCrop()
+                        .into(navProfielFoto);
 
-        // ik gebruik Glide om een foto te laden
-        //Glide.with(this).load(currentuser.getPhotoUrl()).into(navUserPhoto);
+
+
+            }else
+            {
+
+            }
+
+
+        }
     }
+    /**Servi test navheaderupdate eindigd hier
+     *
+     * @param dataSnapshot
+     */
 
 }
+
+

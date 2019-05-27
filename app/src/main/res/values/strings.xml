@@ -59,7 +59,7 @@
     <string name="goedeavond">Goedeavond,</string>
     <string name="goedenacht">Goedenacht</string>
     <string name="woonplaats">Woonplaats</string>
-    <string name="geboortedatum">Geboortedatum</string>
+    <string name="geboortedatum">Geboortedatum:</string>
     <string name="sport">Sport</string>
     <string name="huisdier">Huisdier</string>
     <string name="tvprogramma">Tv-Programma</string>
@@ -70,5 +70,11 @@
     <string name="hintsport">Favoriete Sport</string>
     <string name="hintgeboortedatum">Vul hier je geboortedatum in</string>
     <string name="hintwoonplaats">Vul hier je woonplaats in.</string>
+    <string name="locatie">Locatie:</string>
+    <string name="datum">Datum:</string>
+    <string name="beschrijving">Beschrijving:</string>
+    <string name="btnikwilsamen">Ik wil samen</string>
+    <string name="btnikwilalleen">Ik wil Alleen</string>
+    <string name="btnikwilniet">Ik wil Niet</string>
 
 </resources>

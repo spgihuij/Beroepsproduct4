@@ -33,7 +33,6 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-//servi
 public class EvenementAanmaken extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseReference databaseReference, databaseEvenementen;
@@ -41,12 +40,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
     private Button btnOpslaan;
     private FirebaseAuth firebaseAuth;
     private ImageView ibEvenementFoto;
-    private StorageReference storage;
-    private StorageReference imagepath;
-    private int Gallery_intent = 2;
-    Evenement evenement;
-    String imageLocation;
-    //test
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri mImageUri;
     private StorageReference mStorageRef;
@@ -60,7 +53,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evenementaanmaken);
-
         databaseReference = FirebaseDatabase.getInstance().getReference();
         editTextEvenementnaam = (EditText) findViewById(R.id.editTextEvenementnaam);
         editTextLocatie = (EditText) findViewById(R.id.editTextLocatie);
@@ -72,7 +64,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
         databaseEvenementen = FirebaseDatabase.getInstance().getReference("Evenementen");
         btnOpslaan.setOnClickListener(this);
 
-//test
         mStorageRef = FirebaseStorage.getInstance().getReference().child("EvenementFoto/");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Evenementen");
         mButtonUpload = findViewById(R.id.button4);
@@ -90,21 +81,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
 
     }
 
-    /** data opslaan
-     private void opslaanEvenement() {
-
-     String evenementnaam = editTextEvenementnaam.getText().toString().trim();
-     String evenementlocatie = editTextLocatie.getText().toString().trim();
-     String evenementbeschrijving = editTextBeschrijving.getText().toString().trim();
-     String evenementdatum = editTextDatum.getText().toString().trim();
-     String evenementfoto = imagepath.toString().trim();
-     String id = databaseEvenementen.push().getKey();
-     evenement = new Evenement(id, evenementnaam, evenementlocatie, evenementbeschrijving, evenementdatum, evenementfoto);
-     databaseEvenementen.child(evenementnaam).setValue(evenement);
-     Toast.makeText(this, "Evenement Toegevoegd", Toast.LENGTH_LONG).show();
-
-     }
-     */
 
     private void openFileChooser() {
         Intent intent = new Intent();
@@ -115,11 +91,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        /**  if (view == btnOpslaan) {
-         opslaanEvenement();
-         }*/
-
-
 
     }
 
@@ -128,9 +99,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
     }
 
 
-
-
-    //test
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
