@@ -2,8 +2,6 @@ package com.example.beroepsproduct4;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -17,9 +15,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -61,14 +56,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         View view;
         if(i == type_personen)
         {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listitem_personen,viewGroup,false);
             return new personenViewHolder(view);
         }
 
 
         else
         {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem,viewGroup,false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.listitem_evenementen,viewGroup,false);
             return  new evenementenViewHolder(view);
         }
     }

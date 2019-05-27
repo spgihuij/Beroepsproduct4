@@ -51,13 +51,9 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         //navdrawer
         mAuth=FirebaseAuth.getInstance();
         currentuser = mAuth.getCurrentUser();
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -77,6 +73,7 @@ public class Hoofdscherm extends AppCompatActivity   implements NavigationView.O
 
         //ontwikkelaars code
         ontwikkelaars.add("mCoC80t1pXfjwvtaXD22xTOprzI2");
+        ontwikkelaars.add("nA6IucwbJkgtswYG7MfKwGXC67g1");
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();

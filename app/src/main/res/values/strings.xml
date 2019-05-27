@@ -57,5 +57,10 @@
     <string name="goedemorgen">Goedemorgen,</string>
     <string name="goedemiddag">Goedemiddag,</string>
     <string name="goedeavond">Goedeavond,</string>
+    <string name="sn_naam">Naam :</string>
+    <string name="sn_aantalleden">Aantal leden in het Sociaal Netwerk :</string>
+    <string name="sn_beschrijving"> Beschrijving :</string>
+    <string name="sn_lidworden">Lid worden</string>
+    <string name="sn_nietlidworden">Verder zoeken</string>
 
 </resources>
