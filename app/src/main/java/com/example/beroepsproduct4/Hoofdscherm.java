@@ -30,14 +30,14 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 
 
-public class Hoofdscherm extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Hoofdscherm extends AppCompatActivity   implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseAuth firebaseAuth,mAuth;
     FirebaseUser currentuser;
     FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
+
     View creerzinnen;
 
 
@@ -96,10 +96,6 @@ public class Hoofdscherm extends AppCompatActivity
         int rando = (int) (Math.random() * 3);
         gebroetingszinnen.setText(voelgoedzinnen[rando]);
     }
-
-
-
-
 
 
     public void checkUser(NavigationView navigationView) {
@@ -201,7 +197,6 @@ public class Hoofdscherm extends AppCompatActivity
 
         navUserName.setText(currentuser.getDisplayName());
         navUserEmail.setText(currentuser.getEmail());
-
         // ik gebruik Glide om een foto te laden
         //Glide.with(this).load(currentuser.getPhotoUrl()).into(navUserPhoto);
     }
