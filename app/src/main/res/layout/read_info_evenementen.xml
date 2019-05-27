@@ -6,168 +6,156 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
     <TextView
         android:id="@+id/titel"
-        android:layout_width="266dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:text="Informatie over anderen"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_header"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="Evenement"
+        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="150dp"
+        android:layout_width="250dp"
         android:layout_height="150dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/titel"
-        app:layout_constraintStart_toStartOf="@+id/titel"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titel"
         app:srcCompat="@android:color/background_dark" />
 
-    <GridLayout
-        android:id="@+id/RensGridInfoAnderen"
-        android:layout_width="371dp"
-        android:layout_height="286dp"
+    <Button
+        android:id="@+id/btnSamen"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/custom_button_groen"
+        android:text="@string/btnikwilsamen"
+        app:layout_constraintEnd_toStartOf="@+id/btnAlleen"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-        <TextView
-            android:id="@+id/ia_naam"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:text="Naam:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_iv_naam"
-            android:layout_width="198dp"
-            android:layout_height="34dp"
-            android:text="Naam"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_Geboortedatum"
-            android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:text="Geboortedatum:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_iv_Geboortedatum"
-            android:layout_width="193dp"
-            android:layout_height="34dp"
-            android:text="Geboortedatum:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_woonp"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:text="Woonplaats:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_iv_woonp"
-            android:layout_width="195dp"
-            android:layout_height="34dp"
-            android:text="Woonplaats"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_sport"
-            android:layout_width="wrap_content"
-            android:layout_height="39dp"
-            android:layout_row="3"
-            android:layout_column="0"
-            android:text="Sport:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_iv_sport"
-            android:layout_width="195dp"
-            android:layout_height="35dp"
-            android:text="Sport"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_huisdier"
-            android:layout_width="162dp"
-            android:layout_height="37dp"
-            android:layout_row="4"
-            android:layout_column="0"
-            android:text="Favoriete Huisdier:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_iv_huisdier"
-            android:layout_width="197dp"
-            android:layout_height="36dp"
-            android:text="Favoriete Huisdier"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_tvp"
-            android:layout_width="168dp"
-            android:layout_height="50dp"
-            android:layout_row="5"
-            android:layout_column="0"
-            android:text="Favorite TV Programma:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_iv_tvprogramma"
-            android:layout_width="195dp"
-            android:layout_height="wrap_content"
-            android:text="Favorite TV Programma"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_website"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_row="6"
-            android:layout_column="0"
-            android:text="Favorite Website:"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/ia_iv_website"
-            android:layout_width="194dp"
-            android:layout_height="wrap_content"
-            android:text="Favorite Website"
-            android:textSize="18dp" />
-
-    </GridLayout>
+        app:layout_constraintTop_toBottomOf="@+id/RensGridInfoAnderen" />
 
     <Button
-        android:id="@+id/buttonInfoOveranderen"
+        android:id="@+id/btnAlleen"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/custom_button_oranje"
+        android:text="@string/btnikwilalleen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RensGridInfoAnderen" />
+
+    <Button
+        android:id="@+id/btnNiet"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/custom_button_rood"
+        android:text="@string/btnikwilniet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnAlleen"
+        app:layout_constraintTop_toBottomOf="@+id/RensGridInfoAnderen" />
+
+    <GridLayout
+        android:id="@+id/RensGridInfoAnderen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RensGridInfoAnderen" />
+        android:layout_marginTop="8dp"
+        android:columnCount="2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <TextView
+            android:id="@+id/ev_naam"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:text="Naam:"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tvNaam"
+            android:layout_width="198dp"
+            android:layout_height="34dp"
+            android:text="Naam"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/ev_Datum"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:text="@string/datum"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tvDatum"
+            android:layout_width="193dp"
+            android:layout_height="34dp"
+            android:text="@string/datum"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/ev_Locatie"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:text="@string/locatie"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tvLocatie"
+            android:layout_width="195dp"
+            android:layout_height="34dp"
+            android:text="@string/locatie"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/ev_Beschrijving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:text="@string/beschrijving"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tvBeschrijving"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:text="@string/beschrijving"
+            android:textSize="14sp" />
+
+    </GridLayout>
 
 </android.support.constraint.ConstraintLayout>
