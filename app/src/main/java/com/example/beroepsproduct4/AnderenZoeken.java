@@ -33,7 +33,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
     private SearchView searchView;
     private RecyclerViewAdapter adapter;
 
-
+//test
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved) {
         View view = inflater.inflate(R.layout.anderenzoeken_layout, container, false);
