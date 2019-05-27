@@ -8,7 +8,8 @@
     <color name="white"> #FFFFFF</color>
     <color name="darkgrey"> #6c6c6c</color>
     <color name="colorHeader">#5DBBFC</color>
-    <color name="Groen">#00B716</color>
+    <color name="Rood"> #e91b0f </color>
+    <color name="Groen">#37ff37 </color>
     <color name="Oranje">#FFA200</color>
-<color name="Rood">#DC0505</color>
+
 </resources>

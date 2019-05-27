@@ -11,13 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ReadInfoOverAnderen"></activity>
-         <activity android:name=".Invoerendatapersoon"></activity>
+        <activity android:name=".SchermSociaalNetwerkToonLeden"></activity>
+        <activity android:name=".SchermSociaalNetwerkDetail" />
+        <activity android:name=".SchermSociaalNetwerk" />
+        <activity android:name=".ReadInfoOverAnderen" />
+        <activity android:name=".Invoerendatapersoon" />
         <activity android:name=".Inlogscherm" />
-        <activity android:name=".EvenementAanmaken"></activity>
-        <activity android:name=".InfoOverEvenementPlaceholder"></activity>
-
+        <activity android:name=".EvenementAanmaken" />
+        <activity android:name=".InfoOverEvenementPlaceholder" />
         <activity android:name=".Registreerscherm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

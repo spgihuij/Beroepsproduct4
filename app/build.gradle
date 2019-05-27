@@ -33,7 +33,7 @@ dependencies {
 
     //Firebase
     //Firebase core
-    implementation'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
     //forebase Auth
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     // Firebase Storage

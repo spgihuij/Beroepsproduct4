@@ -311,6 +311,7 @@ public class Hoofdscherm extends AppCompatActivity
                         .into(navProfielFoto);
 
 
+
             } else {
 
             }
@@ -322,6 +323,7 @@ public class Hoofdscherm extends AppCompatActivity
      *
      * @param dataSnapshot
      */
+
 
 }
 
