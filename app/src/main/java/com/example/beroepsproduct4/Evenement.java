@@ -8,6 +8,10 @@ public class Evenement {
     public String evenementdatum;
     public String evenementfoto;
 
+    public Evenement() {
+
+    }
+
     public String getEvenementid() {
         return evenementid;
     }

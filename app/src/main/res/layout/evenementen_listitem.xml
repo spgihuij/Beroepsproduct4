@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="3dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="3dp"
+    app:cardMaxElevation="3dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/recycler_Layout_evenement"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/evenementNaam"
+            android:layout_width="170dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="TextView"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/evenementImage"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/evenementImage"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="47dp"
+            android:layout_marginRight="47dp"
+            android:background="@color/colorPrimaryDark"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/evenementNaam"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/btn_dialog" />
+
+        <TextView
+            android:id="@+id/evenementDatum"
+            android:layout_width="94dp"
+            android:layout_height="20dp"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Datum"
+            app:layout_constraintEnd_toEndOf="@+id/evenementNaam"
+            app:layout_constraintStart_toStartOf="@+id/evenementNaam"
+            app:layout_constraintTop_toBottomOf="@+id/evenementNaam" />
+
+        <TextView
+            android:id="@+id/evenementBeschrijving"
+            android:layout_width="170dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="8dp"
+            android:text="Beschrijving komt hier te staan. Blalblabla hahaha test 123 hoe is het ermee. Dit is een leuk evenement zeg!"
+            app:layout_constraintBottom_toBottomOf="@+id/evenementImage"
+            app:layout_constraintEnd_toEndOf="@+id/evenementDatum"
+            app:layout_constraintStart_toStartOf="@+id/evenementDatum"
+            app:layout_constraintTop_toBottomOf="@+id/evenementDatum" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

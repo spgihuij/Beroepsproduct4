@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import static android.support.constraint.Constraints.TAG;
 
 
-public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextListener {
+public class PersonenInEvenement extends Fragment implements SearchView.OnQueryTextListener {
 
-    private ArrayList<Persoon> personen = new ArrayList<>();
+    private ArrayList<Evenement> evenementen = new ArrayList<>();
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -34,10 +34,9 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
     private RecyclerViewAdapter adapter;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved) {
-        View view = inflater.inflate(R.layout.anderenzoeken_layout, container, false);
+        View view = inflater.inflate(R.layout.evenementen_layout, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         searchView = (SearchView) view.findViewById(R.id.search_view);
@@ -45,15 +44,15 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Personen");
-
-
+        databaseReference = firebaseDatabase.getReference().child("Evenementen");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 showData(dataSnapshot);
             }
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -64,24 +63,23 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
     }
 
     private void showData(DataSnapshot dataSnapshot) {
-        personen.clear();
+        evenementen.clear();
 
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-            Persoon persoon = new Persoon();
-            persoon.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
-            persoon.setPersoonprofielfoto(ds.getValue(Persoon.class).getPersoonprofielfoto());
+            Evenement evenement = new Evenement();
+            evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
 
 
-            if (persoon != null) {
+            if (evenement != null) {
 
-                personen.add(persoon);
-                Log.d(TAG, persoon.getPersoonnaam());
+                evenementen.add(evenement);
+                Log.d(TAG, evenement.getEvenementnaam());
             }
             // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
             // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-            adapter = new RecyclerViewAdapter(getActivity(), personen, null);
+            adapter = new RecyclerViewAdapter(getActivity(), null, evenementen);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }

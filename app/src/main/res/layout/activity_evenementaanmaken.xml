@@ -28,12 +28,19 @@
         android:layout_height="wrap_content"
         android:text="@string/titelafbevenement" />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ibAfbeeldingEvenement"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:onClick="btnEvenementFoto"
+        android:scaleType="fitCenter"
         android:src="@android:drawable/ic_input_add" />
+
+    <ProgressBar
+        android:id="@+id/mProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/editTextEvenementnaam"
@@ -69,8 +76,14 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/btnOpslaan"
+        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/knopopslaan" />
+
+    <Button
+        android:id="@+id/btnOpslaan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="tste" />
 </LinearLayout>
