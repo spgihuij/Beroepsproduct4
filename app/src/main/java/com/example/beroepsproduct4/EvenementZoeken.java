@@ -68,6 +68,9 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
             Evenement evenement = new Evenement();
             evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
+            evenement.setEvenementfoto(ds.getValue(Evenement.class).getEvenementfoto());
+            evenement.setEvenementbeschrijving(ds.getValue(Evenement.class).getEvenementbeschrijving());
+            evenement.setEvenementdatum(ds.getValue(Evenement.class).getEvenementdatum());
 
 
             if (evenement != null) {
@@ -75,14 +78,14 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
                 evenementen.add(evenement);
                 Log.d(TAG, evenement.getEvenementnaam());
             }
-            // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
-            // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-            adapter = new RecyclerViewAdapter(getActivity(), null, evenementen);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
         }
+        adapter = new RecyclerViewAdapter(getActivity(), null, evenementen, null);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
     }
 
@@ -94,6 +97,10 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        if(!isVisible())
+        {
+            return true;
+        }
         adapter.getFilter().filter(newText);
         return false;
     }

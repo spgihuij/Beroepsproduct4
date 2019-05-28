@@ -27,47 +27,50 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final String TAG = "RecyclerViewAdapter";
     private static int type_personen = 1;
     private static int type_evenementen = 2;
+    private static int type_personenAlleen = 3;
 
     private ArrayList<Persoon> persoonList = null;
     private ArrayList<Persoon> persoonsListFull = new ArrayList<>();
     private ArrayList<Evenement> evenementList = null;
     private ArrayList<Evenement> evenementListFull = new ArrayList<>();
+    private ArrayList<EvenementGroep> persoonAlleenList = new ArrayList<>();
+    private ArrayList<EvenementGroep> persoonAlleenListFull = new ArrayList<>();
+
     private Context context;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList) {
-        if(persoonList != null) {
+    public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList, ArrayList<EvenementGroep> persoonAlleenList) {
+        if (persoonList != null) {
             this.persoonList = persoonList;
-
-                persoonsListFull.addAll(persoonList);
-
+            persoonsListFull.addAll(persoonList);
             this.context = context;
-        }
-        if(evenementList!= null){
+        } else if (evenementList != null) {
             this.evenementList = evenementList;
             evenementListFull.addAll(evenementList);
             this.context = context;
 
+        } else {
+            this.persoonAlleenList = persoonAlleenList;
+            persoonAlleenListFull.addAll(persoonAlleenList);
+            this.context = context;
         }
     }
-
 
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
-        if(i == type_personen)
-        {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem,viewGroup,false);
+        if (i == type_personen) {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem, viewGroup, false);
             return new personenViewHolder(view);
+        } else if (i == type_evenementen) {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem, viewGroup, false);
+            return new evenementenViewHolder(view);
+        } else {
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem, viewGroup, false);
+            return new evenementGroepViewHolder(view);
         }
 
-
-        else
-        {
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem,viewGroup,false);
-            return  new evenementenViewHolder(view);
-        }
     }
 
     @Override
@@ -81,9 +84,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             Picasso.get()
                     .load(uri)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fit()
+                    .centerCrop()
                     .into(((personenViewHolder) viewHolder).imageView);
 
-            ((personenViewHolder)viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
+            ((personenViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent s = new Intent(v.getContext(), ReadInfoOverAnderen.class);
@@ -95,10 +101,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             });
 
 
-        }
-        else {
-
+        } else if (getItemViewType(i) == type_evenementen) {
             ((evenementenViewHolder) viewHolder).setEvenementInfo(evenementList.get(i));
+
+            String uri = evenementList.get(i).getEvenementfoto();
+            Picasso.get()
+                    .load(uri)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fit()
+                    .centerCrop()
+                    .into(((evenementenViewHolder) viewHolder).evenementFoto);
+
 
             ((evenementenViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -110,35 +123,54 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     v.getContext().startActivity(s);
                 }
             });
+        } else if (getItemViewType(i) == type_personenAlleen) {
+            ((evenementGroepViewHolder) viewHolder).setGroepInfo(persoonAlleenList.get(i));
+
+           /* String uri = persoonAlleenList.get(i).getPersoonprofielfoto();
+
+            Picasso.get()
+                    .load(uri)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fit()
+                    .centerCrop()
+                    .into(((personenViewHolder) viewHolder).imageView); */
+
+            ((evenementGroepViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent s = new Intent(v.getContext(), ReadInfoOverEvenementPersoon.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("persoonsnaam", persoonAlleenList.get(i).getPersoonsnaam1());
+                    bundle.putString("evenementnaam", persoonAlleenList.get(i).getEvenementnaam());
+                    s.putExtras(bundle);
+                    v.getContext().startActivity(s);
+                }
+            });
         }
-
-
-
-
     }
 
     @Override
-    public int getItemViewType(int i)
-    {
-        if (persoonList!= null)
-        {
-                 return type_personen;
+    public int getItemViewType(int i) {
+        if (persoonList != null) {
+            return type_personen;
 
+        } else if (evenementList != null) {
+
+            return type_evenementen;
+        } else {
+            return type_personenAlleen;
         }
-        else
-
-                return  type_evenementen;
 
     }
 
     @Override
     public int getItemCount() {
-        if(persoonList!= null) {
+        if (persoonList != null) {
             return persoonList.size();
-        }
-        else
-        {
+        } else if (evenementList != null) {
             return evenementList.size();
+        } else {
+            return persoonAlleenList.size();
         }
     }
 
@@ -152,6 +184,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Persoon> filteredlijstPersoon = new ArrayList<>();
             List<Evenement> filteredlijstEvenement = new ArrayList<>();
+            List<EvenementGroep> filteredlijstPersoonAlleen = new ArrayList<>();
             if (persoonList != null) {
 
                 if (constraint == null || constraint.length() == 0) {
@@ -168,10 +201,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 FilterResults results = new FilterResults();
                 results.values = filteredlijstPersoon;
                 return results;
-            }
-
-            else
-            {
+            } else if (evenementList != null) {
                 if (constraint == null || constraint.length() == 0) {
                     filteredlijstEvenement.addAll(evenementListFull);
                 } else {
@@ -186,57 +216,72 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 FilterResults results = new FilterResults();
                 results.values = filteredlijstEvenement;
                 return results;
+            } else {
+
+                if (constraint == null || constraint.length() == 0) {
+                    filteredlijstPersoonAlleen.addAll(persoonAlleenListFull);
+                } else {
+                    String filterpattern = constraint.toString().toLowerCase().trim();
+
+                    for (EvenementGroep evenementGroep : persoonAlleenListFull) {
+                        if (evenementGroep.getPersoonsnaam1().toLowerCase().contains(filterpattern)) {
+                            filteredlijstPersoonAlleen.add(evenementGroep);
+                        }
+                    }
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredlijstPersoonAlleen;
+                return results;
             }
+
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            if (persoonList != null ) {
+            if (persoonList != null) {
                 persoonList.clear();
                 persoonList.addAll((List) results.values);
-            }
-
-            else
-            {
+            } else if (evenementList != null) {
                 evenementList.clear();
                 evenementList.addAll((List) results.values);
+            } else {
+                persoonAlleenList.clear();
+                persoonAlleenList.addAll((List) results.values);
             }
+
             notifyDataSetChanged();
 
         }
     };
 
-     class personenViewHolder extends RecyclerView.ViewHolder{
+    class personenViewHolder extends RecyclerView.ViewHolder {
 
         TextView persoonsNaam;
         ConstraintLayout recyclerLayout;
         ImageView imageView;
 
-        public personenViewHolder(View itemView){
+        public personenViewHolder(View itemView) {
             super(itemView);
             persoonsNaam = itemView.findViewById(R.id.persoonsnaam);
             recyclerLayout = itemView.findViewById(R.id.recycler_Layout_personen);
             imageView = itemView.findViewById(R.id.imageViewPersoon);
         }
 
-         public void setPersonenInfo(Persoon persoon)
-         {
-             persoonsNaam.setText(persoon.getPersoonnaam());
+        public void setPersonenInfo(Persoon persoon) {
+            persoonsNaam.setText(persoon.getPersoonnaam());
 
 
-
-
-         }
+        }
 
     }
 
-    class evenementenViewHolder extends RecyclerView.ViewHolder{
-         TextView evenementNaam;
-         TextView evenementDatum;
-         ImageView evenementFoto;
-         ConstraintLayout recyclerLayout;
+    class evenementenViewHolder extends RecyclerView.ViewHolder {
+        TextView evenementNaam;
+        TextView evenementDatum;
+        ImageView evenementFoto;
+        ConstraintLayout recyclerLayout;
 
-        public evenementenViewHolder(View itemView){
+        public evenementenViewHolder(View itemView) {
             super(itemView);
             evenementNaam = itemView.findViewById(R.id.evenementNaam);
             evenementFoto = itemView.findViewById(R.id.evenementImage);
@@ -245,8 +290,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         }
 
-        public void setEvenementInfo(Evenement evenement)
-        {
+        public void setEvenementInfo(Evenement evenement) {
             evenementNaam.setText(evenement.getEvenementnaam());
             //evenementDatum.setText(evenement.getEvenementdatum());
 
@@ -255,7 +299,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     }
 
+    class evenementGroepViewHolder extends RecyclerView.ViewHolder {
 
+        TextView persoonsNaam;
+        ConstraintLayout recyclerLayout;
+        ImageView imageView;
+
+        public evenementGroepViewHolder(View itemView) {
+            super(itemView);
+            persoonsNaam = itemView.findViewById(R.id.persoonsnaam);
+            recyclerLayout = itemView.findViewById(R.id.recycler_Layout_personen);
+            imageView = itemView.findViewById(R.id.imageViewPersoon);
+        }
+
+        public void setGroepInfo(EvenementGroep evenementGroep) {
+            persoonsNaam.setText(evenementGroep.getPersoonsnaam1());
+
+
+        }
+
+    }
 
 
 }

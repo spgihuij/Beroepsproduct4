@@ -30,6 +30,7 @@
     <string name="toastregistrerenmislukt">Register failed, please try again.</string>
     <string name="toastregistrerensuccesvol">Register succesfull.</string>
     <string name="hintevenementdatum">Date</string>
+    <string name="zoekpersoon">Click on the person you are looking for</string>
     <string name="hintnaam">Name</string>
     <string name="naam">Full name:</string>
     <string name="profielfoto">Profile picture:</string>
@@ -37,4 +38,5 @@
     <string name="titelafbevenement">Press on the plus icon to assign an image to the event.</string>
     <string name="titelevenementaanmaken">Create Event</string>
     <string name="toastgeennaam">Please fill in a name.</string>
+    <string name="knopdeelnemen">Sign up</string>
 </resources>

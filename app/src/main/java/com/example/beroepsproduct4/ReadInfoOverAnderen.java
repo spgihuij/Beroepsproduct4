@@ -2,6 +2,7 @@ package com.example.beroepsproduct4;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +16,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ReadInfoOverAnderen extends AppCompatActivity {
-    TextView naam, geboortedatum, woonplaats, sport, huisdier, tvprogramma, website;
-    Button btn;
-    String persoonsNaam;
-    DatabaseReference reference;
+    private TextView naam, geboortedatum, woonplaats, sport, huisdier, tvprogramma, website;
+    private Button btn;
+    private String persoonsNaam;
+    private DatabaseReference reference;
+
 
 
     @Override
@@ -27,6 +29,7 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         setContentView(R.layout.activity_read_info_over_anderen);
         getIntentData();
 
+
         naam = (TextView) findViewById(R.id.ia_iv_naam);
         geboortedatum = (TextView) findViewById(R.id.ia_iv_Geboortedatum);
         woonplaats = (TextView) findViewById(R.id.ia_iv_woonp);
@@ -34,7 +37,11 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         huisdier = (TextView) findViewById(R.id.ia_iv_huisdier);
         tvprogramma = (TextView) findViewById(R.id.ia_iv_tvprogramma);
         website = (TextView) findViewById(R.id.ia_iv_website);
+        btn = (Button) findViewById(R.id.buttonSamenGaan);
 
+
+
+        btn.setVisibility(View.INVISIBLE);
 
 
         reference = FirebaseDatabase.getInstance().getReference().child("Personen").child(persoonsNaam);
@@ -42,7 +49,6 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 showData(dataSnapshot);
-
 
 
             }
@@ -55,8 +61,7 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         });
     }
 
-    private void showData(DataSnapshot dataSnapshot)
-    {
+    private void showData(DataSnapshot dataSnapshot) {
         String nam = dataSnapshot.child("persoonnaam").getValue().toString();
         String gd = dataSnapshot.child("persoongeboortedatum").getValue().toString();
         String hd = dataSnapshot.child("persoonhuisdier").getValue().toString();
@@ -72,10 +77,12 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         tvprogramma.setText(tvp);
         website.setText(web);
     }
-    private void getIntentData(){
-        Bundle bundle=getIntent().getExtras();
-        if(bundle!=null)
-        persoonsNaam=bundle.getString("persoonsnaam");
-        }
-        }
+
+    private void getIntentData() {
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+            persoonsNaam = bundle.getString("persoonsnaam");
+
+    }
+}
 

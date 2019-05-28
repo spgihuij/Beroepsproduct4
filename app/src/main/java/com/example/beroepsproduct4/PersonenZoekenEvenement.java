@@ -1,9 +1,11 @@
 package com.example.beroepsproduct4;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,9 +25,9 @@ import java.util.ArrayList;
 import static android.support.constraint.Constraints.TAG;
 
 
-public class PersonenInEvenement extends Fragment implements SearchView.OnQueryTextListener {
+public class PersonenZoekenEvenement extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
-    private ArrayList<Evenement> evenementen = new ArrayList<>();
+    private ArrayList<EvenementGroep> evenementGroepen = new ArrayList<>();
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -34,55 +36,59 @@ public class PersonenInEvenement extends Fragment implements SearchView.OnQueryT
     private RecyclerViewAdapter adapter;
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved) {
-        View view = inflater.inflate(R.layout.evenementen_layout, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        searchView = (SearchView) view.findViewById(R.id.search_view);
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.personeninevenement_layout);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        searchView = (SearchView) findViewById(R.id.search_view_groepen);
         searchView.setOnQueryTextListener(this);
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Evenementen");
+        databaseReference = firebaseDatabase.getReference().child("Personen_Evenementen");
+
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 showData(dataSnapshot);
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        return view;
+
     }
 
     private void showData(DataSnapshot dataSnapshot) {
-        evenementen.clear();
+        evenementGroepen.clear();
+        Intent intent = getIntent();
+        String evenementnaam = intent.getStringExtra("evenementnaam");
+
 
         for (DataSnapshot ds : dataSnapshot.getChildren()) {
-            Evenement evenement = new Evenement();
-            evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
 
 
-            if (evenement != null) {
-
-                evenementen.add(evenement);
-                Log.d(TAG, evenement.getEvenementnaam());
+            EvenementGroep evenementGroep = new EvenementGroep();
+            if(ds.getValue(EvenementGroep.class).getPersoonsnaam2().equals("-") && ds.getValue(EvenementGroep.class).getEvenementnaam().equals(evenementnaam))
+            {
+                evenementGroep.setPersoonsnaam1(ds.getValue(evenementGroep.getClass()).getPersoonsnaam1());
+                evenementGroep.setEvenementnaam(evenementnaam);
+                //persoon.setPersoonprofielfoto(ds.getValue(Persoon.class).getPersoonprofielfoto());
+                evenementGroepen.add(evenementGroep);
             }
-            // persoon.setEmail(ds.getValue(Persoon.class).getEmail());
-            // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
-
-            adapter = new RecyclerViewAdapter(getActivity(), null, evenementen);
+            adapter = new RecyclerViewAdapter(this, null, null, evenementGroepen);
             recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
         }
+
 
     }
 
@@ -94,7 +100,10 @@ public class PersonenInEvenement extends Fragment implements SearchView.OnQueryT
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        adapter.getFilter().filter(newText);
-        return false;
+        if(adapter!= null) {
+            adapter.getFilter().filter(newText);
+            return false;
+        }
+        return true;
     }
 }
