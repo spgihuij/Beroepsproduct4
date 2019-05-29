@@ -257,7 +257,7 @@ public class Hoofdscherm extends AppCompatActivity
 
                 break;
             case R.id.sociaal_netwerk:
-                //sociaalnetwerk
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchermSociaalNetwerk()).commit();
                 break;
             case R.id.mijn_agenda:
                 // Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);

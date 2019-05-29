@@ -25,14 +25,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final String TAG = "RecyclerViewAdapter";
     private static int type_personen = 1;
     private static int type_evenementen = 2;
+    private static int type_sociaalnetwerken = 3;
 
     private ArrayList<Persoon> persoonList = null;
     private ArrayList<Persoon> persoonsListFull = new ArrayList<>();
     private ArrayList<Evenement> evenementList = null;
     private ArrayList<Evenement> evenementListFull = new ArrayList<>();
+    private ArrayList<SociaalNetwerk> sociaalnetwerkList = null;
+    private ArrayList<SociaalNetwerk> sociaalnetwerkListFull = new ArrayList<>();
     private Context context;
 
-    public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList) {
+    public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList, ArrayList<SociaalNetwerk> sociaalnetwerkList) {
         if (persoonList != null) {
             this.persoonList = persoonList;
 
@@ -46,6 +49,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             this.context = context;
 
         }
+        if (sociaalnetwerkList != null) {
+            this.sociaalnetwerkList = sociaalnetwerkList;
+            sociaalnetwerkListFull.addAll(sociaalnetwerkList);
+            this.context = context;
+
+        }
     }
 
 
@@ -56,7 +65,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         if (i == type_personen) {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.personen_listitem, viewGroup, false);
             return new personenViewHolder(view);
-        } else {
+        }
+        else if(i == type_sociaalnetwerken){
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.sociaalnetwerken_listitem, viewGroup, false);
+            return new sociaalnetwerkenViewHolder(view);
+        }
+
+        else {
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.evenementen_listitem, viewGroup, false);
             return new evenementenViewHolder(view);
         }
@@ -114,8 +129,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     v.getContext().startActivity(s);
                 }
             });
-        }
 
+        } else if (getItemViewType(i) == type_sociaalnetwerken) {
+            ((sociaalnetwerkenViewHolder) viewHolder).setSociaalnetwerkenInfo(sociaalnetwerkList.get(i));
+
+
+            String uri = sociaalnetwerkList.get(i).getSociaalnetwerkfoto();
+
+           Picasso.get()
+                    .load(uri)
+                    .placeholder(R.color.colorPrimaryDark)
+                    .fit()
+                    .centerCrop()
+                    .into(((sociaalnetwerkenViewHolder) viewHolder).imageView);
+
+
+            ((sociaalnetwerkenViewHolder) viewHolder).recyclerLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent s = new Intent(v.getContext(), SchermSociaalNetwerk.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("sociaalnetwerknaam", sociaalnetwerkList.get(i).getSociaalnetwerknaam());
+                    s.putExtras(bundle);
+                    v.getContext().startActivity(s);
+                }
+            });
+        }
 
     }
 
@@ -123,6 +162,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public int getItemViewType(int i) {
         if (persoonList != null) {
             return type_personen;
+
+        }else if(sociaalnetwerkList != null){
+            return type_sociaalnetwerken;
 
         } else
 
@@ -134,6 +176,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public int getItemCount() {
         if (persoonList != null) {
             return persoonList.size();
+        } else if(sociaalnetwerkList != null){
+            return sociaalnetwerkList.size();
         } else {
             return evenementList.size();
         }
@@ -149,6 +193,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Persoon> filteredlijstPersoon = new ArrayList<>();
             List<Evenement> filteredlijstEvenement = new ArrayList<>();
+            List<SociaalNetwerk> filteredlijstSociaalNetwerk = new ArrayList<>();
             if (persoonList != null) {
 
                 if (constraint == null || constraint.length() == 0) {
@@ -164,6 +209,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
                 FilterResults results = new FilterResults();
                 results.values = filteredlijstPersoon;
+                return results;
+            } else if (sociaalnetwerkList != null) {
+
+                if (constraint == null || constraint.length() == 0) {
+                    filteredlijstSociaalNetwerk.addAll(sociaalnetwerkListFull);
+                } else {
+                    String filterpattern = constraint.toString().toLowerCase().trim();
+
+                    for (SociaalNetwerk sociaalNetwerk : sociaalnetwerkListFull) {
+                        if (sociaalNetwerk.getSociaalnetwerknaam().toLowerCase().contains(filterpattern)) {
+                            filteredlijstSociaalNetwerk.add(sociaalNetwerk);
+                        }
+                    }
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredlijstSociaalNetwerk;
                 return results;
             } else {
                 if (constraint == null || constraint.length() == 0) {
@@ -188,7 +249,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             if (persoonList != null) {
                 persoonList.clear();
                 persoonList.addAll((List) results.values);
-            } else {
+            } else if (sociaalnetwerkList != null) {
+                sociaalnetwerkList.clear();
+                sociaalnetwerkList.addAll((List) results.values);}
+            else {
                 evenementList.clear();
                 evenementList.addAll((List) results.values);
             }
@@ -217,7 +281,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
     }
+    class sociaalnetwerkenViewHolder extends RecyclerView.ViewHolder {
 
+        TextView sociaalnetwerknaam;
+        ConstraintLayout recyclerLayout;
+        ImageView imageView;
+
+        public sociaalnetwerkenViewHolder(View itemView) {
+            super(itemView);
+            sociaalnetwerknaam = itemView.findViewById(R.id.Sociaalnetwerknaam);
+            recyclerLayout = itemView.findViewById(R.id.recycler_Layout_sociaalnetwerken);
+            imageView = itemView.findViewById(R.id.imageViewSociaalNetwerk);
+        }
+
+        public void setSociaalnetwerkenInfo(SociaalNetwerk sociaalnetwerk) {
+            sociaalnetwerknaam.setText(sociaalnetwerk.getSociaalnetwerknaam());
+
+
+        }
+
+    }
     class evenementenViewHolder extends RecyclerView.ViewHolder {
         TextView evenementNaam;
         TextView evenementDatum;

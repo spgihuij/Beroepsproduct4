@@ -81,7 +81,7 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
             // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-            adapter = new RecyclerViewAdapter(getActivity(), null, evenementen);
+            adapter = new RecyclerViewAdapter(getActivity(), null, evenementen, null);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }

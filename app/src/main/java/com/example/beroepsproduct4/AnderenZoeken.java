@@ -80,7 +80,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
             // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-            adapter = new RecyclerViewAdapter(getActivity(), personen, null);
+            adapter = new RecyclerViewAdapter(getActivity(), personen, null, null);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
