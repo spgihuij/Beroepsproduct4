@@ -269,7 +269,8 @@ public class Hoofdscherm extends AppCompatActivity
                 break;
 
             case R.id.sociaal_netwerk_toevoegen:
-                //sociaal netwerk teovoegen
+                Intent intent4 = new Intent(Hoofdscherm.this, SchermSociaalNetwerk.class);
+startActivity(intent4);
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
