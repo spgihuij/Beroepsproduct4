@@ -33,7 +33,7 @@ dependencies {
 
     //Firebase
     //Firebase core
-    implementation'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.google.firebase:firebase-core:16.0.9'
     //forebase Auth
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     // Firebase Storage
@@ -43,6 +43,7 @@ dependencies {
 
     //picasso for image
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.android.support:gridlayout-v7:28.0.0'
 
 }
 

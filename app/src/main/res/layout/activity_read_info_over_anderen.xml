@@ -9,46 +9,60 @@
 
     <TextView
         android:id="@+id/titel"
-        android:layout_width="266dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_header"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
         android:text="Informatie over anderen"
+        android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/titel"
+        app:layout_constraintStart_toStartOf="@+id/titel"
+        app:layout_constraintTop_toBottomOf="@+id/titel"
+        app:srcCompat="@android:color/background_dark" />
+
     <GridLayout
         android:id="@+id/RensGridInfoAnderen"
-        android:layout_width="371dp"
-        android:layout_height="286dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titel">
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <TextView
-            android:id="@+id/ia_naam"
+            android:id="@+id/ev_naam"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
+            android:layout_row="0"
+            android:layout_column="0"
             android:text="Naam:"
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/ia_iv_naam"
+            android:id="@+id/tvNaam"
             android:layout_width="198dp"
             android:layout_height="34dp"
+            android:layout_row="0"
+            android:layout_column="1"
             android:text="Naam"
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/ia_Geboortedatum"
+            android:id="@+id/ev_Geboortedatum"
             android:layout_width="wrap_content"
             android:layout_height="34dp"
             android:layout_row="1"
@@ -57,14 +71,14 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/ia_iv_Geboortedatum"
+            android:id="@+id/tvGeboortedatum"
             android:layout_width="193dp"
             android:layout_height="34dp"
             android:text="Geboortedatum:"
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/ia_woonp"
+            android:id="@+id/ev_Woonplaats"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_row="2"
@@ -73,7 +87,7 @@
             android:textSize="18dp" />
 
         <TextView
-            android:id="@+id/ia_iv_woonp"
+            android:id="@+id/tvWoonplaats"
             android:layout_width="195dp"
             android:layout_height="34dp"
             android:text="Woonplaats"
@@ -97,7 +111,7 @@
 
         <TextView
             android:id="@+id/ia_huisdier"
-            android:layout_width="162dp"
+            android:layout_width="wrap_content"
             android:layout_height="37dp"
             android:layout_row="4"
             android:layout_column="0"
@@ -113,7 +127,7 @@
 
         <TextView
             android:id="@+id/ia_tvp"
-            android:layout_width="168dp"
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_row="5"
             android:layout_column="0"
@@ -159,5 +173,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RensGridInfoAnderen" />
+
 
 </android.support.constraint.ConstraintLayout>

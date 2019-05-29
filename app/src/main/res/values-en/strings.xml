@@ -30,7 +30,6 @@
     <string name="toastregistrerenmislukt">Register failed, please try again.</string>
     <string name="toastregistrerensuccesvol">Register succesfull.</string>
     <string name="hintevenementdatum">Date</string>
-    <string name="zoekpersoon">Click on the person you are looking for</string>
     <string name="hintnaam">Name</string>
     <string name="naam">Full name:</string>
     <string name="profielfoto">Profile picture:</string>
@@ -38,5 +37,20 @@
     <string name="titelafbevenement">Press on the plus icon to assign an image to the event.</string>
     <string name="titelevenementaanmaken">Create Event</string>
     <string name="toastgeennaam">Please fill in a name.</string>
-    <string name="knopdeelnemen">Sign up</string>
+    <string name="zin1">Today is a nice day!</string>
+    <string name="zin2">I hope that you are happy!</string>
+    <string name="zin3">What a beautiful day!</string>
+    <string name="zin4">Nice to see you again!</string>
+    <string name="zin5">Are you excited to use the app again?</string>
+    <string name="zoekpersoon">Click on the person that you are looking for</string>
+    <string name="toastvulnaamenmailin">Please fill in a name and an email.</string>
+    <string name="toastpersoondataaangepast">Persondata Changed.</string>
+    <string name="toastevenementtoegevoegd">Event added.</string>
+    <string name="toastfotonietopgeslagen">Image not saved try again.</string>
+    <string name="toastfotoopgeslagen">Image saved.</string>
+    <string name="goedeavond">Good evening,</string>
+    <string name="goedemiddag">Good afternoon,</string>
+    <string name="goedemorgen">Good morning,</string>
+    <string name="goedenacht">Goodnight,</string>
+
 </resources>

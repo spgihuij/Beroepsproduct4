@@ -7,7 +7,6 @@ public class Evenement {
     public String evenementbeschrijving;
     public String evenementdatum;
     public String evenementfoto;
-
     public Evenement() {
 
     }

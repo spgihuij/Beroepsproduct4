@@ -5,17 +5,29 @@ public class EvenementGroep {
     String persoonsnaam1;
     String persoonsnaam2;
     String evenementnaam;
+    String id;
 
 
-    public EvenementGroep(String persoonsnaam1, String persoonsnaam2, String evenementnaam) {
+
+    public EvenementGroep(String persoonsnaam1, String persoonsnaam2, String evenementnaam, String id) {
         this.persoonsnaam1 = persoonsnaam1;
         this.persoonsnaam2 = persoonsnaam2;
         this.evenementnaam = evenementnaam;
+        this.id = id;
+
     }
 
     public EvenementGroep()
     {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPersoonsnaam1() {

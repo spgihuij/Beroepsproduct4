@@ -7,78 +7,54 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".EvenementAanmaken">
+    tools:context=".SociaalnetwerkAanmaken">
 
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewsociaalnetwerkaanmaken"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/custom_header"
         android:gravity="center"
-        android:text="@string/titelevenementaanmaken"
+        android:text="Sociaal netwerk aanmaken"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="36sp"
         app:fontFamily="sans-serif-thin" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textViewsociaalnetwerkaanmaken2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titelafbevenement" />
+        android:text="Druk op de plus om een afbeelding aan het sociale netwerk te koppelen" />
 
-    <ImageView
-        android:id="@+id/ibAfbeeldingEvenement"
+    <ImageButton
+        android:id="@+id/ibAfbeeldingSociaalnetwerk"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:onClick="btnEvenementFoto"
-        android:scaleType="fitCenter"
+        android:layout_height="250dp"
+        android:onClick="btnSociaalNetwerkFoto"
         android:src="@android:drawable/ic_input_add" />
 
-    <ProgressBar
-        android:id="@+id/mProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <EditText
-        android:id="@+id/editTextEvenementnaam"
+        android:id="@+id/editTextSociaalnetwerknaam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/vulhierinevenement"
+        android:hint="Vul hier de naam van het sociale netwerk in"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editTextDatum"
+        android:id="@+id/editTextBeschrijvingSociaalnetwerk"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hintevenementdatum"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editTextLocatie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/vulhierinlocatie"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editTextBeschrijving"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:ems="10"
         android:gravity="left"
         android:hint="@string/vulhierinbeschrijving"
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnOpslaanSociaalnetwerk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/knopopslaan" />
-
 </LinearLayout>

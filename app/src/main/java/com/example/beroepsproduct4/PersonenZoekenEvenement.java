@@ -80,6 +80,7 @@ public class PersonenZoekenEvenement extends AppCompatActivity implements Search
             {
                 evenementGroep.setPersoonsnaam1(ds.getValue(evenementGroep.getClass()).getPersoonsnaam1());
                 evenementGroep.setEvenementnaam(evenementnaam);
+                evenementGroep.setId(ds.getValue(evenementGroep.getClass()).getId());
                 //persoon.setPersoonprofielfoto(ds.getValue(Persoon.class).getPersoonprofielfoto());
                 evenementGroepen.add(evenementGroep);
             }
