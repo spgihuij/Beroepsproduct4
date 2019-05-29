@@ -13,6 +13,11 @@ public class EvenementGroep {
         this.evenementnaam = evenementnaam;
     }
 
+    public EvenementGroep()
+    {
+
+    }
+
     public String getPersoonsnaam1() {
         return persoonsnaam1;
     }

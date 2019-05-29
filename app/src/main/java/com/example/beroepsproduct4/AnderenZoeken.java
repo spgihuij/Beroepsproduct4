@@ -80,7 +80,7 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
             // persoon.setWoonplaats(ds.getValue(Persoon.class).getWoonplaats());
 
 
-            adapter = new RecyclerViewAdapter(getActivity(), personen, null);
+            adapter = new RecyclerViewAdapter(getActivity(), personen, null, null);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         }
@@ -95,6 +95,10 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
 
     @Override
     public boolean onQueryTextChange(String newText) {
+        if(!isVisible())
+        {
+            return true;
+        }
         adapter.getFilter().filter(newText);
         return false;
     }
