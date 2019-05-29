@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".SociaalnetwerkAanmaken">
+    tools:context=".SociaalNetwerkAanmaken">
 
 
     <TextView
@@ -29,10 +29,10 @@
         android:text="Druk op de plus om een afbeelding aan het sociale netwerk te koppelen" />
 
     <ImageButton
-        android:id="@+id/ibAfbeeldingSociaalnetwerk"
+        android:id="@+id/ibSociaalNetwerkFoto"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:onClick="btnSociaalNetwerkFoto"
+        android:onClick="BtnSociaalnetwerkFoto"
         android:src="@android:drawable/ic_input_add" />
 
     <EditText
@@ -51,7 +51,11 @@
         android:gravity="left"
         android:hint="@string/vulhierinbeschrijving"
         android:inputType="textPersonName" />
-
+    <ProgressBar
+        android:id="@+id/mProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/btnOpslaanSociaalnetwerk"
         android:layout_width="match_parent"
