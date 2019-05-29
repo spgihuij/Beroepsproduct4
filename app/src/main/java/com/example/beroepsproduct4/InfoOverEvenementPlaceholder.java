@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,16 +19,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class InfoOverEvenementPlaceholder extends AppCompatActivity {
-    TextView naam;
-    Button btn;
+    TextView evNaam, evDatum, evLocatie, evBeschrijving;
     String evenementNaam;
-    String persoonsEmail;
-    String ingelogdePersoonNaam;
     DatabaseReference reference;
-    FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
+
     private DatabaseReference databaseReferencePersonen;
     private DatabaseReference databaseReferenceGroepAanmaken;
+
     ImageView imageView;
 
 
@@ -38,26 +36,29 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
         setContentView(R.layout.read_info_evenementen);
         getIntentData();
 
-        naam = (TextView) findViewById(R.id.ia_iv_naam);
-        btn = (Button) findViewById(R.id.deelnemen) ;
+
+      
+
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         persoonsEmail = user.getEmail();
+    
+
+        evNaam = (TextView) findViewById(R.id.tvNaam);
+        evDatum = (TextView) findViewById(R.id.tvDatum);
+        evLocatie = (TextView) findViewById(R.id.tvLocatie);
+        evBeschrijving = (TextView) findViewById(R.id.tvBeschrijving);
+
+
+
         imageView = (ImageView) findViewById(R.id.imageView);
 
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                persoonAanmelden();
-            }
-        });
 
         reference = firebaseDatabase.getInstance().getReference();
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userNaam(dataSnapshot);
+                evenementData(dataSnapshot);
                 showData(dataSnapshot);
 
             }
@@ -73,19 +74,28 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
 
     private void showData(DataSnapshot dataSnapshot) {
 
-        String nam = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementnaam").getValue().toString();
-        String pf = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementfoto").getValue().toString();
 
-        naam.setText(nam);
 
+        String evnaam = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementnaam").getValue().toString();
+        String evdatum = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementdatum").getValue().toString();
+        String evlocatie = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementlocatie").getValue().toString();
+        String evbes = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementbeschrijving").getValue().toString();
+        String evfoto = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementfoto").getValue().toString();
+
+        evNaam.setText(evnaam);
+        evDatum.setText(evdatum);
+        evLocatie.setText(evlocatie);
+        evBeschrijving.setText(evbes);
 
         Picasso.get()
-                .load(pf)
-                .placeholder(R.mipmap.ic_launcher)
+                .load(evfoto)
+                .placeholder(R.color.colorPrimaryDark)
+
                 .fit()
                 .centerCrop()
                 .into(imageView);
     }
+
 
     private void getIntentData() {
         Bundle bundle = getIntent().getExtras();
@@ -94,7 +104,8 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
     }
 
 
-    private void persoonAanmelden() {
+    private void evenementData(DataSnapshot dataSnapshot) {
+
 
 
         EvenementGroep evenementGroep = new EvenementGroep(ingelogdePersoonNaam, "-", evenementNaam);
@@ -107,7 +118,10 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
 
     }
 
-    private void userNaam(DataSnapshot dataSnapshot) {
+        for (DataSnapshot ds : dataSnapshot.child("Evenementen").getChildren()) {
+            Evenement evenement = new Evenement();
+            try {
+                evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
 
         for (DataSnapshot ds : dataSnapshot.child("Personen").getChildren()) {
             Persoon persoon = new Persoon();
@@ -117,22 +131,10 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
             }
             catch (Exception e)
             {
+
             }
 
 
-            if (persoon.getPersoonemail().equals(persoonsEmail)) {
-                ingelogdePersoonNaam = persoon.getPersoonnaam();
-                break;
-            }
-        }
-
-    }
-
-    private void maakGroepNaam(DataSnapshot dataSnapshot)
-    {
-        for(DataSnapshot ds : dataSnapshot.child("Personen_Evenementen").getChildren())
-        {
-
         }
     }
-}
+

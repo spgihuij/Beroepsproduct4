@@ -34,7 +34,6 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
     private RecyclerViewAdapter adapter;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle saved) {
         View view = inflater.inflate(R.layout.anderenzoeken_layout, container, false);
@@ -48,12 +47,12 @@ public class AnderenZoeken extends Fragment implements SearchView.OnQueryTextLis
         databaseReference = firebaseDatabase.getReference().child("Personen");
 
 
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 showData(dataSnapshot);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
