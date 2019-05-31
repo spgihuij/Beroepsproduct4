@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:visibility="visible"
-    tools:context=".EvenementAanmaken">
+    tools:context=".SociaalNetwerkAanmaken">
 
 
     <TextView
@@ -32,8 +32,14 @@
         android:id="@+id/ibAfbeeldingSociaalNetwerk"
         android:layout_width="match_parent"
         android:layout_height="147dp"
-        android:onClick="btnEvenementFoto"
+        android:onClick="btnSociaalNetwerkFoto"
         android:src="@android:drawable/ic_input_add" />
+
+    <ProgressBar
+        android:id="@+id/mProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/editTextSociaalNetwerk"

@@ -6,6 +6,7 @@ public class SociaalNetwerk {
         public String sociaalnetwerkbeschrijving;
         public String sociaalnetwerkfoto;
 
+
     public SociaalNetwerk(String sociaalnetwerkid, String sociaalnetwerktnaam, String sociaalnetwerkbeschrijving, String sociaalnetwerkfoto) {
         this.sociaalnetwerkid = sociaalnetwerkid;
         this.sociaalnetwerktnaam = sociaalnetwerktnaam;

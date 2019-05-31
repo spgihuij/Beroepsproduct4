@@ -58,11 +58,11 @@ public class SociaalNetwerkAanmaken extends AppCompatActivity implements View.On
         ibSociaalNetwerkFoto = (ImageView) findViewById(R.id.ibAfbeeldingSociaalNetwerk);
         btnOpslaan = (Button) findViewById(R.id.btnOpslaanaSN);
         firebaseAuth = FirebaseAuth.getInstance();
-        databaseSociaalNetwerk = FirebaseDatabase.getInstance().getReference("Evenementen");
+        databaseSociaalNetwerk = FirebaseDatabase.getInstance().getReference("SociaalNetwerk");
         btnOpslaan.setOnClickListener(this);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference().child("EvenementFoto/");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Evenementen");
+        mStorageRef = FirebaseStorage.getInstance().getReference().child("SociaalNetwerkFoto/");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("SociaalNetwerk");
         mButtonUpload = findViewById(R.id.btnOpslaanaSN);
         mProgressBar = findViewById(R.id.mProgressBar);
         mButtonUpload.setOnClickListener(new View.OnClickListener() {
@@ -90,10 +90,10 @@ public class SociaalNetwerkAanmaken extends AppCompatActivity implements View.On
     public void onClick(View view) {
 
     }
-
     public void btnSociaalNetwerkFoto(View view) {
         openFileChooser();
     }
+
 
 
     @Override
@@ -148,7 +148,6 @@ public class SociaalNetwerkAanmaken extends AppCompatActivity implements View.On
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
-
                                         String id = mDatabaseRef.push().getKey();
                                         String naam = editTextSociaalNetwerknaam.getText().toString().trim();
                                         String beschrijving = editTextSociaalNetwerkBeschrijving.getText().toString().trim();

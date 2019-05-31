@@ -120,18 +120,15 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
 
     private void uploadFile() {
         if (mImageUri != null) {
-            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
-                    + "." + getFileExtension(mImageUri));
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
 
-            mUploadTask = fileReference.putFile(mImageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            mUploadTask = fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Handler handler = new Handler();
                             handler.postDelayed(new Runnable() {
                                 @Override
-                                public void run() {
-                                    mProgressBar.setProgress(0);
+                                public void run() { mProgressBar.setProgress(0);
                                 }
                             }, 500);
 
@@ -151,7 +148,6 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
-
                                         String id = mDatabaseRef.push().getKey();
                                         String naam = editTextEvenementnaam.getText().toString().trim();
                                         String datum = editTextDatum.getText().toString().trim();
