@@ -17,7 +17,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/custom_header"
         android:gravity="center"
-        android:text="@string/titelevenementaanmaken"
+        android:text="@string/titelsnaanmaken"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:fontFamily="sans-serif-thin" />
@@ -26,7 +26,7 @@
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titelafbevenement" />
+        android:text="@string/snafbeelding" />
 
     <ImageButton
         android:id="@+id/ibAfbeeldingSociaalNetwerk"
@@ -40,23 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/vulhierinevenement"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editTextDatum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hintevenementdatum"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/editTextLocatie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/vulhierinlocatie"
+        android:hint="@string/snvulinsnnaam"
         android:inputType="textPersonName" />
 
     <EditText
@@ -65,7 +49,7 @@
         android:layout_height="100dp"
         android:ems="10"
         android:gravity="left"
-        android:hint="@string/vulhierinbeschrijving"
+        android:hint="@string/snvulinbeschrijving"
         android:inputType="textPersonName" />
 
     <Button

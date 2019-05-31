@@ -1,16 +1,11 @@
 package com.example.beroepsproduct4;
 
-
 import android.content.Intent;
-
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
-
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,27 +13,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 
-public class Hoofdscherm extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Hoofdscherm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    FirebaseAuth firebaseAuth,mAuth;
-    FirebaseUser currentuser;
-    FragmentManager fragmentManager = getSupportFragmentManager();
+    private DatabaseReference profileUserRef;
+    private FirebaseAuth firebaseAuth, mAuth;
+    private String currenUserdata;
+
+
+
+    private FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
-    View creerzinnen;
+    private View creerzinnen;
 
 
     @Override
@@ -50,9 +51,9 @@ public class Hoofdscherm extends AppCompatActivity
 
 
         //navdrawer
-        mAuth=FirebaseAuth.getInstance();
-        currentuser = mAuth.getCurrentUser();
-
+        mAuth = FirebaseAuth.getInstance();
+       // currenUserdata = mAuth.getCurrentUser().ge();
+        profileUserRef = FirebaseDatabase.getInstance().getReference().child("Personen").child("Rens");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -96,10 +97,6 @@ public class Hoofdscherm extends AppCompatActivity
         int rando = (int) (Math.random() * 3);
         gebroetingszinnen.setText(voelgoedzinnen[rando]);
     }
-
-
-
-
 
 
     public void checkUser(NavigationView navigationView) {
@@ -195,15 +192,30 @@ public class Hoofdscherm extends AppCompatActivity
     public void updateNavHeader() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        TextView navUserName= headerView.findViewById(R.id.nav_profielnaam);
-        TextView navUserEmail= headerView.findViewById(R.id.nav_profielemail);
-        ImageView navUserPhoto= headerView.findViewById(R.id.nav_profielFoto);
+        final TextView navUserName = headerView.findViewById(R.id.nav_profielnaam);
+        final TextView navUserEmail = headerView.findViewById(R.id.nav_profielemail);
+        final ImageView navUserPhoto = headerView.findViewById(R.id.nav_profielFoto);
 
-        navUserName.setText(currentuser.getDisplayName());
-        navUserEmail.setText(currentuser.getEmail());
+        profileUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists())
+                {
+                    String myProfileImage = dataSnapshot.child("persoonfoto").getValue().toString();
+                    String myProfilenaam = dataSnapshot.child("persoonnaam").getValue().toString();
+                    String myProfilemail = dataSnapshot.child("persoonemail").getValue().toString();
 
-        // ik gebruik Glide om een foto te laden
-        //Glide.with(this).load(currentuser.getPhotoUrl()).into(navUserPhoto);
+                    Picasso.with(Hoofdscherm.this).load(myProfileImage).into(navUserPhoto);
+                    navUserName.setText(myProfilenaam);
+                    navUserEmail.setText(myProfilemail);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
 }
