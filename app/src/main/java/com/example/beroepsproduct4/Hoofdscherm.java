@@ -1,11 +1,16 @@
 package com.example.beroepsproduct4;
 
+
 import android.content.Intent;
+
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
+
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,8 +18,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,21 +34,30 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
-public class Hoofdscherm extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private DatabaseReference profileUserRef;
-    private FirebaseAuth firebaseAuth, mAuth;
-    private String currenUserdata;
+public class Hoofdscherm extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
 
-
-    private FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentManager fragmentManager = getSupportFragmentManager();
     private ArrayList<String> ontwikkelaars = new ArrayList<String>();
     private static final String TAG = "MyActivity";
-    private View creerzinnen;
-
+    View creerzinnen;
+    View creertimestamp;
+    View creerimage;
+    ImageView ivHoofdscherm;
+    //servitest navheaderupdate
+    private String userEmail;
+    private FirebaseAuth.AuthStateListener AuthListener;
+    private DatabaseReference myRef;
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
+    private FirebaseUser user = firebaseAuth.getCurrentUser();
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databasePersonen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +66,38 @@ public class Hoofdscherm extends AppCompatActivity implements NavigationView.OnN
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//Servitest
+        userEmail = user.getEmail();
 
-        //navdrawer
-        mAuth = FirebaseAuth.getInstance();
-       // currenUserdata = mAuth.getCurrentUser().ge();
-        profileUserRef = FirebaseDatabase.getInstance().getReference().child("Personen").child("Rens");
+        databasePersonen = FirebaseDatabase.getInstance().getReference("Personen");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = firebaseDatabase.getReference().child("Personen");
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        AuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+
+                } else {
+
+                }
+            }
+        };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,14 +109,15 @@ public class Hoofdscherm extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
 
         //beginnen van het maken van welkomszinnen
+        creertimestampzinnen(creertimestamp);
         creerrandomzinnen(creerzinnen);
-
+        creerrandomimage(creerimage);
         //gegevens in navigation drawer plaatsen
-        updateNavHeader();
 
 
         //ontwikkelaars code
-        ontwikkelaars.add("PhDjDY2gtGSoGrrUNwCrPy2TCpm1");
+        ontwikkelaars.add("mCoC80t1pXfjwvtaXD22xTOprzI2");
+
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -90,12 +135,54 @@ public class Hoofdscherm extends AppCompatActivity implements NavigationView.OnN
 
     }
 
+    public void creerrandomimage(View view) {
+        ivHoofdscherm = (ImageView) findViewById(R.id.ivHoofdscherm);
+        int image1 = R.drawable.hoofdschermimage1;
+        int image2 = R.drawable.hoofdschermimage2;
+        int image3 = R.drawable.hoofdschermimage3;
+        int image4 = R.drawable.hoofdschermimage4;
+        int image5 = R.drawable.hoofdschermimage5;
+
+        final int[] leukeplaatjes = {image1, image2, image3, image4, image5};
+        int randomimage = (int) (Math.random() * 5);
+        ivHoofdscherm.setImageResource(leukeplaatjes[randomimage]);
+    }
+
+
+    public void creertimestampzinnen(View view) {
+        Calendar currTime = Calendar.getInstance();
+        int hour = currTime.get(Calendar.HOUR_OF_DAY);
+        final TextView timestampzin = (TextView) findViewById(R.id.tvTijdbegroet);
+        if (hour >= 6 && hour < 12) {
+            String goedemorgen = getString(R.string.goedemorgen);
+            timestampzin.setText(goedemorgen);
+        } else if (hour >= 12 && hour < 18) {
+            String goedemiddag = getString(R.string.goedemiddag);
+            timestampzin.setText(goedemiddag);
+        } else if (hour >= 18 && hour < 23) {
+            String goedeavond = getString(R.string.goedeavond);
+            timestampzin.setText(goedeavond);
+        } else if (hour >= 0 && hour < 6) {
+            String goedenacht = getString(R.string.goedenacht);
+            timestampzin.setText(goedenacht);
+        }
+
+
+    }
+
+
     public void creerrandomzinnen(View view) {
         // random zinnen
-        final TextView gebroetingszinnen = (TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
-        final String[] voelgoedzinnen = {"voel je je goed", "hoe voel je je vandaag", "helemaal top vandaag"};
-        int rando = (int) (Math.random() * 3);
-        gebroetingszinnen.setText(voelgoedzinnen[rando]);
+        String zin1 = getString(R.string.zin1);
+        String zin2 = getString(R.string.zin2);
+        String zin3 = getString(R.string.zin3);
+        String zin4 = getString(R.string.zin4);
+        String zin5 = getString(R.string.zin5);
+
+        final TextView begroetingszin = (TextView) findViewById(R.id.begroetingszinnen_hoofdscherm);
+        final String[] voelgoedzinnen = {zin1, zin2, zin3, zin4, zin5};
+        int rando = (int) (Math.random() * 5);
+        begroetingszin.setText(voelgoedzinnen[rando]);
     }
 
 
@@ -166,19 +253,21 @@ public class Hoofdscherm extends AppCompatActivity implements NavigationView.OnN
                 break;
 
             case R.id.evenementen:
-                Intent intent = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
-                startActivity(intent);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EvenementZoeken()).commit();
+
                 break;
             case R.id.sociaal_netwerk:
                 //sociaalnetwerk
                 break;
             case R.id.mijn_agenda:
-                Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
-                startActivity(intent2);
+                // Intent intent2 = new Intent(Hoofdscherm.this, ReadInfoOverAnderen.class);
+                // startActivity(intent2);
                 break;
             case R.id.evenement_toevoegen:
-                // evenement toevoegen
+                Intent intent3 = new Intent(Hoofdscherm.this, EvenementAanmaken.class);
+                startActivity(intent3);
                 break;
+
             case R.id.sociaal_netwerk_toevoegen:
                 //sociaal netwerk teovoegen
                 break;
@@ -189,33 +278,53 @@ public class Hoofdscherm extends AppCompatActivity implements NavigationView.OnN
 
     }
 
-    public void updateNavHeader() {
+
+    /**
+     * Servi test navheaderupdate hieronder
+     *
+     * @param dataSnapshot
+     */
+
+    private void showData(DataSnapshot dataSnapshot) {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
-        final TextView navUserName = headerView.findViewById(R.id.nav_profielnaam);
-        final TextView navUserEmail = headerView.findViewById(R.id.nav_profielemail);
-        final ImageView navUserPhoto = headerView.findViewById(R.id.nav_profielFoto);
+        for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-        profileUserRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists())
-                {
-                    String myProfileImage = dataSnapshot.child("persoonfoto").getValue().toString();
-                    String myProfilenaam = dataSnapshot.child("persoonnaam").getValue().toString();
-                    String myProfilemail = dataSnapshot.child("persoonemail").getValue().toString();
+            Persoon uInfo = new Persoon();
+            uInfo.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
+            uInfo.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
+            uInfo.setPersoonprofielfoto(ds.getValue(Persoon.class).getPersoonprofielfoto());
+            if (uInfo.getPersoonemail().equals(userEmail)) {
+                TextView navUserName = headerView.findViewById(R.id.nav_profielnaam);
+                TextView navUserEmail = headerView.findViewById(R.id.nav_profielemail);
+                ImageView navProfielFoto = headerView.findViewById(R.id.nav_profielFoto);
+                String nam = ds.child("persoonnaam").getValue().toString();
+                String email = ds.child("persoonemail").getValue().toString();
+                String pf = ds.child("persoonprofielfoto").getValue().toString();
+                navUserName.setText(nam);
+                navUserEmail.setText(email);
+                Picasso.get()
+                        .load(pf)
+                        .placeholder(R.color.colorPrimaryDark)
+                        .fit()
+                        .centerCrop()
+                        .into(navProfielFoto);
 
-                    Picasso.with(Hoofdscherm.this).load(myProfileImage).into(navUserPhoto);
-                    navUserName.setText(myProfilenaam);
-                    navUserEmail.setText(myProfilemail);
-                }
+
+
+            } else {
+
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+        }
     }
+    /**Servi test navheaderupdate eindigd hier
+     *
+     * @param dataSnapshot
+     */
+
 
 }
+
+

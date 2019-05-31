@@ -11,7 +11,7 @@
 
 
     <TextView
-        android:id="@+id/snAanmakenTitel"
+        android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -19,7 +19,7 @@
         android:gravity="center"
         android:text="@string/titelevenementaanmaken"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:fontFamily="sans-serif-thin" />
 
     <TextView
@@ -28,15 +28,22 @@
         android:layout_height="wrap_content"
         android:text="@string/titelafbevenement" />
 
-    <ImageButton
-        android:id="@+id/ibAfbeeldingSociaalNetwerk"
+    <ImageView
+        android:id="@+id/ibAfbeeldingEvenement"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:onClick="btnEvenementFoto"
+        android:scaleType="fitCenter"
         android:src="@android:drawable/ic_input_add" />
 
+    <ProgressBar
+        android:id="@+id/mProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <EditText
-        android:id="@+id/editTextSociaalNetwerk"
+        android:id="@+id/editTextEvenementnaam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -60,17 +67,18 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/editTextBeschrijvingSociaalNetwerk"
+        android:id="@+id/editTextBeschrijving"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="left"
         android:hint="@string/vulhierinbeschrijving"
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/btnOpslaanaSN"
+        android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/knopopslaan" />
+
 </LinearLayout>
