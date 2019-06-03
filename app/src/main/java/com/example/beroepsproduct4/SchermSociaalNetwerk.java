@@ -48,7 +48,7 @@ public class SchermSociaalNetwerk extends Fragment implements SearchView.OnQuery
         View view = inflater.inflate(R.layout.activity_scherm_sociaal_netwerk, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        searchView = (SearchView) view.findViewById(R.id.search_view) ;
+        searchView = (SearchView) view.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(this);
 
 
