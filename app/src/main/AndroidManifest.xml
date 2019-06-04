@@ -22,6 +22,7 @@
         <activity android:name=".Invoerendatapersoon" />
         <activity android:name=".Inlogscherm" />
         <activity android:name=".EvenementAanmaken" />
+        <activity android:name=".SociaalNetwerkAanmaken" />
         <activity android:name=".InfoOverEvenementPlaceholder" />
 
         <activity android:name=".Registreerscherm">

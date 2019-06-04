@@ -1,6 +1,7 @@
 package com.example.beroepsproduct4;
 
 public class SociaalNetwerk {
+
     public String sociaalnetwerknaam;
     public String sociaalnetwerkbeschrijving;
     private String Sociaalnetwerkfoto;
@@ -24,6 +25,8 @@ public class SociaalNetwerk {
     public String getSociaalnetwerkbeschrijving() {
         return sociaalnetwerkbeschrijving;
     }
+
+
 
     public SociaalNetwerk setSociaalnetwerkbeschrijving(String sociaalnetwerkbeschrijving) {
         this.sociaalnetwerkbeschrijving = sociaalnetwerkbeschrijving;
