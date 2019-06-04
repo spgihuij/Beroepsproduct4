@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,18 +31,18 @@ public class ReadInfoOverAnderen extends AppCompatActivity {
         setContentView(R.layout.activity_read_info_over_anderen);
         getIntentData();
 
-<
-        naam = (TextView) findViewById(R.id.tvNaam);
-        geboortedatum = (TextView) findViewById(R.id.tvDatum);
-        woonplaats = (TextView) findViewById(R.id.tvLocatie);
 
+        naam = (TextView) findViewById(R.id.tvNaam);
+        geboortedatum = (TextView) findViewById(R.id.tvGeboortedatum);
+        woonplaats = (TextView) findViewById(R.id.tvWoonplaats);
         sport = (TextView) findViewById(R.id.ia_iv_sport);
         huisdier = (TextView) findViewById(R.id.ia_iv_huisdier);
         tvprogramma = (TextView) findViewById(R.id.ia_iv_tvprogramma);
         website = (TextView) findViewById(R.id.ia_iv_website);
-
         imageView = (ImageView) findViewById(R.id.imageView);
         infoover = (TextView) findViewById(R.id.titel);
+        btn = (Button) findViewById(R.id.buttonSamenGaan);
+        btn.setVisibility(View.INVISIBLE);
 
 
         reference = FirebaseDatabase.getInstance().getReference().child("Personen").child(persoonsNaam);

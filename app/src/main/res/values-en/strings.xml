@@ -30,7 +30,6 @@
     <string name="toastregistrerenmislukt">Register failed, please try again.</string>
     <string name="toastregistrerensuccesvol">Register succesfull.</string>
     <string name="hintevenementdatum">Date</string>
-    <string name="zoekpersoon">Click on the person you are looking for</string>
     <string name="hintnaam">Name</string>
     <string name="naam">Full name:</string>
     <string name="profielfoto">Profile picture:</string>

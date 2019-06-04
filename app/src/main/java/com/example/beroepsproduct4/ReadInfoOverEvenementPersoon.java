@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -14,14 +15,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class ReadInfoOverEvenementPersoon extends AppCompatActivity {
     private TextView naam, geboortedatum, woonplaats, sport, huisdier, tvprogramma, website;
     private Button btn;
-    private String persoonsNaam2, ingelogdePersoonNaam, evenementNaam, persoonsEmail;
+    private String persoonsNaam2, ingelogdePersoonNaam, evenementNaam, persoonsEmail, id;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference reference;
     private DatabaseReference writeGroepDataRef;
+    ImageView imageView;
 
 
 
@@ -36,14 +39,15 @@ public class ReadInfoOverEvenementPersoon extends AppCompatActivity {
         persoonsEmail = user.getEmail();
 
 
-        naam = (TextView) findViewById(R.id.ia_iv_naam);
-        geboortedatum = (TextView) findViewById(R.id.ia_iv_Geboortedatum);
-        woonplaats = (TextView) findViewById(R.id.ia_iv_woonp);
+        naam = (TextView) findViewById(R.id.tvNaam);
+        geboortedatum = (TextView) findViewById(R.id.tvGeboortedatum);
+        woonplaats = (TextView) findViewById(R.id.tvWoonplaats);
         sport = (TextView) findViewById(R.id.ia_iv_sport);
         huisdier = (TextView) findViewById(R.id.ia_iv_huisdier);
         tvprogramma = (TextView) findViewById(R.id.ia_iv_tvprogramma);
         website = (TextView) findViewById(R.id.ia_iv_website);
         btn = (Button) findViewById(R.id.buttonSamenGaan);
+        imageView = (ImageView) findViewById(R.id.imageView);
 
 
 
@@ -83,6 +87,7 @@ public class ReadInfoOverEvenementPersoon extends AppCompatActivity {
         String tvp = dataSnapshot.child("Personen").child(persoonsNaam2).child("persoontvprogramma").getValue().toString();
         String wp = dataSnapshot.child("Personen").child(persoonsNaam2).child("persoonwoonplaats").getValue().toString();
         String web = dataSnapshot.child("Personen").child(persoonsNaam2).child("persoonwebsite").getValue().toString();
+        String pf = dataSnapshot.child("Personen").child(persoonsNaam2).child("persoonprofielfoto").getValue().toString();
         naam.setText(nam);
         geboortedatum.setText(gd);
         woonplaats.setText(wp);
@@ -90,6 +95,13 @@ public class ReadInfoOverEvenementPersoon extends AppCompatActivity {
         huisdier.setText(hd);
         tvprogramma.setText(tvp);
         website.setText(web);
+
+        Picasso.get()
+                .load(pf)
+                .placeholder(R.mipmap.ic_launcher)
+                .fit()
+                .centerCrop()
+                .into(imageView);
     }
 
     private void userNaam(DataSnapshot dataSnapshot) {
@@ -118,14 +130,17 @@ public class ReadInfoOverEvenementPersoon extends AppCompatActivity {
         if (bundle != null)
             persoonsNaam2 = bundle.getString("persoonsnaam");
             evenementNaam = bundle.getString("evenementnaam");
+            id = bundle.getString("groepid");
+
 
     }
 
     private void writeData()
     {
-        EvenementGroep evenementGroep = new EvenementGroep(ingelogdePersoonNaam, persoonsNaam2, evenementNaam);
+
+        EvenementGroep evenementGroep = new EvenementGroep(ingelogdePersoonNaam, persoonsNaam2, evenementNaam, id);
         writeGroepDataRef = FirebaseDatabase.getInstance().getReference("Personen_Evenementen");
-        writeGroepDataRef.child(evenementNaam).setValue(evenementGroep);
+        writeGroepDataRef.child(id).setValue(evenementGroep);
     }
 }
 

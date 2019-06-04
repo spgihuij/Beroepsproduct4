@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,9 +22,11 @@ import com.squareup.picasso.Picasso;
 
 public class InfoOverEvenementPlaceholder extends AppCompatActivity {
     TextView evNaam, evDatum, evLocatie, evBeschrijving;
-    String evenementNaam;
+    String evenementNaam, persoonsEmail, ingelogdePersoonNaam;
+    Button btnSamen;
     DatabaseReference reference;
     FirebaseDatabase firebaseDatabase;
+    FirebaseAuth firebaseAuth;
 
     private DatabaseReference databaseReferencePersonen;
     private DatabaseReference databaseReferenceGroepAanmaken;
@@ -37,21 +41,22 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
         getIntentData();
 
 
-      
-
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         persoonsEmail = user.getEmail();
-    
-
         evNaam = (TextView) findViewById(R.id.tvNaam);
         evDatum = (TextView) findViewById(R.id.tvDatum);
         evLocatie = (TextView) findViewById(R.id.tvLocatie);
         evBeschrijving = (TextView) findViewById(R.id.tvBeschrijving);
-
-
-
         imageView = (ImageView) findViewById(R.id.imageView);
+        btnSamen = (Button) findViewById(R.id.btnSamen);
+
+        btnSamen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                persoonAanmelden();
+            }
+        });
 
 
         reference = firebaseDatabase.getInstance().getReference();
@@ -59,6 +64,7 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 evenementData(dataSnapshot);
+                userNaam(dataSnapshot);
                 showData(dataSnapshot);
 
             }
@@ -73,7 +79,6 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
     }
 
     private void showData(DataSnapshot dataSnapshot) {
-
 
 
         String evnaam = dataSnapshot.child("Evenementen").child(evenementNaam).child("evenementnaam").getValue().toString();
@@ -104,13 +109,14 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
     }
 
 
-    private void evenementData(DataSnapshot dataSnapshot) {
+    private void persoonAanmelden() {
 
 
 
-        EvenementGroep evenementGroep = new EvenementGroep(ingelogdePersoonNaam, "-", evenementNaam);
         databaseReferenceGroepAanmaken = FirebaseDatabase.getInstance().getReference("Personen_Evenementen");
-        databaseReferenceGroepAanmaken.child(evenementNaam).setValue(evenementGroep);
+        String id = databaseReferenceGroepAanmaken.push().getKey();
+        EvenementGroep evenementGroep = new EvenementGroep(ingelogdePersoonNaam, "-", evenementNaam, id);
+        databaseReferenceGroepAanmaken.child(id).setValue(evenementGroep);
 
         Intent intent = new Intent(this, PersonenZoekenEvenement.class);
         intent.putExtra("evenementnaam", evenementNaam);
@@ -118,23 +124,39 @@ public class InfoOverEvenementPlaceholder extends AppCompatActivity {
 
     }
 
+    private void evenementData(DataSnapshot dataSnapshot) {
+
         for (DataSnapshot ds : dataSnapshot.child("Evenementen").getChildren()) {
             Evenement evenement = new Evenement();
             try {
                 evenement.setEvenementnaam(ds.getValue(Evenement.class).getEvenementnaam());
 
-        for (DataSnapshot ds : dataSnapshot.child("Personen").getChildren()) {
-            Persoon persoon = new Persoon();
-            try {
-                persoon.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
-                persoon.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
-            }
-            catch (Exception e)
-            {
+
+            } catch (Exception e) {
 
             }
 
 
         }
     }
+
+    private void userNaam(DataSnapshot dataSnapshot) {
+        for (DataSnapshot ds : dataSnapshot.child("Personen").getChildren()) {
+            Persoon persoon = new Persoon();
+            try {
+                persoon.setPersoonnaam(ds.getValue(Persoon.class).getPersoonnaam());
+                persoon.setPersoonemail(ds.getValue(Persoon.class).getPersoonemail());
+            } catch (Exception e) {
+
+            }
+
+            if (persoon.getPersoonemail().equals(persoonsEmail)) {
+                ingelogdePersoonNaam = persoon.getPersoonnaam();
+                break;
+            }
+
+
+        }
+    }
+}
 
