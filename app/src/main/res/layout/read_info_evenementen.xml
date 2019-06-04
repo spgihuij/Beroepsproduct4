@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+
     <TextView
         android:id="@+id/titel"
         android:layout_width="0dp"
@@ -18,6 +19,7 @@
         android:textColor="@color/white"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,6 +114,7 @@
             android:layout_height="34dp"
             android:layout_row="1"
             android:layout_column="0"
+
             android:text="@string/datum"
             android:textSize="14dp" />
 
@@ -121,7 +124,6 @@
             android:layout_height="34dp"
             android:text="@string/datum"
             android:textSize="14sp" />
-
         <TextView
             android:id="@+id/ev_Locatie"
             android:layout_width="wrap_content"
@@ -157,5 +159,6 @@
             android:textSize="14sp" />
 
     </GridLayout>
+
 
 </android.support.constraint.ConstraintLayout>

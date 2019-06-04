@@ -1,48 +1,44 @@
 package com.example.beroepsproduct4;
 
 public class SociaalNetwerk {
-        public String sociaalnetwerkid;
-        public String sociaalnetwerktnaam;
-        public String sociaalnetwerkbeschrijving;
-        public String sociaalnetwerkfoto;
 
+    public String sociaalnetwerknaam;
+    public String sociaalnetwerkbeschrijving;
+    private String Sociaalnetwerkfoto;
 
-    public SociaalNetwerk(String sociaalnetwerkid, String sociaalnetwerktnaam, String sociaalnetwerkbeschrijving, String sociaalnetwerkfoto) {
-        this.sociaalnetwerkid = sociaalnetwerkid;
-        this.sociaalnetwerktnaam = sociaalnetwerktnaam;
+    public SociaalNetwerk() {}
+    public SociaalNetwerk(String sociaalnetwerknaam, String sociaalnetwerkbeschrijving, String sociaalnetwerkfoto) {
+        this.sociaalnetwerknaam = sociaalnetwerknaam;
         this.sociaalnetwerkbeschrijving = sociaalnetwerkbeschrijving;
-        this.sociaalnetwerkfoto = sociaalnetwerkfoto;
+        this.Sociaalnetwerkfoto = sociaalnetwerkfoto;
     }
 
-    public String getSociaalnetwerkid() {
-        return sociaalnetwerkid;
+    public String getSociaalnetwerknaam() {
+        return sociaalnetwerknaam;
     }
 
-    public void setSociaalnetwerkid(String sociaalnetwerkid) {
-        this.sociaalnetwerkid = sociaalnetwerkid;
-    }
-
-    public String getSociaalnetwerktnaam() {
-        return sociaalnetwerktnaam;
-    }
-
-    public void setSociaalnetwerktnaam(String sociaalnetwerktnaam) {
-        this.sociaalnetwerktnaam = sociaalnetwerktnaam;
+    public SociaalNetwerk setSociaalnetwerknaam(String sociaalnetwerknaam) {
+        this.sociaalnetwerknaam = sociaalnetwerknaam;
+        return this;
     }
 
     public String getSociaalnetwerkbeschrijving() {
         return sociaalnetwerkbeschrijving;
     }
 
-    public void setSociaalnetwerkbeschrijving(String sociaalnetwerkbeschrijving) {
+
+
+    public SociaalNetwerk setSociaalnetwerkbeschrijving(String sociaalnetwerkbeschrijving) {
         this.sociaalnetwerkbeschrijving = sociaalnetwerkbeschrijving;
+        return this;
     }
 
     public String getSociaalnetwerkfoto() {
-        return sociaalnetwerkfoto;
+        return Sociaalnetwerkfoto;
     }
 
-    public void setSociaalnetwerkfoto(String sociaalnetwerkfoto) {
-        this.sociaalnetwerkfoto = sociaalnetwerkfoto;
+    public SociaalNetwerk setSociaalnetwerkfoto(String sociaalnetwerkfoto) {
+        this.Sociaalnetwerkfoto = sociaalnetwerkfoto;
+        return this;
     }
 }

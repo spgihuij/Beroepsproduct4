@@ -116,7 +116,8 @@ public class Hoofdscherm extends AppCompatActivity
 
 
         //ontwikkelaars code
-        ontwikkelaars.add("IKpaGvWSiQbIWT251xhRECR5nz33");
+
+        ontwikkelaars.add("eHmd730mZSSSQXA7kFZ4rnKZ4W62");
 
         FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -269,9 +270,10 @@ public class Hoofdscherm extends AppCompatActivity
                 break;
 
             case R.id.sociaal_netwerk_toevoegen:
-                Intent intent = new Intent(Hoofdscherm.this, SociaalNetwerkAanmaken.class);
-                startActivity(intent);
+                Intent intent5 = new Intent(Hoofdscherm.this, SociaalNetwerkAanmaken.class);
+                startActivity(intent5);
                 break;
+                
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

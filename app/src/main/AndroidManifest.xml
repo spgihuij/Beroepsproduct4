@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SchermSociaalNetwerkToonLeden"></activity>
+
+        <activity android:name=".PersonenZoekenEvenement"></activity>
+        <activity android:name=".ReadInfoOverEvenementPersoon"></activity>
+        <activity android:name=".SociaalNetwerkAanmaken"></activity>
+        <activity android:name=".SchermSociaalNetwerkToonLeden" />
         <activity android:name=".SchermSociaalNetwerkDetail" />
         <activity android:name=".SchermSociaalNetwerk" />
         <activity android:name=".ReadInfoOverAnderen" />
@@ -20,6 +24,7 @@
         <activity android:name=".EvenementAanmaken" />
         <activity android:name=".SociaalNetwerkAanmaken" />
         <activity android:name=".InfoOverEvenementPlaceholder" />
+
         <activity android:name=".Registreerscherm">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
