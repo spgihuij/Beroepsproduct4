@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:visibility="visible"
+    tools:context=".SociaalnetwerkAanmaken">
+
+
+    <TextView
+        android:id="@+id/textViewsociaalnetwerkaanmaken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_header"
+        android:gravity="center"
+        android:text="Sociaal netwerk aanmaken"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:fontFamily="sans-serif-thin" />
+
+    <TextView
+        android:id="@+id/textViewsociaalnetwerkaanmaken2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Druk op de plus om een afbeelding aan het sociale netwerk te koppelen" />
+
+    <ImageButton
+        android:id="@+id/ibAfbeeldingSociaalnetwerk"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:onClick="btnSociaalNetwerkFoto"
+        android:src="@android:drawable/ic_input_add" />
+
+    <EditText
+        android:id="@+id/editTextSociaalnetwerknaam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Vul hier de naam van het sociale netwerk in"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/editTextBeschrijvingSociaalnetwerk"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:ems="10"
+        android:gravity="left"
+        android:hint="@string/vulhierinbeschrijving"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnOpslaanSociaalnetwerk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/knopopslaan" />
+</LinearLayout>
