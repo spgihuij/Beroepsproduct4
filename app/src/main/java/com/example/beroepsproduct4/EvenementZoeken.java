@@ -79,9 +79,6 @@ public class EvenementZoeken extends Fragment implements SearchView.OnQueryTextL
                 Log.d(TAG, evenement.getEvenementnaam());
             }
 
-
-
-
         }
         adapter = new RecyclerViewAdapter(getActivity(), null, evenementen, null);
         recyclerView.setAdapter(adapter);

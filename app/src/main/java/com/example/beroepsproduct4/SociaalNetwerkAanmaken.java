@@ -1,7 +1,6 @@
 package com.example.beroepsproduct4;
 
 
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,15 +18,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,7 +63,7 @@ public class SociaalNetwerkAanmaken extends AppCompatActivity implements View.On
     private Button mButtonUpload;
     private ProgressBar mProgressBar;
 
-   
+
     @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,10 +108,10 @@ public class SociaalNetwerkAanmaken extends AppCompatActivity implements View.On
     public void onClick(View view) {
 
     }
+
     public void btnSociaalNetwerkFoto(View view) {
         openFileChooser();
     }
-
 
 
     @Override
@@ -164,11 +166,10 @@ public class SociaalNetwerkAanmaken extends AppCompatActivity implements View.On
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     if (task.isSuccessful()) {
                                         Uri downloadUri = task.getResult();
-                                        String id = mDatabaseRef.push().getKey();
                                         String naam = editTextSociaalNetwerknaam.getText().toString().trim();
                                         String beschrijving = editTextSociaalNetwerkBeschrijving.getText().toString().trim();
                                         String image = downloadUri.toString();
-                                        SociaalNetwerk sociaalNetwerk = new SociaalNetwerk(id, naam, beschrijving, image);
+                                        SociaalNetwerk sociaalNetwerk = new SociaalNetwerk(naam, beschrijving, image);
                                         mDatabaseRef.child(naam).setValue(sociaalNetwerk);
                                     } else {
                                         Toast.makeText(SociaalNetwerkAanmaken.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

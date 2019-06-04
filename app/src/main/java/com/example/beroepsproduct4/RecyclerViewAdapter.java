@@ -32,17 +32,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static int type_personen = 1;
     private static int type_evenementen = 2;
     private static int type_personenAlleen = 3;
-private String profielFoto;
-private String persoonNaam1;
+    private String profielFoto;
+    private String persoonNaam1;
     private ArrayList<Persoon> persoonList = null;
     private ArrayList<Persoon> persoonsListFull = new ArrayList<>();
     private ArrayList<Evenement> evenementList = null;
     private ArrayList<Evenement> evenementListFull = new ArrayList<>();
     private ArrayList<EvenementGroep> persoonAlleenList = new ArrayList<>();
     private ArrayList<EvenementGroep> persoonAlleenListFull = new ArrayList<>();
-public DatabaseReference reference;
+    public DatabaseReference reference;
     private Context context;
-
 
 
     public RecyclerViewAdapter(Context context, ArrayList<Persoon> persoonList, ArrayList<Evenement> evenementList, ArrayList<EvenementGroep> persoonAlleenList) {
@@ -52,7 +51,7 @@ public DatabaseReference reference;
             this.context = context;
         } else if (evenementList != null) {
 
-    
+
             this.evenementList = evenementList;
             evenementListFull.addAll(evenementList);
             this.context = context;
@@ -153,7 +152,7 @@ public DatabaseReference reference;
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     //showData(dataSnapshot);
-                    for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         String persoonNaam = ds.child("persoonnaam").getValue().toString();
                         if (persoonNaam1.equals(persoonNaam)) {
                             profielFoto = ds.child("persoonprofielfoto").getValue().toString();
@@ -167,7 +166,6 @@ public DatabaseReference reference;
                         }
 
                     }
-
 
 
                 }
@@ -376,7 +374,6 @@ public DatabaseReference reference;
             persoonsNaam.setText(evenementGroep.getPersoonsnaam1());
 
 
-
         }
 
     }
@@ -387,8 +384,7 @@ public DatabaseReference reference;
             String persoonNaam = ds.child("persoonnaam").getValue().toString();
 
 
-            if(persoonNaam.equals(persoonNaam1))
-            {
+            if (persoonNaam.equals(persoonNaam1)) {
                 profielFoto = ds.child("persoonprofielfoto").getValue().toString();
                 break;
             }
