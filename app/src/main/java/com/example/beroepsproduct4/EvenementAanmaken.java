@@ -47,7 +47,7 @@ public class EvenementAanmaken extends AppCompatActivity implements View.OnClick
     private StorageTask mUploadTask;
     private Button mButtonUpload;
     private ProgressBar mProgressBar;
-
+//servi
     @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
