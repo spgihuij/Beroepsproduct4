@@ -82,5 +82,12 @@
     <string name="btnikwilalleen">Ik wil Alleen</string>
     <string name="btnikwilniet">Ik wil Niet</string>
 
+    //Rens
+    //sn aanmaken
+    <string name="titelsnaanmaken"> Sociaal Netwerk aanmaken</string>
+    <string name="snvulinsnnaam"> Vul naam in van Sociaal Netwerk</string>
+    <string name="snvulinbeschrijving"> Beschrijf het Sociaal Netwerk</string>
+    <string name="snafbeelding">Druk op de plus om een afbeelding aan het Sociaal Netwerk te koppelen</string>
+
 
 </resources>
